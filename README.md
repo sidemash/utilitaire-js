@@ -26,8 +26,7 @@ Future.from(getUserFromServer1)            // Create a Future by Trying to get u
         ifFailure : exception  => console.log("An exception Occured " + exception.toString())
     })
 ```
-
-
+<br>
 ### 2 - Delaying execution and Retrying
 You will see why the Future can be in a NotYetStarted state.
 ```typescript
@@ -55,9 +54,7 @@ lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to
                                     // its initial State start it and Return Future<User>
 
 ``` 
-
-
-
+<br>
 ### 3 - Rendering Promise inside React component
 There exists in Future class a method called fold that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
 ```typescript jsx
@@ -77,7 +74,8 @@ render() {
     ); 
 } 
 ```
-3 - Others methods availables
+<br>
+### 4 - Others methods availables
 
 |                      | ```Promise<T>```                                                                                                                                                                                                                                                | ```Future<T> ```                                                                                                                                                                                                                                                |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
