@@ -42,7 +42,7 @@ export interface Copyable<T, U> {
 }
 
 /**
- * A JsObject is a definition of Json that is not a
+ * A JsObject is a definition from Json that is not a
  * primitive value nor an array.
  */
 export type JsObject = {

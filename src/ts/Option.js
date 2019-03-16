@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const Exception_1 = require("./Exception");
-class Option {
+import { Exception } from "./Exception";
+export class Option {
     get value() { return this._value; }
     valueOrElse(value) {
         if (this.isDefined())
@@ -23,26 +21,26 @@ class Option {
     }
     flatMap(fn) {
         if (this.isEmpty())
-            return exports.None;
+            return None;
         else {
             const resultOption = fn(this.value);
             if (Option.isDefinedValue(resultOption))
                 return resultOption;
             else
-                return exports.None;
+                return None;
         }
     }
     map(fn) {
         if (this.isDefined())
             return Option.of(fn(this.value));
         else
-            return exports.None;
+            return None;
     }
     filter(fn) {
         if (this.isEmpty())
-            return exports.None;
+            return None;
         else if (!fn(this.value))
-            return exports.None;
+            return None;
         else
             return this;
     }
@@ -70,7 +68,7 @@ class Option {
         if (Option.isDefinedValue(value))
             return new Some(value);
         else
-            return exports.None;
+            return None;
     }
     orElseFilter(value, fn) {
         if (this.isEmpty() && Option.isDefinedValue(value) && fn(value))
@@ -88,27 +86,25 @@ class Option {
         if (Option.isDefinedValue(value) && fn(value))
             return new Some(value);
         else
-            return exports.None;
+            return None;
     }
     static empty() {
-        return exports.None;
+        return None;
     }
 }
-exports.Option = Option;
-class Some extends Option {
+export class Some extends Option {
     constructor(_value) {
         super();
         if (_value == null || _value == undefined)
-            throw new Exception_1.Exception("Some constructor expected non null an non undefined value. " +
+            throw new Exception("Some constructor expected non null an non undefined value. " +
                 _value + "given. " +
                 "If you are not sure whether your value is defined or not, please " +
-                "consider the static method Option.of<T>(value:T) that will " +
+                "consider the static method Option.from<T>(value:T) that will " +
                 "deal with the null/undefined case properly.");
         this._value = _value;
     }
 }
-exports.Some = Some;
 class NoneT extends Option {
 }
-exports.None = new NoneT();
+export const None = new NoneT();
 //# sourceMappingURL=Option.js.map

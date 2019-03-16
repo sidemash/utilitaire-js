@@ -7,9 +7,9 @@ declare module 'lodash' {
 #### TODO:
 removed:
 - [x] Removed _.support
-- [x] Removed _.findWhere in favor of _.find with iteratee shorthand
-- [x] Removed _.where in favor of _.filter with iteratee shorthand
-- [x] Removed _.pluck in favor of _.map with iteratee shorthand
+- [x] Removed _.findWhere in favor from _.find with iteratee shorthand
+- [x] Removed _.where in favor from _.filter with iteratee shorthand
+- [x] Removed _.pluck in favor from _.map with iteratee shorthand
 
 renamed:
 - [x] Renamed _.first to _.head
@@ -35,8 +35,8 @@ split:
 
 changes:
 - [x] Absorbed _.sortByAll into _.sortBy
-- [x] Changed the category of _.at to “Object”
-- [x] Changed the category of _.bindAll to “Utility”
+- [x] Changed the category from _.at to “Object”
+- [x] Changed the category from _.bindAll to “Utility”
 - [x] Made _.capitalize uppercase the first character & lowercase the rest
 - [x] Made _.functions return only own method names
 
@@ -127,7 +127,7 @@ added collection method:
 
 Added 3 aliases
 
-- [x] _.first as an alias of _.head
+- [x] _.first as an alias from _.head
 
 Removed 17 aliases
 - [x] Removed aliase _.all
@@ -152,7 +152,7 @@ Other changes
 - [x] Added support for array buffers to _.isEqual
 - [x] Added support for converting iterators to _.toArray
 - [x] Added support for deep paths to _.zipObject
-- [x] Changed UMD to export to window or self when available regardless of other exports
+- [x] Changed UMD to export to window or self when available regardless from other exports
 - [x] Ensured debounce cancel clears args & thisArg references
 - [x] Ensured _.add, _.subtract, & _.sum don’t skip NaN values
 - [x] Ensured _.clone treats generators like functions
@@ -164,11 +164,11 @@ Other changes
 - [x] Ensured _.keys skips “length” on strict mode arguments objects in Safari 9
 - [x] Ensured _.merge doesn’t convert strings to arrays
 - [x] Ensured _.merge merges plain-objects onto non plain-objects
-- [x] Ensured _#plant resets iterator data of cloned sequences
+- [x] Ensured _#plant resets iterator data from cloned sequences
 - [x] Ensured _.random swaps min & max if min is greater than max
-- [x] Ensured _.range preserves the sign of start of -0
+- [x] Ensured _.range preserves the sign from start from -0
 - [x] Ensured _.reduce & _.reduceRight use getIteratee in their array branch
-- [x] Fixed rounding issue with the precision param of _.floor
+- [x] Fixed rounding issue with the precision param from _.floor
 
 ** LATER **
 Misc:
@@ -179,19 +179,19 @@ Misc:
 - [ ] Removed isDeep params from _.clone & _.flatten
 - [ ] Removed _.bindAll support for binding all methods when no names are provided
 - [ ] Removed func-first param signature from _.before & _.after
-- [ ] _.extend as an alias of _.assignIn
-- [ ] _.extendWith as an alias of _.assignInWith
+- [ ] _.extend as an alias from _.assignIn
+- [ ] _.extendWith as an alias from _.assignInWith
 - [ ] Added clear method to _.memoize.Cache
 - [ ] Added flush method to debounced & throttled functions
 - [ ] Added support for ES6 maps, sets, & symbols to _.clone, _.isEqual, & _.toArray
-- [ ] Enabled _.flow & _.flowRight to accept an array of functions
+- [ ] Enabled _.flow & _.flowRight to accept an array from functions
 - [ ] Ensured “Collection” methods treat functions as objects
 - [ ] Ensured _.assign, _.defaults, & _.merge coerce object values to objects
 - [ ] Ensured _.bindKey bound functions call object[key] when called with the new operator
 - [ ] Ensured _.isFunction returns true for generator functions
 - [ ] Ensured _.merge assigns typed arrays directly
 - [ ] Made _(...) an iterator & iterable
-- [ ] Made _.drop, _.take, & right forms coerce n of undefined to 0
+- [ ] Made _.drop, _.take, & right forms coerce n from undefined to 0
 
 Methods:
 - [ ] _.concat
@@ -325,28 +325,28 @@ namespace _ {
   interface MapCache {
     /**
      * Removes `key` and its value from the cache.
-     * @param key The key of the value to remove.
+     * @param key The key from the value to remove.
      * @return Returns `true` if the entry was removed successfully, else `false`.
      */
     delete(key: string): boolean;
 
     /**
      * Gets the cached value for `key`.
-     * @param key The key of the value to get.
+     * @param key The key from the value to get.
      * @return Returns the cached value.
      */
     get(key: string): any;
 
     /**
      * Checks if a cached value for `key` exists.
-     * @param key The key of the entry to check.
+     * @param key The key from the entry to check.
      * @return Returns `true` if an entry for `key` exists, else `false`.
      */
     has(key: string): boolean;
 
     /**
-     * Sets `value` to `key` of the cache.
-     * @param key The key of the value to cache.
+     * Sets `value` to `key` from the cache.
+     * @param key The key from the value to cache.
      * @param value The value to cache.
      * @return Returns the cache object.
      */
@@ -394,11 +394,11 @@ namespace _ {
   // _.chunk
   interface LoDashStatic {
     /**
-     * Creates an array of elements split into groups the length of size. If collection can’t be split evenly, the
+     * Creates an array from elements split into groups the length from size. If collection can’t be split evenly, the
      * final chunk will be the remaining elements.
      *
      * @param array The array to process.
-     * @param size The length of each chunk.
+     * @param size The length from each chunk.
      * @return Returns the new array containing chunks.
      */
     chunk<T>(
@@ -442,7 +442,7 @@ namespace _ {
      * falsey.
      *
      * @param array The array to compact.
-     * @return (Array) Returns the new array of filtered values.
+     * @return (Array) Returns the new array from filtered values.
      */
     compact<T>(array?: List<T>): T[];
   }
@@ -504,12 +504,12 @@ namespace _ {
   // _.difference
   interface LoDashStatic {
     /**
-     * Creates an array of unique array values not included in the other provided arrays using SameValueZero for
+     * Creates an array from unique array values not included in the other provided arrays using SameValueZero for
      * equality comparisons.
      *
      * @param array The array to inspect.
-     * @param values The arrays of values to exclude.
-     * @return Returns the new array of filtered values.
+     * @param values The arrays from values to exclude.
+     * @return Returns the new array from filtered values.
      */
     difference<T>(
       array: T[] | List<T>,
@@ -548,14 +548,14 @@ namespace _ {
   // _.differenceBy
   interface LoDashStatic {
     /**
-     * This method is like _.difference except that it accepts iteratee which is invoked for each element of array
+     * This method is like _.difference except that it accepts iteratee which is invoked for each element from array
      * and values to generate the criterion by which uniqueness is computed. The iteratee is invoked with one
      * argument: (value).
      *
      * @param array The array to inspect.
      * @param values The values to exclude.
      * @param iteratee The iteratee invoked per element.
-     * @returns Returns the new array of filtered values.
+     * @returns Returns the new array from filtered values.
      */
     differenceBy<T>(
       array: T[] | List<T>,
@@ -1112,7 +1112,7 @@ namespace _ {
   // _.differenceWith DUMMY
   interface LoDashStatic {
     /**
-     * Creates an array of unique `array` values not included in the other
+     * Creates an array from unique `array` values not included in the other
      * provided arrays using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons.
      *
@@ -1121,7 +1121,7 @@ namespace _ {
      * @category Array
      * @param {Array} array The array to inspect.
      * @param {...Array} [values] The values to exclude.
-     * @returns {Array} Returns the new array of filtered values.
+     * @returns {Array} Returns the new array from filtered values.
      * @example
      *
      * _.difference([3, 2, 1], [4, 2]);
@@ -1136,11 +1136,11 @@ namespace _ {
   // _.drop
   interface LoDashStatic {
     /**
-     * Creates a slice of array with n elements dropped from the beginning.
+     * Creates a slice from array with n elements dropped from the beginning.
      *
      * @param array The array to query.
-     * @param n The number of elements to drop.
-     * @return Returns the slice of array.
+     * @param n The number from elements to drop.
+     * @return Returns the slice from array.
      */
     drop<T>(array: T[] | List<T>, n?: number): T[];
   }
@@ -1176,11 +1176,11 @@ namespace _ {
   // _.dropRight
   interface LoDashStatic {
     /**
-     * Creates a slice of array with n elements dropped from the end.
+     * Creates a slice from array with n elements dropped from the end.
      *
      * @param array The array to query.
-     * @param n The number of elements to drop.
-     * @return Returns the slice of array.
+     * @param n The number from elements to drop.
+     * @return Returns the slice from array.
      */
     dropRight<T>(
       array: List<T>,
@@ -1219,22 +1219,22 @@ namespace _ {
   // _.dropRightWhile
   interface LoDashStatic {
     /**
-     * Creates a slice of array excluding elements dropped from the end. Elements are dropped until predicate
+     * Creates a slice from array excluding elements dropped from the end. Elements are dropped until predicate
      * returns falsey. The predicate is bound to thisArg and invoked with three arguments: (value, index, array).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * match the properties of the given object, else false.
+     * match the properties from the given object, else false.
      *
      * @param array The array to query.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the slice of array.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the slice from array.
      */
     dropRightWhile<TValue>(
       array: List<TValue>,
@@ -1363,22 +1363,22 @@ namespace _ {
   // _.dropWhile
   interface LoDashStatic {
     /**
-     * Creates a slice of array excluding elements dropped from the beginning. Elements are dropped until predicate
+     * Creates a slice from array excluding elements dropped from the beginning. Elements are dropped until predicate
      * returns falsey. The predicate is bound to thisArg and invoked with three arguments: (value, index, array).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param array The array to query.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the slice of array.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the slice from array.
      */
     dropWhile<TValue>(
       array: List<TValue>,
@@ -1507,7 +1507,7 @@ namespace _ {
   // _.fill
   interface LoDashStatic {
     /**
-     * Fills elements of array with value from start up to, but not including, end.
+     * Fills elements from array with value from start up to, but not including, end.
      *
      * Note: This method mutates array.
      *
@@ -1582,22 +1582,22 @@ namespace _ {
   // _.findIndex
   interface LoDashStatic {
     /**
-     * This method is like _.find except that it returns the index of the first element predicate returns truthy
-     * for instead of the element itself.
+     * This method is like _.find except that it returns the index from the first element predicate returns truthy
+     * for instead from the element itself.
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param array The array to search.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the index of the found element, else -1.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the index from the found element, else -1.
      */
     findIndex<T>(
       array: List<T>,
@@ -1726,21 +1726,21 @@ namespace _ {
   // _.findLastIndex
   interface LoDashStatic {
     /**
-     * This method is like _.findIndex except that it iterates over elements of collection from right to left.
+     * This method is like _.findIndex except that it iterates over elements from collection from right to left.
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param array The array to search.
      * @param predicate The function invoked per iteration.
      * @param thisArg The function invoked per iteration.
-     * @return Returns the index of the found element, else -1.
+     * @return Returns the index from the found element, else -1.
      */
     findLastIndex<T>(
       array: List<T>,
@@ -1901,7 +1901,7 @@ namespace _ {
   // _.flatMap
   interface LoDashStatic {
       /**
-       * Creates an array of flattened values by running each element in collection through iteratee
+       * Creates an array from flattened values by running each element in collection through iteratee
        * and concating its result to the other mapped values. The iteratee is invoked with three arguments:
        * (value, index|key, collection).
        *
@@ -2285,7 +2285,7 @@ namespace _ {
   // _.fromPairs
   interface LoDashStatic {
     /**
-     * The inverse of `_.toPairs`; this method returns an object composed
+     * The inverse from `_.toPairs`; this method returns an object composed
      * from key-value `pairs`.
      *
      * @static
@@ -2320,12 +2320,12 @@ namespace _ {
   // _.head
   interface LoDashStatic {
     /**
-     * Gets the first element of array.
+     * Gets the first element from array.
      *
      * @alias _.first
      *
      * @param array The array to query.
-     * @return Returns the first element of array.
+     * @return Returns the first element from array.
      */
     head<T>(array: List<T>): T;
   }
@@ -2347,10 +2347,10 @@ namespace _ {
   // _.indexOf
   interface LoDashStatic {
     /**
-     * Gets the index at which the first occurrence of `value` is found in `array`
+     * Gets the index at which the first occurrence from `value` is found in `array`
      * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
      * for equality comparisons. If `fromIndex` is negative, it's used as the offset
-     * from the end of `array`. If `array` is sorted providing `true` for `fromIndex`
+     * from the end from `array`. If `array` is sorted providing `true` for `fromIndex`
      * performs a faster binary search.
      *
      * @static
@@ -2359,7 +2359,7 @@ namespace _ {
      * @param {Array} array The array to search.
      * @param {*} value The value to search for.
      * @param {number} [fromIndex=0] The index to search from.
-     * @returns {number} Returns the index of the matched value, else `-1`.
+     * @returns {number} Returns the index from the matched value, else `-1`.
      * @example
      *
      * _.indexOf([1, 2, 1, 2], 2);
@@ -2420,7 +2420,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.intersection` except that it accepts `iteratee`
-     * which is invoked for each element of each `arrays` to generate the criterion
+     * which is invoked for each element from each `arrays` to generate the criterion
      * by which uniqueness is computed. The iteratee is invoked with one argument: (value).
      *
      * @static
@@ -2428,7 +2428,7 @@ namespace _ {
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Function|Object|string} [iteratee=_.identity] The iteratee invoked per element.
-     * @returns {Array} Returns the new array of shared values.
+     * @returns {Array} Returns the new array from shared values.
      * @example
      *
      * _.intersectionBy([2.1, 1.2], [4.3, 2.4], Math.floor);
@@ -2448,7 +2448,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.intersection` except that it accepts `comparator`
-     * which is invoked to compare elements of `arrays`. The comparator is invoked
+     * which is invoked to compare elements from `arrays`. The comparator is invoked
      * with two arguments: (arrVal, othVal).
      *
      * @static
@@ -2456,7 +2456,7 @@ namespace _ {
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Function} [comparator] The comparator invoked per element.
-     * @returns {Array} Returns the new array of shared values.
+     * @returns {Array} Returns the new array from shared values.
      * @example
      *
      * var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -2531,7 +2531,7 @@ namespace _ {
   // _.pullAll DUMMY
   interface LoDashStatic {
     /**
-     * This method is like `_.pull` except that it accepts an array of values to remove.
+     * This method is like `_.pull` except that it accepts an array from values to remove.
      *
      * **Note:** Unlike `_.difference`, this method mutates `array`.
      *
@@ -2559,7 +2559,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.pullAll` except that it accepts `iteratee` which is
-     * invoked for each element of `array` and `values` to to generate the criterion
+     * invoked for each element from `array` and `values` to to generate the criterion
      * by which uniqueness is computed. The iteratee is invoked with one argument: (value).
      *
      * **Note:** Unlike `_.differenceBy`, this method mutates `array`.
@@ -2624,7 +2624,7 @@ namespace _ {
      * @category Array
      * @param {Array} array The array to search.
      * @param {*} value The value to search for.
-     * @returns {number} Returns the index of the matched value, else `-1`.
+     * @returns {number} Returns the index from the matched value, else `-1`.
      * @example
      *
      * _.sortedIndexOf([1, 1, 2, 2], 2);
@@ -2675,10 +2675,10 @@ namespace _ {
   // _.initial
   interface LoDashStatic {
     /**
-     * Gets all but the last element of array.
+     * Gets all but the last element from array.
      *
      * @param array The array to query.
-     * @return Returns the slice of array.
+     * @return Returns the slice from array.
      */
     initial<T>(array: List<T>): T[];
   }
@@ -2714,11 +2714,11 @@ namespace _ {
   // _.intersection
   interface LoDashStatic {
     /**
-     * Creates an array of unique values that are included in all of the provided arrays using SameValueZero for
+     * Creates an array from unique values that are included in all from the provided arrays using SameValueZero for
      * equality comparisons.
      *
      * @param arrays The arrays to inspect.
-     * @return Returns the new array of shared values.
+     * @return Returns the new array from shared values.
      */
     intersection<T>(...arrays: (T[] | List<T>)[]): T[];
   }
@@ -2754,10 +2754,10 @@ namespace _ {
   // _.last
   interface LoDashStatic {
     /**
-     * Gets the last element of array.
+     * Gets the last element from array.
      *
      * @param array The array to query.
-     * @return Returns the last element of array.
+     * @return Returns the last element from array.
      */
     last<T>(array: List<T>): T;
   }
@@ -2800,12 +2800,12 @@ namespace _ {
   // _.lastIndexOf
   interface LoDashStatic {
     /**
-     * This method is like _.indexOf except that it iterates over elements of array from right to left.
+     * This method is like _.indexOf except that it iterates over elements from array from right to left.
      *
      * @param array The array to search.
      * @param value The value to search for.
      * @param fromIndex The index to search from or true to perform a binary search on a sorted array.
-     * @return Returns the index of the matched value, else -1.
+     * @return Returns the index from the matched value, else -1.
      */
     lastIndexOf<T>(
       array: List<T>,
@@ -2910,14 +2910,14 @@ namespace _ {
   // _.pullAt
   interface LoDashStatic {
     /**
-     * Removes elements from array corresponding to the given indexes and returns an array of the removed elements.
-     * Indexes may be specified as an array of indexes or as individual arguments.
+     * Removes elements from array corresponding to the given indexes and returns an array from the removed elements.
+     * Indexes may be specified as an array from indexes or as individual arguments.
      *
      * Note: Unlike _.at, this method mutates array.
      *
      * @param array The array to modify.
-     * @param indexes The indexes of elements to remove, specified as individual indexes or arrays of indexes.
-     * @return Returns the new array of removed elements.
+     * @param indexes The indexes from elements to remove, specified as individual indexes or arrays from indexes.
+     * @return Returns the new array from removed elements.
      */
     pullAt<T>(
       array: List<T>,
@@ -2956,24 +2956,24 @@ namespace _ {
   // _.remove
   interface LoDashStatic {
     /**
-     * Removes all elements from array that predicate returns truthy for and returns an array of the removed
+     * Removes all elements from array that predicate returns truthy for and returns an array from the removed
      * elements. The predicate is bound to thisArg and invoked with three arguments: (value, index, array).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * Note: Unlike _.filter, this method mutates array.
      *
      * @param array The array to modify.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the new array of removed elements.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the new array from removed elements.
      */
     remove<T>(
       array: List<T>,
@@ -3102,12 +3102,12 @@ namespace _ {
   // _.tail
   interface LoDashStatic {
     /**
-     * Gets all but the first element of array.
+     * Gets all but the first element from array.
      *
      * @alias _.tail
      *
      * @param array The array to query.
-     * @return Returns the slice of array.
+     * @return Returns the slice from array.
      */
     tail<T>(array: List<T>): T[];
   }
@@ -3143,12 +3143,12 @@ namespace _ {
   // _.slice
   interface LoDashStatic {
     /**
-     * Creates a slice of array from start up to, but not including, end.
+     * Creates a slice from array from start up to, but not including, end.
      *
      * @param array The array to slice.
      * @param start The start position.
      * @param end The end position.
-     * @return Returns the slice of array.
+     * @return Returns the slice from array.
      */
     slice<T>(
       array: T[],
@@ -3344,7 +3344,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.sortedIndex` except that it accepts `iteratee`
-     * which is invoked for `value` and each element of `array` to compute their
+     * which is invoked for `value` and each element from `array` to compute their
      * sort ranking. The iteratee is invoked with one argument: (value).
      *
      * @static
@@ -3727,7 +3727,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.sortedLastIndex` except that it accepts `iteratee`
-     * which is invoked for `value` and each element of `array` to compute their
+     * which is invoked for `value` and each element from `array` to compute their
      * sort ranking. The iteratee is invoked with one argument: (value).
      *
      * @static
@@ -3953,7 +3953,7 @@ namespace _ {
      * @category Array
      * @param {Array} array The array to search.
      * @param {*} value The value to search for.
-     * @returns {number} Returns the index of the matched value, else `-1`.
+     * @returns {number} Returns the index from the matched value, else `-1`.
      * @example
      *
      * _.sortedLastIndexOf([1, 1, 2, 2], 2);
@@ -4004,11 +4004,11 @@ namespace _ {
   // _.take
   interface LoDashStatic {
     /**
-     * Creates a slice of array with n elements taken from the beginning.
+     * Creates a slice from array with n elements taken from the beginning.
      *
      * @param array The array to query.
-     * @param n The number of elements to take.
-     * @return Returns the slice of array.
+     * @param n The number from elements to take.
+     * @return Returns the slice from array.
      */
     take<T>(
       array: List<T>,
@@ -4047,11 +4047,11 @@ namespace _ {
   // _.takeRight
   interface LoDashStatic {
     /**
-     * Creates a slice of array with n elements taken from the end.
+     * Creates a slice from array with n elements taken from the end.
      *
      * @param array The array to query.
-     * @param n The number of elements to take.
-     * @return Returns the slice of array.
+     * @param n The number from elements to take.
+     * @return Returns the slice from array.
      */
     takeRight<T>(
       array: List<T>,
@@ -4090,22 +4090,22 @@ namespace _ {
   // _.takeRightWhile
   interface LoDashStatic {
     /**
-     * Creates a slice of array with elements taken from the end. Elements are taken until predicate returns
+     * Creates a slice from array with elements taken from the end. Elements are taken until predicate returns
      * falsey. The predicate is bound to thisArg and invoked with three arguments: (value, index, array).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param array The array to query.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the slice of array.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the slice from array.
      */
     takeRightWhile<TValue>(
       array: List<TValue>,
@@ -4234,22 +4234,22 @@ namespace _ {
   // _.takeWhile
   interface LoDashStatic {
     /**
-     * Creates a slice of array with elements taken from the beginning. Elements are taken until predicate returns
+     * Creates a slice from array with elements taken from the beginning. Elements are taken until predicate returns
      * falsey. The predicate is bound to thisArg and invoked with three arguments: (value, index, array).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param array The array to query.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the slice of array.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the slice from array.
      */
     takeWhile<TValue>(
       array: List<TValue>,
@@ -4378,11 +4378,11 @@ namespace _ {
   // _.union
   interface LoDashStatic {
     /**
-     * Creates an array of unique values, in order, from all of the provided arrays using SameValueZero for
+     * Creates an array from unique values, in order, from all from the provided arrays using SameValueZero for
      * equality comparisons.
      *
      * @param arrays The arrays to inspect.
-     * @return Returns the new array of combined values.
+     * @return Returns the new array from combined values.
      */
     union<T>(...arrays: List<T>[]): T[];
   }
@@ -4429,12 +4429,12 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.union` except that it accepts `iteratee` which is
-     * invoked for each element of each `arrays` to generate the criterion by which
+     * invoked for each element from each `arrays` to generate the criterion by which
      * uniqueness is computed. The iteratee is invoked with one argument: (value).
      *
      * @param arrays The arrays to inspect.
      * @param iteratee The iteratee invoked per element.
-     * @return Returns the new array of combined values.
+     * @return Returns the new array from combined values.
      */
     unionBy<T>(
       arrays: T[] | List<T>,
@@ -4941,9 +4941,9 @@ namespace _ {
   // _.uniq
   interface LoDashStatic {
     /**
-     * Creates a duplicate-free version of an array, using
+     * Creates a duplicate-free version from an array, using
      * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons, in which only the first occurrence of each element
+     * for equality comparisons, in which only the first occurrence from each element
      * is kept.
      *
      * @static
@@ -5509,7 +5509,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.union` except that it accepts `comparator` which
-     * is invoked to compare elements of `arrays`. The comparator is invoked
+     * is invoked to compare elements from `arrays`. The comparator is invoked
      * with two arguments: (arrVal, othVal).
      *
      * @static
@@ -5517,7 +5517,7 @@ namespace _ {
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Function} [comparator] The comparator invoked per element.
-     * @returns {Array} Returns the new array of combined values.
+     * @returns {Array} Returns the new array from combined values.
      * @example
      *
      * var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -5536,7 +5536,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.uniq` except that it accepts `comparator` which
-     * is invoked to compare elements of `array`. The comparator is invoked with
+     * is invoked to compare elements from `array`. The comparator is invoked with
      * two arguments: (arrVal, othVal).
      *
      * @static
@@ -5561,11 +5561,11 @@ namespace _ {
   // _.unzip
   interface LoDashStatic {
     /**
-     * This method is like _.zip except that it accepts an array of grouped elements and creates an array
+     * This method is like _.zip except that it accepts an array from grouped elements and creates an array
      * regrouping the elements to their pre-zip configuration.
      *
-     * @param array The array of grouped elements to process.
-     * @return Returns the new array of regrouped elements.
+     * @param array The array from grouped elements to process.
+     * @return Returns the new array from regrouped elements.
      */
     unzip<T>(array: List<List<T>>): T[][];
   }
@@ -5605,10 +5605,10 @@ namespace _ {
      * combined. The iteratee is bound to thisArg and invoked with four arguments: (accumulator, value, index,
      * group).
      *
-     * @param array The array of grouped elements to process.
+     * @param array The array from grouped elements to process.
      * @param iteratee The function to combine regrouped values.
-     * @param thisArg The this binding of iteratee.
-     * @return Returns the new array of regrouped elements.
+     * @param thisArg The this binding from iteratee.
+     * @return Returns the new array from regrouped elements.
      */
     unzipWith<TArray, TResult>(
       array: List<List<TArray>>,
@@ -5644,7 +5644,7 @@ namespace _ {
      *
      * @param array The array to filter.
      * @param values The values to exclude.
-     * @return Returns the new array of filtered values.
+     * @return Returns the new array from filtered values.
      */
     without<T>(
       array: List<T>,
@@ -5683,10 +5683,10 @@ namespace _ {
   // _.xor
   interface LoDashStatic {
     /**
-     * Creates an array of unique values that is the symmetric difference of the provided arrays.
+     * Creates an array from unique values that is the symmetric difference from the provided arrays.
      *
      * @param arrays The arrays to inspect.
-     * @return Returns the new array of values.
+     * @return Returns the new array from values.
      */
     xor<T>(...arrays: List<T>[]): T[];
   }
@@ -5723,7 +5723,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.xor` except that it accepts `iteratee` which is
-     * invoked for each element of each `arrays` to generate the criterion by which
+     * invoked for each element from each `arrays` to generate the criterion by which
      * uniqueness is computed. The iteratee is invoked with one argument: (value).
      *
      * @static
@@ -5731,7 +5731,7 @@ namespace _ {
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Function|Object|string} [iteratee=_.identity] The iteratee invoked per element.
-     * @returns {Array} Returns the new array of values.
+     * @returns {Array} Returns the new array from values.
      * @example
      *
      * _.xorBy([2.1, 1.2], [4.3, 2.4], Math.floor);
@@ -5751,7 +5751,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.xor` except that it accepts `comparator` which is
-     * invoked to compare elements of `arrays`. The comparator is invoked with
+     * invoked to compare elements from `arrays`. The comparator is invoked with
      * two arguments: (arrVal, othVal).
      *
      * @static
@@ -5759,7 +5759,7 @@ namespace _ {
      * @category Array
      * @param {...Array} [arrays] The arrays to inspect.
      * @param {Function} [comparator] The comparator invoked per element.
-     * @returns {Array} Returns the new array of values.
+     * @returns {Array} Returns the new array from values.
      * @example
      *
      * var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -5777,11 +5777,11 @@ namespace _ {
   // _.zip
   interface LoDashStatic {
     /**
-     * Creates an array of grouped elements, the first of which contains the first elements of the given arrays,
-     * the second of which contains the second elements of the given arrays, and so on.
+     * Creates an array from grouped elements, the first from which contains the first elements from the given arrays,
+     * the second from which contains the second elements from the given arrays, and so on.
      *
      * @param arrays The arrays to process.
-     * @return Returns the new array of grouped elements.
+     * @return Returns the new array from grouped elements.
      */
     zip<T>(...arrays: List<T>[]): T[][];
   }
@@ -5817,9 +5817,9 @@ namespace _ {
   // _.zipObject
   interface LoDashStatic {
     /**
-     * The inverse of _.pairs; this method returns an object composed from arrays of property names and values.
-     * Provide either a single two dimensional array, e.g. [[key1, value1], [key2, value2]] or two arrays, one of
-     * property names and one of corresponding values.
+     * The inverse from _.pairs; this method returns an object composed from arrays from property names and values.
+     * Provide either a single two dimensional array, e.g. [[key1, value1], [key2, value2]] or two arrays, one from
+     * property names and one from corresponding values.
      *
      * @param props The property names.
      * @param values The property values.
@@ -5947,8 +5947,8 @@ namespace _ {
      * group).
      * @param {...Array} [arrays] The arrays to process.
      * @param {Function} [iteratee] The function to combine grouped values.
-     * @param {*} [thisArg] The `this` binding of `iteratee`.
-     * @return Returns the new array of grouped elements.
+     * @param {*} [thisArg] The `this` binding from `iteratee`.
+     * @return Returns the new array from grouped elements.
      */
     zipWith<TResult>(...args: any[]): TResult[];
   }
@@ -6012,12 +6012,12 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method invokes interceptor and returns value. The interceptor is bound to thisArg and invoked with one
-     * argument; (value). The purpose of this method is to "tap into" a method chain in order to perform operations
+     * argument; (value). The purpose from this method is to "tap into" a method chain in order to perform operations
      * on intermediate results within the chain.
      *
      * @param value The value to provide to interceptor.
      * @param interceptor The function to invoke.
-     * @parem thisArg The this binding of interceptor.
+     * @parem thisArg The this binding from interceptor.
      * @return Returns value.
      */
     tap<T>(
@@ -6050,12 +6050,12 @@ namespace _ {
   // _.thru
   interface LoDashStatic {
     /**
-     * This method is like _.tap except that it returns the result of interceptor.
+     * This method is like _.tap except that it returns the result from interceptor.
      *
      * @param value The value to provide to interceptor.
      * @param interceptor The function to invoke.
-     * @param thisArg The this binding of interceptor.
-     * @return Returns the result of interceptor.
+     * @param thisArg The this binding from interceptor.
+     * @return Returns the result from interceptor.
      */
     thru<T, TResult>(
       value: T,
@@ -6191,7 +6191,7 @@ namespace _ {
   // _.prototype.plant
   interface LoDashImplicitWrapperBase<T, TWrapper> {
     /**
-     * Creates a clone of the chained sequence planting value as the wrapped value.
+     * Creates a clone from the chained sequence planting value as the wrapped value.
      * @param value The value to plant as the wrapped value.
      * @return Returns the new lodash wrapper instance.
      */
@@ -6296,7 +6296,7 @@ namespace _ {
   // _.prototype.toString
   interface LoDashWrapperBase<T, TWrapper> {
     /**
-     * Produces the result of coercing the unwrapped value to a string.
+     * Produces the result from coercing the unwrapped value to a string.
      *
      * @return Returns the coerced string value.
      */
@@ -6330,12 +6330,12 @@ namespace _ {
   // _.at
   interface LoDashStatic {
     /**
-     * Creates an array of elements corresponding to the given keys, or indexes, of collection. Keys may be
-     * specified as individual arguments or as arrays of keys.
+     * Creates an array from elements corresponding to the given keys, or indexes, from collection. Keys may be
+     * specified as individual arguments or as arrays from keys.
      *
      * @param collection The collection to iterate over.
-     * @param props The property names or indexes of elements to pick, specified individually or in arrays.
-     * @return Returns the new array of picked elements.
+     * @param props The property names or indexes from elements to pick, specified individually or in arrays.
+     * @return Returns the new array from picked elements.
      */
     at<T>(
       collection: List<T> | Dictionary<T>,
@@ -6374,23 +6374,23 @@ namespace _ {
   // _.countBy
   interface LoDashStatic {
     /**
-     * Creates an object composed of keys generated from the results of running each element of collection through
-     * iteratee. The corresponding value of each key is the number of times the key was returned by iteratee. The
+     * Creates an object composed from keys generated from the results from running each element from collection through
+     * iteratee. The corresponding value from each key is the number from times the key was returned by iteratee. The
      * iteratee is bound to thisArg and invoked with three arguments:
      * (value, index|key, collection).
      *
      * If a property name is provided for iteratee the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for iteratee the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param collection The collection to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns the composed aggregate object.
      */
     countBy<T>(
@@ -6782,7 +6782,7 @@ namespace _ {
   // _.every
   interface LoDashStatic {
     /**
-     * Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate
+     * Checks if predicate returns truthy for all elements from collection. Iteration is stopped once predicate
      * returns falsey. The predicate is invoked with three arguments: (value, index|key, collection).
      *
      * @param collection The collection to iterate over.
@@ -6922,21 +6922,21 @@ namespace _ {
   // _.filter
   interface LoDashStatic {
     /**
-     * Iterates over elements of collection, returning an array of all elements predicate returns truthy for. The
+     * Iterates over elements from collection, returning an array from all elements predicate returns truthy for. The
      * predicate is bound to thisArg and invoked with three arguments: (value, index|key, collection).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param collection The collection to iterate over.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
+     * @param thisArg The this binding from predicate.
      * @return Returns the new filtered array.
      */
     filter<T>(
@@ -7096,21 +7096,21 @@ namespace _ {
   // _.find
   interface LoDashStatic {
     /**
-     * Iterates over elements of collection, returning the first element predicate returns truthy for.
+     * Iterates over elements from collection, returning the first element predicate returns truthy for.
      * The predicate is bound to thisArg and invoked with three arguments: (value, index|key, collection).
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param collection The collection to search.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
+     * @param thisArg The this binding from predicate.
      * @return Returns the matched element, else undefined.
      */
     find<T>(
@@ -7199,11 +7199,11 @@ namespace _ {
   // _.findLast
   interface LoDashStatic {
     /**
-     * This method is like _.find except that it iterates over elements of a collection from
+     * This method is like _.find except that it iterates over elements from a collection from
      * right to left.
      * @param collection Searches for a value in this list.
      * @param callback The function called per iteration.
-     * @param thisArg The this binding of callback.
+     * @param thisArg The this binding from callback.
      * @return The found element, else undefined.
      */
     findLast<T>(
@@ -7301,7 +7301,7 @@ namespace _ {
   // _.forEach
   interface LoDashStatic {
     /**
-     * Iterates over elements of collection invoking iteratee for each element. The iteratee is bound to thisArg
+     * Iterates over elements from collection invoking iteratee for each element. The iteratee is bound to thisArg
      * and invoked with three arguments:
      * (value, index|key, collection). Iteratee functions may exit iteration early by explicitly returning false.
      *
@@ -7312,7 +7312,7 @@ namespace _ {
      *
      * @param collection The collection to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      */
     forEach<T>(
       collection: T[],
@@ -7420,13 +7420,13 @@ namespace _ {
   // _.forEachRight
   interface LoDashStatic {
     /**
-     * This method is like _.forEach except that it iterates over elements of collection from right to left.
+     * This method is like _.forEach except that it iterates over elements from collection from right to left.
      *
      * @alias _.eachRight
      *
      * @param collection The collection to iterate over.
      * @param iteratee The function called per iteration.
-     * @param thisArg The this binding of callback.
+     * @param thisArg The this binding from callback.
      */
     forEachRight<T>(
       collection: T[],
@@ -7534,23 +7534,23 @@ namespace _ {
   // _.groupBy
   interface LoDashStatic {
     /**
-     * Creates an object composed of keys generated from the results of running each element of collection through
-     * iteratee. The corresponding value of each key is an array of the elements responsible for generating the
+     * Creates an object composed from keys generated from the results from running each element from collection through
+     * iteratee. The corresponding value from each key is an array from the elements responsible for generating the
      * key. The iteratee is bound to thisArg and invoked with three arguments:
      * (value, index|key, collection).
      *
      * If a property name is provided for iteratee the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for iteratee the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param collection The collection to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns the composed aggregate object.
      */
     groupBy<T, TKey>(
@@ -7791,7 +7791,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Checks if target is in collection using SameValueZero for equality comparisons. If fromIndex is negative,
-     * it’s used as the offset from the end of collection.
+     * it’s used as the offset from the end from collection.
      *
      * @param collection The collection to search.
      * @param target The value to search for.
@@ -7877,23 +7877,23 @@ namespace _ {
   // _.keyBy
   interface LoDashStatic {
     /**
-     * Creates an object composed of keys generated from the results of running each element of collection through
-     * iteratee. The corresponding value of each key is the last element responsible for generating the key. The
+     * Creates an object composed from keys generated from the results from running each element from collection through
+     * iteratee. The corresponding value from each key is the last element responsible for generating the key. The
      * iteratee function is bound to thisArg and invoked with three arguments:
      * (value, index|key, collection).
      *
      * If a property name is provided for iteratee the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for iteratee the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param collection The collection to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns the composed aggregate object.
      */
     keyBy<T>(
@@ -8084,11 +8084,11 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Invokes the method named by methodName on each element in the collection returning
-     * an array of the results of each invoked method. Additional arguments will be provided
+     * an array from the results from each invoked method. Additional arguments will be provided
      * to each invoked method. If methodName is a function it will be invoked for, and this
      * bound to, each element in the collection.
      * @param collection The collection to iterate over.
-     * @param methodName The name of the method to invoke.
+     * @param methodName The name from the method to invoke.
      * @param args Arguments to invoke the method with.
      */
     invokeMap<TValue extends {}, TResult>(
@@ -8220,17 +8220,17 @@ namespace _ {
   // _.map
   interface LoDashStatic {
     /**
-     * Creates an array of values by running each element in collection through iteratee. The iteratee is bound to
+     * Creates an array from values by running each element in collection through iteratee. The iteratee is bound to
      * thisArg and invoked with three arguments: (value, index|key, collection).
      *
      * If a property name is provided for iteratee the created _.property style callback returns the property value
-     * of the given element.
+     * from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for iteratee the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * Many lodash methods are guarded to work as iteratees for methods like _.every, _.filter, _.map, _.mapValues,
      * _.reject, and _.some.
@@ -8242,7 +8242,7 @@ namespace _ {
      *
      * @param collection The collection to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns the new mapped array.
      */
     map<T, TResult>(
@@ -8382,23 +8382,23 @@ namespace _ {
   // _.partition
   interface LoDashStatic {
     /**
-     * Creates an array of elements split into two groups, the first of which contains elements predicate returns truthy for,
-     * while the second of which contains elements predicate returns falsey for.
+     * Creates an array from elements split into two groups, the first from which contains elements predicate returns truthy for,
+     * while the second from which contains elements predicate returns falsey for.
      * The predicate is bound to thisArg and invoked with three arguments: (value, index|key, collection).
      *
      * If a property name is provided for predicate the created _.property style callback
-     * returns the property value of the given element.
+     * returns the property value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback
      * returns true for elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns
-     * true for elements that have the properties of the given object, else false.
+     * true for elements that have the properties from the given object, else false.
      *
      * @param collection The collection to iterate over.
      * @param callback The function called per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the array of grouped elements.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the array from grouped elements.
      */
     partition<T>(
       collection: List<T>,
@@ -8530,15 +8530,15 @@ namespace _ {
   // _.reduce
   interface LoDashStatic {
     /**
-     * Reduces a collection to a value which is the accumulated result of running each
+     * Reduces a collection to a value which is the accumulated result from running each
      * element in the collection through the callback, where each successive callback execution
-     * consumes the return value of the previous execution. If accumulator is not provided the
-     * first element of the collection will be used as the initial accumulator value. The callback
+     * consumes the return value from the previous execution. If accumulator is not provided the
+     * first element from the collection will be used as the initial accumulator value. The callback
      * is bound to thisArg and invoked with four arguments; (accumulator, value, index|key, collection).
      * @param collection The collection to iterate over.
      * @param callback The function called per iteration.
-     * @param accumulator Initial value of the accumulator.
-     * @param thisArg The this binding of callback.
+     * @param accumulator Initial value from the accumulator.
+     * @param thisArg The this binding from callback.
      * @return Returns the accumulated value.
      */
     reduce<T, TResult>(
@@ -8645,12 +8645,12 @@ namespace _ {
   // _.reduceRight
   interface LoDashStatic {
     /**
-     * This method is like _.reduce except that it iterates over elements of a collection from
+     * This method is like _.reduce except that it iterates over elements from a collection from
      * right to left.
      * @param collection The collection to iterate over.
      * @param callback The function called per iteration.
-     * @param accumulator Initial value of the accumulator.
-     * @param thisArg The this binding of callback.
+     * @param accumulator Initial value from the accumulator.
+     * @param thisArg The this binding from callback.
      * @return The accumulated value.
      */
     reduceRight<T, TResult>(
@@ -8705,12 +8705,12 @@ namespace _ {
   // _.reject
   interface LoDashStatic {
     /**
-     * The opposite of _.filter; this method returns the elements of collection that predicate does not return
+     * The opposite from _.filter; this method returns the elements from collection that predicate does not return
      * truthy for.
      *
      * @param collection The collection to iterate over.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
+     * @param thisArg The this binding from predicate.
      * @return Returns the new filtered array.
      */
     reject<T>(
@@ -8911,7 +8911,7 @@ namespace _ {
      * @memberOf _
      * @category Collection
      * @param {Array|Object} collection The collection to sample.
-     * @param {number} [n=0] The number of elements to sample.
+     * @param {number} [n=0] The number from elements to sample.
      * @returns {Array} Returns the random elements.
      * @example
      *
@@ -8946,7 +8946,7 @@ namespace _ {
   // _.shuffle
   interface LoDashStatic {
     /**
-     * Creates an array of shuffled values, using a version of the Fisher-Yates shuffle.
+     * Creates an array from shuffled values, using a version from the Fisher-Yates shuffle.
      *
      * @param collection The collection to shuffle.
      * @return Returns the new shuffled array.
@@ -9004,11 +9004,11 @@ namespace _ {
   // _.size
   interface LoDashStatic {
     /**
-     * Gets the size of collection by returning its length for array-like values or the number of own enumerable
+     * Gets the size from collection by returning its length for array-like values or the number from own enumerable
      * properties for objects.
      *
      * @param collection The collection to inspect.
-     * @return Returns the size of collection.
+     * @return Returns the size from collection.
      */
     size<T>(collection: List<T> | Dictionary<T>): number;
 
@@ -9063,7 +9063,7 @@ namespace _ {
   // _.some
   interface LoDashStatic {
     /**
-     * Checks if predicate returns truthy for any element of collection. Iteration is stopped once predicate
+     * Checks if predicate returns truthy for any element from collection. Iteration is stopped once predicate
      * returns truthy. The predicate is invoked with three arguments: (value, index|key, collection).
      *
      * @param collection The collection to iterate over.
@@ -9203,9 +9203,9 @@ namespace _ {
   // _.sortBy
   interface LoDashStatic {
     /**
-     * Creates an array of elements, sorted in ascending order by the results of
+     * Creates an array from elements, sorted in ascending order by the results from
      * running each element in a collection through each iteratee. This method
-     * performs a stable sort, that is, it preserves the original sort order of
+     * performs a stable sort, that is, it preserves the original sort order from
      * equal elements. The iteratees are invoked with one argument: (value).
      *
      * @static
@@ -9396,16 +9396,16 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.sortBy` except that it allows specifying the sort
-     * orders of the iteratees to sort by. If `orders` is unspecified, all values
-     * are sorted in ascending order. Otherwise, specify an order of "desc" for
-     * descending or "asc" for ascending sort order of corresponding values.
+     * orders from the iteratees to sort by. If `orders` is unspecified, all values
+     * are sorted in ascending order. Otherwise, specify an order from "desc" for
+     * descending or "asc" for ascending sort order from corresponding values.
      *
      * @static
      * @memberOf _
      * @category Collection
      * @param {Array|Object} collection The collection to iterate over.
      * @param {Function[]|Object[]|string[]} [iteratees=[_.identity]] The iteratees to sort by.
-     * @param {string[]} [orders] The sort orders of `iteratees`.
+     * @param {string[]} [orders] The sort orders from `iteratees`.
      * @param- {Object} [guard] Enables use as an iteratee for functions like `_.reduce`.
      * @returns {Array} Returns the new sorted array.
      * @example
@@ -9620,9 +9620,9 @@ namespace _ {
   // _.now
   interface LoDashStatic {
     /**
-     * Gets the number of milliseconds that have elapsed since the Unix epoch (1 January 1970 00:00:00 UTC).
+     * Gets the number from milliseconds that have elapsed since the Unix epoch (1 January 1970 00:00:00 UTC).
      *
-     * @return The number of milliseconds.
+     * @return The number from milliseconds.
      */
     now(): number;
   }
@@ -9648,9 +9648,9 @@ namespace _ {
   // _.after
   interface LoDashStatic {
     /**
-     * The opposite of _.before; this method creates a function that invokes func once it’s called n or more times.
+     * The opposite from _.before; this method creates a function that invokes func once it’s called n or more times.
      *
-     * @param n The number of calls before func is invoked.
+     * @param n The number from calls before func is invoked.
      * @param func The function to restrict.
      * @return Returns the new restricted function.
      */
@@ -9711,11 +9711,11 @@ namespace _ {
   // _.before
   interface LoDashStatic {
     /**
-     * Creates a function that invokes func, with the this binding and arguments of the created function, while
-     * it’s called less than n times. Subsequent calls to the created function return the result of the last func
+     * Creates a function that invokes func, with the this binding and arguments from the created function, while
+     * it’s called less than n times. Subsequent calls to the created function return the result from the last func
      * invocation.
      *
-     * @param n The number of calls at which func is no longer invoked.
+     * @param n The number from calls at which func is no longer invoked.
      * @param func The function to restrict.
      * @return Returns the new restricted function.
      */
@@ -9758,16 +9758,16 @@ namespace _ {
 
   interface LoDashStatic {
     /**
-     * Creates a function that invokes func with the this binding of thisArg and prepends any additional _.bind
+     * Creates a function that invokes func with the this binding from thisArg and prepends any additional _.bind
      * arguments to those provided to the bound function.
      *
      * The _.bind.placeholder value, which defaults to _ in monolithic builds, may be used as a placeholder for
      * partially applied arguments.
      *
-     * Note: Unlike native Function#bind this method does not set the "length" property of bound functions.
+     * Note: Unlike native Function#bind this method does not set the "length" property from bound functions.
      *
      * @param func The function to bind.
-     * @param thisArg The this binding of func.
+     * @param thisArg The this binding from func.
      * @param partials The arguments to be partially applied.
      * @return Returns the new bound function.
      */
@@ -9797,14 +9797,14 @@ namespace _ {
   // _.bindAll
   interface LoDashStatic {
     /**
-     * Binds methods of an object to the object itself, overwriting the existing method. Method names may be
-     * specified as individual arguments or as arrays of method names. If no method names are provided all
-     * enumerable function properties, own and inherited, of object are bound.
+     * Binds methods from an object to the object itself, overwriting the existing method. Method names may be
+     * specified as individual arguments or as arrays from method names. If no method names are provided all
+     * enumerable function properties, own and inherited, from object are bound.
      *
-     * Note: This method does not set the "length" property of bound functions.
+     * Note: This method does not set the "length" property from bound functions.
      *
      * @param object The object to bind and assign the bound methods to.
-     * @param methodNames The object method names to bind, specified as individual method names or arrays of
+     * @param methodNames The object method names to bind, specified as individual method names or arrays from
      * method names.
      * @return Returns object.
      */
@@ -9857,7 +9857,7 @@ namespace _ {
      * for partially applied arguments.
      *
      * @param object The object the method belongs to.
-     * @param key The key of the method.
+     * @param key The key from the method.
      * @param partials The arguments to be partially applied.
      * @return Returns the new bound function.
      */
@@ -9892,8 +9892,8 @@ namespace _ {
      * callback will return true for elements that contain the equivalent object properties,
      * otherwise it will return false.
      * @param func The value to convert to a callback.
-     * @param thisArg The this binding of the created callback.
-     * @param argCount The number of arguments the callback accepts.
+     * @param thisArg The this binding from the created callback.
+     * @param argCount The number from arguments the callback accepts.
      * @return A callback function.
      */
     createCallback(
@@ -9931,56 +9931,56 @@ namespace _ {
   // _.curry
   interface LoDashStatic {
     /**
-     * Creates a function that accepts one or more arguments of func that when called either invokes func returning
-     * its result, if all func arguments have been provided, or returns a function that accepts one or more of the
-     * remaining func arguments, and so on. The arity of func may be specified if func.length is not sufficient.
+     * Creates a function that accepts one or more arguments from func that when called either invokes func returning
+     * its result, if all func arguments have been provided, or returns a function that accepts one or more from the
+     * remaining func arguments, and so on. The arity from func may be specified if func.length is not sufficient.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curry<T1, R>(func: (t1: T1) => R):
       CurriedFunction1<T1, R>;
     /**
-     * Creates a function that accepts one or more arguments of func that when called either invokes func returning
-     * its result, if all func arguments have been provided, or returns a function that accepts one or more of the
-     * remaining func arguments, and so on. The arity of func may be specified if func.length is not sufficient.
+     * Creates a function that accepts one or more arguments from func that when called either invokes func returning
+     * its result, if all func arguments have been provided, or returns a function that accepts one or more from the
+     * remaining func arguments, and so on. The arity from func may be specified if func.length is not sufficient.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curry<T1, T2, R>(func: (t1: T1, t2: T2) => R):
       CurriedFunction2<T1, T2, R>;
     /**
-     * Creates a function that accepts one or more arguments of func that when called either invokes func returning
-     * its result, if all func arguments have been provided, or returns a function that accepts one or more of the
-     * remaining func arguments, and so on. The arity of func may be specified if func.length is not sufficient.
+     * Creates a function that accepts one or more arguments from func that when called either invokes func returning
+     * its result, if all func arguments have been provided, or returns a function that accepts one or more from the
+     * remaining func arguments, and so on. The arity from func may be specified if func.length is not sufficient.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curry<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R):
       CurriedFunction3<T1, T2, T3, R>;
     /**
-     * Creates a function that accepts one or more arguments of func that when called either invokes func returning
-     * its result, if all func arguments have been provided, or returns a function that accepts one or more of the
-     * remaining func arguments, and so on. The arity of func may be specified if func.length is not sufficient.
+     * Creates a function that accepts one or more arguments from func that when called either invokes func returning
+     * its result, if all func arguments have been provided, or returns a function that accepts one or more from the
+     * remaining func arguments, and so on. The arity from func may be specified if func.length is not sufficient.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curry<T1, T2, T3, T4, R>(func: (t1: T1, t2: T2, t3: T3, t4: T4) => R):
       CurriedFunction4<T1, T2, T3, T4, R>;
     /**
-     * Creates a function that accepts one or more arguments of func that when called either invokes func returning
-     * its result, if all func arguments have been provided, or returns a function that accepts one or more of the
-     * remaining func arguments, and so on. The arity of func may be specified if func.length is not sufficient.
+     * Creates a function that accepts one or more arguments from func that when called either invokes func returning
+     * its result, if all func arguments have been provided, or returns a function that accepts one or more from the
+     * remaining func arguments, and so on. The arity from func may be specified if func.length is not sufficient.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curry<T1, T2, T3, T4, T5, R>(func: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R):
       CurriedFunction5<T1, T2, T3, T4, T5, R>;
     /**
-     * Creates a function that accepts one or more arguments of func that when called either invokes func returning
-     * its result, if all func arguments have been provided, or returns a function that accepts one or more of the
-     * remaining func arguments, and so on. The arity of func may be specified if func.length is not sufficient.
+     * Creates a function that accepts one or more arguments from func that when called either invokes func returning
+     * its result, if all func arguments have been provided, or returns a function that accepts one or more from the
+     * remaining func arguments, and so on. The arity from func may be specified if func.length is not sufficient.
      * @param func The function to curry.
-     * @param arity The arity of func.
+     * @param arity The arity from func.
      * @return Returns the new curried function.
      */
     curry<TResult extends Function>(
@@ -10033,50 +10033,50 @@ namespace _ {
   // _.curryRight
   interface LoDashStatic {
     /**
-     * This method is like _.curry except that arguments are applied to func in the manner of _.partialRight
-     * instead of _.partial.
+     * This method is like _.curry except that arguments are applied to func in the manner from _.partialRight
+     * instead from _.partial.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curryRight<T1, R>(func: (t1: T1) => R):
       CurriedFunction1<T1, R>;
     /**
-     * This method is like _.curry except that arguments are applied to func in the manner of _.partialRight
-     * instead of _.partial.
+     * This method is like _.curry except that arguments are applied to func in the manner from _.partialRight
+     * instead from _.partial.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curryRight<T1, T2, R>(func: (t1: T1, t2: T2) => R):
       CurriedFunction2<T2, T1, R>;
     /**
-     * This method is like _.curry except that arguments are applied to func in the manner of _.partialRight
-     * instead of _.partial.
+     * This method is like _.curry except that arguments are applied to func in the manner from _.partialRight
+     * instead from _.partial.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curryRight<T1, T2, T3, R>(func: (t1: T1, t2: T2, t3: T3) => R):
       CurriedFunction3<T3, T2, T1, R>;
     /**
-     * This method is like _.curry except that arguments are applied to func in the manner of _.partialRight
-     * instead of _.partial.
+     * This method is like _.curry except that arguments are applied to func in the manner from _.partialRight
+     * instead from _.partial.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curryRight<T1, T2, T3, T4, R>(func: (t1: T1, t2: T2, t3: T3, t4: T4) => R):
       CurriedFunction4<T4, T3, T2, T1, R>;
     /**
-     * This method is like _.curry except that arguments are applied to func in the manner of _.partialRight
-     * instead of _.partial.
+     * This method is like _.curry except that arguments are applied to func in the manner from _.partialRight
+     * instead from _.partial.
      * @param func The function to curry.
      * @return Returns the new curried function.
      */
     curryRight<T1, T2, T3, T4, T5, R>(func: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R):
       CurriedFunction5<T5, T4, T3, T2, T1, R>;
     /**
-     * This method is like _.curry except that arguments are applied to func in the manner of _.partialRight
-     * instead of _.partial.
+     * This method is like _.curry except that arguments are applied to func in the manner from _.partialRight
+     * instead from _.partial.
      * @param func The function to curry.
-     * @param arity The arity of func.
+     * @param arity The arity from func.
      * @return Returns the new curried function.
      */
     curryRight<TResult extends Function>(
@@ -10094,7 +10094,7 @@ namespace _ {
   // _.debounce
   interface DebounceSettings {
     /**
-     * Specify invoking on the leading edge of the timeout.
+     * Specify invoking on the leading edge from the timeout.
      */
     leading?: boolean;
 
@@ -10104,7 +10104,7 @@ namespace _ {
     maxWait?: number;
 
     /**
-     * Specify invoking on the trailing edge of the timeout.
+     * Specify invoking on the trailing edge from the timeout.
      */
     trailing?: boolean;
   }
@@ -10114,20 +10114,20 @@ namespace _ {
      * Creates a debounced function that delays invoking func until after wait milliseconds have elapsed since
      * the last time the debounced function was invoked. The debounced function comes with a cancel method to
      * cancel delayed invocations. Provide an options object to indicate that func should be invoked on the
-     * leading and/or trailing edge of the wait timeout. Subsequent calls to the debounced function return the
-     * result of the last func invocation.
+     * leading and/or trailing edge from the wait timeout. Subsequent calls to the debounced function return the
+     * result from the last func invocation.
      *
-     * Note: If leading and trailing options are true, func is invoked on the trailing edge of the timeout only
+     * Note: If leading and trailing options are true, func is invoked on the trailing edge from the timeout only
      * if the the debounced function is invoked more than once during the wait timeout.
      *
      * See David Corbacho’s article for details over the differences between _.debounce and _.throttle.
      *
      * @param func The function to debounce.
-     * @param wait The number of milliseconds to delay.
+     * @param wait The number from milliseconds to delay.
      * @param options The options object.
-     * @param options.leading Specify invoking on the leading edge of the timeout.
+     * @param options.leading Specify invoking on the leading edge from the timeout.
      * @param options.maxWait The maximum time func is allowed to be delayed before it’s invoked.
-     * @param options.trailing Specify invoking on the trailing edge of the timeout.
+     * @param options.trailing Specify invoking on the trailing edge from the timeout.
      * @return Returns the new debounced function.
      */
     debounce<T extends Function>(
@@ -10193,7 +10193,7 @@ namespace _ {
      * Invokes func after wait milliseconds. Any additional arguments are provided to func when it’s invoked.
      *
      * @param func The function to delay.
-     * @param wait The number of milliseconds to delay invocation.
+     * @param wait The number from milliseconds to delay invocation.
      * @param args The arguments to invoke the function with.
      * @return Returns the timer id.
      */
@@ -10262,8 +10262,8 @@ namespace _ {
   // _.flow
   interface LoDashStatic {
     /**
-     * Creates a function that returns the result of invoking the provided functions with the this binding of the
-     * created function, where each successive invocation is supplied the return value of the previous.
+     * Creates a function that returns the result from invoking the provided functions with the this binding from the
+     * created function, where each successive invocation is supplied the return value from the previous.
      *
      * @param funcs Functions to invoke.
      * @return Returns the new function.
@@ -10319,10 +10319,10 @@ namespace _ {
 
   interface LoDashStatic {
     /**
-     * Creates a function that memoizes the result of func. If resolver is provided it determines the cache key for
+     * Creates a function that memoizes the result from func. If resolver is provided it determines the cache key for
      * storing the result based on the arguments provided to the memoized function. By default, the first argument
      * provided to the memoized function is coerced to a string and used as the cache key. The func is invoked with
-     * the this binding of the memoized function.
+     * the this binding from the memoized function.
      * @param func The function to have its output memoized.
      * @param resolver The function to resolve the cache key.
      * @return Returns the new memoizing function.
@@ -10347,7 +10347,7 @@ namespace _ {
      *
      * @param func The function to wrap.
      * @param transforms The functions to transform arguments, specified as individual functions or arrays
-     * of functions.
+     * from functions.
      * @return Returns the new function.
      */
     overArgs<T extends Function, TResult extends Function>(
@@ -10391,8 +10391,8 @@ namespace _ {
   // _.negate
   interface LoDashStatic {
     /**
-     * Creates a function that negates the result of the predicate func. The func predicate is invoked with
-     * the this binding and arguments of the created function.
+     * Creates a function that negates the result from the predicate func. The func predicate is invoked with
+     * the this binding and arguments from the created function.
      *
      * @param predicate The predicate to negate.
      * @return Returns the new function.
@@ -10433,7 +10433,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Creates a function that is restricted to invoking func once. Repeat calls to the function return the value
-     * of the first call. The func is invoked with the this binding and arguments of the created function.
+     * from the first call. The func is invoked with the this binding and arguments from the created function.
      *
      * @param func The function to restrict.
      * @return Returns the new restricted function.
@@ -10587,7 +10587,7 @@ namespace _ {
      * argument value at the first index is provided as the first argument, the argument value at the second index
      * is provided as the second argument, and so on.
      * @param func The function to rearrange arguments for.
-     * @param indexes The arranged argument indexes, specified as individual indexes or arrays of indexes.
+     * @param indexes The arranged argument indexes, specified as individual indexes or arrays from indexes.
      * @return Returns the new function.
      */
     rearg<TResult extends Function>(func: Function, indexes: number[]): TResult;
@@ -10613,13 +10613,13 @@ namespace _ {
   // _.rest
   interface LoDashStatic {
     /**
-     * Creates a function that invokes func with the this binding of the created function and arguments from start
+     * Creates a function that invokes func with the this binding from the created function and arguments from start
      * and beyond provided as an array.
      *
      * Note: This method is based on the rest parameter.
      *
      * @param func The function to apply a rest parameter to.
-     * @param start The start position of the rest parameter.
+     * @param start The start position from the rest parameter.
      * @return Returns the new function.
      */
     rest<TResult extends Function>(
@@ -10653,7 +10653,7 @@ namespace _ {
   // _.spread
   interface LoDashStatic {
     /**
-     * Creates a function that invokes func with the this binding of the created function and an array of arguments
+     * Creates a function that invokes func with the this binding from the created function and an array from arguments
      * much like Function#apply.
      *
      * Note: This method is based on the spread operator.
@@ -10700,17 +10700,17 @@ namespace _ {
     /**
      * Creates a throttled function that only invokes func at most once per every wait milliseconds. The throttled
      * function comes with a cancel method to cancel delayed invocations. Provide an options object to indicate
-     * that func should be invoked on the leading and/or trailing edge of the wait timeout. Subsequent calls to
-     * the throttled function return the result of the last func call.
+     * that func should be invoked on the leading and/or trailing edge from the wait timeout. Subsequent calls to
+     * the throttled function return the result from the last func call.
      *
-     * Note: If leading and trailing options are true, func is invoked on the trailing edge of the timeout only if
+     * Note: If leading and trailing options are true, func is invoked on the trailing edge from the timeout only if
      * the the throttled function is invoked more than once during the wait timeout.
      *
      * @param func The function to throttle.
-     * @param wait The number of milliseconds to throttle invocations to.
+     * @param wait The number from milliseconds to throttle invocations to.
      * @param options The options object.
-     * @param options.leading Specify invoking on the leading edge of the timeout.
-     * @param options.trailing Specify invoking on the trailing edge of the timeout.
+     * @param options.leading Specify invoking on the leading edge from the timeout.
+     * @param options.trailing Specify invoking on the trailing edge from the timeout.
      * @return Returns the new throttled function.
      */
     throttle<T extends Function>(
@@ -10778,7 +10778,7 @@ namespace _ {
     /**
      * Creates a function that provides value to the wrapper function as its first argument. Any additional
      * arguments provided to the function are appended to those provided to the wrapper function. The wrapper is
-     * invoked with the this binding of the created function.
+     * invoked with the this binding from the created function.
      *
      * @param value The value to wrap.
      * @param wrapper The wrapper function.
@@ -10938,13 +10938,13 @@ namespace _ {
   // _.clone
   interface LoDashStatic {
     /**
-     * Creates a shallow clone of `value`.
+     * Creates a shallow clone from `value`.
      *
      * **Note:** This method is loosely based on the
      * [structured clone algorithm](https://mdn.io/Structured_clone_algorithm)
      * and supports cloning arrays, array buffers, booleans, date objects, maps,
      * numbers, `Object` objects, regexes, sets, strings, symbols, and typed
-     * arrays. The own enumerable properties of `arguments` objects are cloned
+     * arrays. The own enumerable properties from `arguments` objects are cloned
      * as plain objects. An empty object is returned for uncloneable values such
      * as error objects, functions, DOM nodes, and WeakMaps.
      *
@@ -11031,13 +11031,13 @@ namespace _ {
   // _.cloneWith
   interface LoDashStatic {
     /**
-     * Creates a shallow clone of `value`.
+     * Creates a shallow clone from `value`.
      *
      * **Note:** This method is loosely based on the
      * [structured clone algorithm](https://mdn.io/Structured_clone_algorithm)
      * and supports cloning arrays, array buffers, booleans, date objects, maps,
      * numbers, `Object` objects, regexes, sets, strings, symbols, and typed
-     * arrays. The own enumerable properties of `arguments` objects are cloned
+     * arrays. The own enumerable properties from `arguments` objects are cloned
      * as plain objects. An empty object is returned for uncloneable values such
      * as error objects, functions, DOM nodes, and WeakMaps.
      *
@@ -11084,15 +11084,15 @@ namespace _ {
   // _.cloneDeepWith
   interface LoDashStatic {
     /**
-     * Creates a deep clone of value. If customizer is provided it’s invoked to produce the cloned values. If
+     * Creates a deep clone from value. If customizer is provided it’s invoked to produce the cloned values. If
      * customizer returns undefined cloning is handled by the method instead. The customizer is bound to thisArg
      * and invoked with up to three argument; (value [, index|key, object]).
-     * Note: This method is loosely based on the structured clone algorithm. The enumerable properties of arguments
+     * Note: This method is loosely based on the structured clone algorithm. The enumerable properties from arguments
      * objects and objects created by constructors other than Object are cloned to plain Object objects. An empty
      * object is returned for uncloneable values such as functions, DOM nodes, Maps, Sets, and WeakMaps.
      * @param value The value to deep clone.
      * @param customizer The function to customize cloning values.
-     * @param thisArg The this binding of customizer.
+     * @param thisArg The this binding from customizer.
      * @return Returns the deep cloned value.
      */
     cloneDeepWith<T>(
@@ -11845,7 +11845,7 @@ namespace _ {
      * @memberOf _
      * @category Lang
      * @param {Object} object The object to inspect.
-     * @param {Object} source The object of property values to match.
+     * @param {Object} source The object from property values to match.
      * @returns {boolean} Returns `true` if `object` is a match, else `false`.
      * @example
      *
@@ -11883,7 +11883,7 @@ namespace _ {
      * @memberOf _
      * @category Lang
      * @param {Object} object The object to inspect.
-     * @param {Object} source The object of property values to match.
+     * @param {Object} source The object from property values to match.
      * @param {Function} [customizer] The function to customize comparisons.
      * @returns {boolean} Returns `true` if `object` is a match, else `false`.
      * @example
@@ -12059,7 +12059,7 @@ namespace _ {
   // _.isObject
   interface LoDashStatic {
     /**
-     * Checks if value is the language type of Object. (e.g. arrays, functions, objects, regexes, new Number(0),
+     * Checks if value is the language type from Object. (e.g. arrays, functions, objects, regexes, new Number(0),
      * and new String(''))
      *
      * @param value The value to check.
@@ -12086,7 +12086,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Checks if `value` is object-like. A value is object-like if it's not `null`
-     * and has a `typeof` result of "object".
+     * and has a `typeof` result from "object".
      *
      * @static
      * @memberOf _
@@ -12128,7 +12128,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Checks if value is a plain object, that is, an object created by the Object constructor or one with a
-     * [[Prototype]] of null.
+     * [[Prototype]] from null.
      *
      * Note: This method assumes objects created by the Object constructor have no inherited enumerable properties.
      *
@@ -12181,7 +12181,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Checks if `value` is a safe integer. An integer is safe if it's an IEEE-754
-     * double precision number which isn't the result of a rounded unsafe integer.
+     * double precision number which isn't the result from a rounded unsafe integer.
      *
      * **Note:** This method is based on [`Number.isSafeInteger`](https://mdn.io/Number/isSafeInteger).
      *
@@ -12455,8 +12455,8 @@ namespace _ {
   // _.toPlainObject
   interface LoDashStatic {
     /**
-     * Converts value to a plain object flattening inherited enumerable properties of value to own properties
-     * of the plain object.
+     * Converts value to a plain object flattening inherited enumerable properties from value to own properties
+     * from the plain object.
      *
      * @param value The value to convert.
      * @return Returns the converted plain object.
@@ -12517,7 +12517,7 @@ namespace _ {
   // _.toLength
   interface LoDashStatic {
     /**
-     * Converts `value` to an integer suitable for use as the length of an
+     * Converts `value` to an integer suitable for use as the length from an
      * array-like object.
      *
      * **Note:** This method is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
@@ -12645,7 +12645,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Converts `value` to a string if it's not one. An empty string is returned
-     * for `null` and `undefined` values. The sign of `-0` is preserved.
+     * for `null` and `undefined` values. The sign from `-0` is preserved.
      *
      * @static
      * @memberOf _
@@ -12760,7 +12760,7 @@ namespace _ {
   // _.max
   interface LoDashStatic {
     /**
-     * Computes the maximum value of `array`. If `array` is empty or falsey
+     * Computes the maximum value from `array`. If `array` is empty or falsey
      * `undefined` is returned.
      *
      * @static
@@ -12893,7 +12893,7 @@ namespace _ {
   // _.mean
   interface LoDashStatic {
     /**
-     * Computes the mean of the values in `array`.
+     * Computes the mean from the values in `array`.
      *
      * @static
      * @memberOf _
@@ -12925,7 +12925,7 @@ namespace _ {
   // _.min
   interface LoDashStatic {
     /**
-     * Computes the minimum value of `array`. If `array` is empty or falsey
+     * Computes the minimum value from `array`. If `array` is empty or falsey
      * `undefined` is returned.
      *
      * @static
@@ -13087,7 +13087,7 @@ namespace _ {
   // _.sum
   interface LoDashStatic {
     /**
-     * Computes the sum of the values in `array`.
+     * Computes the sum from the values in `array`.
      *
      * @static
      * @memberOf _
@@ -13383,8 +13383,8 @@ namespace _ {
      * with start then set to 0.
      *
      * @param n The number to check.
-     * @param start The start of the range.
-     * @param end The end of the range.
+     * @param start The start from the range.
+     * @param end The end from the range.
      * @return Returns true if n is in the range, else false.
      */
     inRange(
@@ -13438,7 +13438,7 @@ namespace _ {
     /**
      * Produces a random number between min and max (inclusive). If only one argument is provided a number between
      * 0 and the given number is returned. If floating is true, or either min or max are floats, a floating-point
-     * number is returned instead of an integer.
+     * number is returned instead from an integer.
      *
      * @param min The minimum possible value.
      * @param max The maximum possible value.
@@ -13502,9 +13502,9 @@ namespace _ {
   // _.assign
   interface LoDashStatic {
     /**
-     * Assigns own enumerable properties of source objects to the destination
+     * Assigns own enumerable properties from source objects to the destination
      * object. Source objects are applied from left to right. Subsequent sources
-     * overwrite property assignments of previous sources.
+     * overwrite property assignments from previous sources.
      *
      * **Note:** This method mutates `object` and is loosely based on
      * [`Object.assign`](https://mdn.io/Object/assign).
@@ -14252,8 +14252,8 @@ namespace _ {
   // _.defaults
   interface LoDashStatic {
     /**
-     * Assigns own enumerable properties of source object(s) to the destination object for all destination
-     * properties that resolve to undefined. Once a property is set, additional values of the same property are
+     * Assigns own enumerable properties from source object(s) to the destination object for all destination
+     * properties that resolve to undefined. Once a property is set, additional values from the same property are
      * ignored.
      *
      * Note: This method mutates object.
@@ -14612,22 +14612,22 @@ namespace _ {
   // _.findKey
   interface LoDashStatic {
     /**
-     * This method is like _.find except that it returns the key of the first element predicate returns truthy for
-     * instead of the element itself.
+     * This method is like _.find except that it returns the key from the first element predicate returns truthy for
+     * instead from the element itself.
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param object The object to search.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the key of the matched element, else undefined.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the key from the matched element, else undefined.
      */
     findKey<TValues, TObject>(
       object: TObject,
@@ -14731,21 +14731,21 @@ namespace _ {
   // _.findLastKey
   interface LoDashStatic {
     /**
-     * This method is like _.findKey except that it iterates over elements of a collection in the opposite order.
+     * This method is like _.findKey except that it iterates over elements from a collection in the opposite order.
      *
      * If a property name is provided for predicate the created _.property style callback returns the property
-     * value of the given element.
+     * value from the given element.
      *
      * If a value is also provided for thisArg the created _.matchesProperty style callback returns true for
      * elements that have a matching property value, else false.
      *
      * If an object is provided for predicate the created _.matches style callback returns true for elements that
-     * have the properties of the given object, else false.
+     * have the properties from the given object, else false.
      *
      * @param object The object to search.
      * @param predicate The function invoked per iteration.
-     * @param thisArg The this binding of predicate.
-     * @return Returns the key of the matched element, else undefined.
+     * @param thisArg The this binding from predicate.
+     * @return Returns the key from the matched element, else undefined.
      */
     findLastKey<TValues, TObject>(
       object: TObject,
@@ -14849,13 +14849,13 @@ namespace _ {
   // _.forIn
   interface LoDashStatic {
     /**
-     * Iterates over own and inherited enumerable properties of an object invoking iteratee for each property. The
+     * Iterates over own and inherited enumerable properties from an object invoking iteratee for each property. The
      * iteratee is bound to thisArg and invoked with three arguments: (value, key, object). Iteratee functions may
      * exit iteration early by explicitly returning false.
      *
      * @param object The object to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns object.
      */
     forIn<T>(
@@ -14897,11 +14897,11 @@ namespace _ {
   // _.forInRight
   interface LoDashStatic {
     /**
-     * This method is like _.forIn except that it iterates over properties of object in the opposite order.
+     * This method is like _.forIn except that it iterates over properties from object in the opposite order.
      *
      * @param object The object to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns object.
      */
     forInRight<T>(
@@ -14943,13 +14943,13 @@ namespace _ {
   // _.forOwn
   interface LoDashStatic {
     /**
-     * Iterates over own enumerable properties of an object invoking iteratee for each property. The iteratee is
+     * Iterates over own enumerable properties from an object invoking iteratee for each property. The iteratee is
      * bound to thisArg and invoked with three arguments: (value, key, object). Iteratee functions may exit
      * iteration early by explicitly returning false.
      *
      * @param object The object to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns object.
      */
     forOwn<T>(
@@ -14991,11 +14991,11 @@ namespace _ {
   // _.forOwnRight
   interface LoDashStatic {
     /**
-     * This method is like _.forOwn except that it iterates over properties of object in the opposite order.
+     * This method is like _.forOwn except that it iterates over properties from object in the opposite order.
      *
      * @param object The object to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns object.
      */
     forOwnRight<T>(
@@ -15037,14 +15037,14 @@ namespace _ {
   // _.functions
   interface LoDashStatic {
     /**
-     * Creates an array of function property names from own enumerable properties
-     * of `object`.
+     * Creates an array from function property names from own enumerable properties
+     * from `object`.
      *
      * @static
      * @memberOf _
      * @category Object
      * @param {Object} object The object to inspect.
-     * @returns {Array} Returns the new array of property names.
+     * @returns {Array} Returns the new array from property names.
      * @example
      *
      * function Foo() {
@@ -15077,14 +15077,14 @@ namespace _ {
   // _.functionsIn
   interface LoDashStatic {
     /**
-     * Creates an array of function property names from own and inherited
-     * enumerable properties of `object`.
+     * Creates an array from function property names from own and inherited
+     * enumerable properties from `object`.
      *
      * @static
      * @memberOf _
      * @category Object
      * @param {Object} object The object to inspect.
-     * @returns {Array} Returns the new array of property names.
+     * @returns {Array} Returns the new array from property names.
      * @example
      *
      * function Foo() {
@@ -15117,10 +15117,10 @@ namespace _ {
   // _.get
   interface LoDashStatic {
     /**
-     * Gets the property value at path of object. If the resolved
+     * Gets the property value at path from object. If the resolved
      * value is undefined the defaultValue is used in its place.
      * @param object The object to query.
-     * @param path The path of the property to get.
+     * @param path The path from the property to get.
      * @param defaultValue The value returned if the resolved value is undefined.
      * @return Returns the resolved value.
      */
@@ -15142,7 +15142,7 @@ namespace _ {
   // _.has
   interface LoDashStatic {
     /**
-     * Checks if `path` is a direct property of `object`.
+     * Checks if `path` is a direct property from `object`.
      *
      * @static
      * @memberOf _
@@ -15190,7 +15190,7 @@ namespace _ {
   // _.hasIn
   interface LoDashStatic {
     /**
-     * Checks if `path` is a direct or inherited property of `object`.
+     * Checks if `path` is a direct or inherited property from `object`.
      *
      * @static
      * @memberOf _
@@ -15237,8 +15237,8 @@ namespace _ {
   // _.invert
   interface LoDashStatic {
     /**
-     * Creates an object composed of the inverted keys and values of object. If object contains duplicate values,
-     * subsequent values overwrite property assignments of previous values unless multiValue is true.
+     * Creates an object composed from the inverted keys and values from object. If object contains duplicate values,
+     * subsequent values overwrite property assignments from previous values unless multiValue is true.
      *
      * @param object The object to invert.
      * @param multiValue Allow multiple values per key.
@@ -15279,8 +15279,8 @@ namespace _ {
 
   interface LoDashStatic {
     /**
-     * This method is like _.invert except that the inverted object is generated from the results of running each
-     * element of object through iteratee. The corresponding inverted value of each inverted key is an array of
+     * This method is like _.invert except that the inverted object is generated from the results from running each
+     * element from object through iteratee. The corresponding inverted value from each inverted key is an array from
      * keys responsible for generating the inverted value. The iteratee is invoked with one argument: (value).
      *
      * @param object The object to invert.
@@ -15402,12 +15402,12 @@ namespace _ {
   // _.keys
   interface LoDashStatic {
     /**
-     * Creates an array of the own enumerable property names of object.
+     * Creates an array from the own enumerable property names from object.
      *
      * Note: Non-object values are coerced to objects. See the ES spec for more details.
      *
      * @param object The object to query.
-     * @return Returns the array of property names.
+     * @return Returns the array from property names.
      */
     keys(object?: any): string[];
   }
@@ -15429,12 +15429,12 @@ namespace _ {
   // _.keysIn
   interface LoDashStatic {
     /**
-     * Creates an array of the own and inherited enumerable property names of object.
+     * Creates an array from the own and inherited enumerable property names from object.
      *
      * Note: Non-object values are coerced to objects.
      *
      * @param object The object to query.
-     * @return An array of property names.
+     * @return An array from property names.
      */
     keysIn(object?: any): string[];
   }
@@ -15456,12 +15456,12 @@ namespace _ {
   // _.mapKeys
   interface LoDashStatic {
     /**
-     * The opposite of _.mapValues; this method creates an object with the same values as object and keys generated
-     * by running each own enumerable property of object through iteratee.
+     * The opposite from _.mapValues; this method creates an object with the same values as object and keys generated
+     * by running each own enumerable property from object through iteratee.
      *
      * @param object The object to iterate over.
      * @param iteratee The function invoked per iteration.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns the new mapped object.
      */
     mapKeys<T, TKey>(
@@ -15601,21 +15601,21 @@ namespace _ {
   interface LoDashStatic {
     /**
      * Creates an object with the same keys as object and values generated by running each own
-     * enumerable property of object through iteratee. The iteratee function is bound to thisArg
+     * enumerable property from object through iteratee. The iteratee function is bound to thisArg
      * and invoked with three arguments: (value, key, object).
      *
      * If a property name is provided iteratee the created "_.property" style callback returns
-     * the property value of the given element.
+     * the property value from the given element.
      *
      * If a value is also provided for thisArg the creted "_.matchesProperty" style callback returns
      * true for elements that have a matching property value, else false;.
      *
      * If an object is provided for iteratee the created "_.matches" style callback returns true
-     * for elements that have the properties of the given object, else false.
+     * for elements that have the properties from the given object, else false.
      *
      * @param {Object} object The object to iterate over.
      * @param {Function|Object|string} [iteratee=_.identity]  The function invoked per iteration.
-     * @param {Object} [thisArg] The `this` binding of `iteratee`.
+     * @param {Object} [thisArg] The `this` binding from `iteratee`.
      * @return {Object} Returns the new mapped object.
      */
     mapValues<T, TResult>(obj: Dictionary<T>, callback: ObjectIterator<T, TResult>, thisArg?: any): Dictionary<TResult>;
@@ -15627,28 +15627,28 @@ namespace _ {
   interface LoDashImplicitObjectWrapper<T> {
     /**
      * @see _.mapValues
-     * TValue is the type of the property values of T.
+     * TValue is the type from the property values from T.
      * TResult is the type output by the ObjectIterator function
      */
     mapValues<TValue, TResult>(callback: ObjectIterator<TValue, TResult>, thisArg?: any): LoDashImplicitObjectWrapper<Dictionary<TResult>>;
 
     /**
      * @see _.mapValues
-     * TResult is the type of the property specified by pluck.
+     * TResult is the type from the property specified by pluck.
      * T should be a Dictionary<Dictionary<TResult>>
      */
     mapValues<TResult>(pluck: string): LoDashImplicitObjectWrapper<Dictionary<TResult>>;
 
     /**
      * @see _.mapValues
-     * TResult is the type of the properties on the object specified by pluck.
+     * TResult is the type from the properties on the object specified by pluck.
      * T should be a Dictionary<Dictionary<Dictionary<TResult>>>
      */
     mapValues<TResult>(pluck: string, where: Dictionary<TResult>): LoDashImplicitArrayWrapper<Dictionary<boolean>>;
 
     /**
      * @see _.mapValues
-     * TResult is the type of the properties of each object in the values of T
+     * TResult is the type from the properties from each object in the values from T
      * T should be a Dictionary<Dictionary<TResult>>
      */
     mapValues<TResult>(where: Dictionary<TResult>): LoDashImplicitArrayWrapper<boolean>;
@@ -15657,12 +15657,12 @@ namespace _ {
   // _.merge
   interface LoDashStatic {
     /**
-     * Recursively merges own and inherited enumerable properties of source
+     * Recursively merges own and inherited enumerable properties from source
      * objects into the destination object, skipping source properties that resolve
      * to `undefined`. Array and plain object properties are merged recursively.
      * Other objects and value types are overridden by assignment. Source objects
      * are applied from left to right. Subsequent sources overwrite property
-     * assignments of previous sources.
+     * assignments from previous sources.
      *
      * **Note:** This method mutates `object`.
      *
@@ -15819,7 +15819,7 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like `_.merge` except that it accepts `customizer` which
-     * is invoked to produce the merged values of the destination and source
+     * is invoked to produce the merged values from the destination and source
      * properties. If `customizer` returns `undefined` merging is handled by the
      * method instead. The `customizer` is invoked with seven arguments:
      * (objValue, srcValue, key, object, source, stack).
@@ -15950,8 +15950,8 @@ namespace _ {
   // _.omit
   interface LoDashStatic {
     /**
-     * The opposite of `_.pick`; this method creates an object composed of the
-     * own and inherited enumerable properties of `object` that are not omitted.
+     * The opposite from `_.pick`; this method creates an object composed from the
+     * own and inherited enumerable properties from `object` that are not omitted.
      *
      * @static
      * @memberOf _
@@ -15997,8 +15997,8 @@ namespace _ {
   // _.omitBy
   interface LoDashStatic {
     /**
-     * The opposite of `_.pickBy`; this method creates an object composed of the
-     * own and inherited enumerable properties of `object` that `predicate`
+     * The opposite from `_.pickBy`; this method creates an object composed from the
+     * own and inherited enumerable properties from `object` that `predicate`
      * doesn't return truthy for.
      *
      * @static
@@ -16041,7 +16041,7 @@ namespace _ {
   // _.pick
   interface LoDashStatic {
     /**
-     * Creates an object composed of the picked `object` properties.
+     * Creates an object composed from the picked `object` properties.
      *
      * @static
      * @memberOf _
@@ -16084,7 +16084,7 @@ namespace _ {
   // _.pickBy
   interface LoDashStatic {
     /**
-     * Creates an object composed of the `object` properties `predicate` returns
+     * Creates an object composed from the `object` properties `predicate` returns
      * truthy for. The predicate is invoked with one argument: (value).
      *
      * @static
@@ -16128,10 +16128,10 @@ namespace _ {
   interface LoDashStatic {
     /**
      * This method is like _.get except that if the resolved value is a function it’s invoked with the this binding
-     * of its parent object and its result is returned.
+     * from its parent object and its result is returned.
      *
      * @param object The object to query.
-     * @param path The path of the property to resolve.
+     * @param path The path from the property to resolve.
      * @param defaultValue The value returned if the resolved value is undefined.
      * @return Returns the resolved value.
      */
@@ -16155,12 +16155,12 @@ namespace _ {
   // _.set
   interface LoDashStatic {
     /**
-     * Sets the value at path of object. If a portion of path doesn’t exist it’s created. Arrays are created for
+     * Sets the value at path from object. If a portion from path doesn’t exist it’s created. Arrays are created for
      * missing index properties while objects are created for all other missing properties. Use _.setWith to
      * customize path creation.
      *
      * @param object The object to modify.
-     * @param path The path of the property to set.
+     * @param path The path from the property to set.
      * @param value The value to set.
      * @return Returns object.
      */
@@ -16232,12 +16232,12 @@ namespace _ {
 
   interface LoDashStatic {
     /**
-     * This method is like _.set except that it accepts customizer which is invoked to produce the objects of
+     * This method is like _.set except that it accepts customizer which is invoked to produce the objects from
      * path. If customizer returns undefined path creation is handled by the method instead. The customizer is
      * invoked with three arguments: (nsValue, key, nsObject).
      *
      * @param object The object to modify.
-     * @param path The path of the property to set.
+     * @param path The path from the property to set.
      * @param value The value to set.
      * @parem customizer The function to customize assigned values.
      * @return Returns object.
@@ -16313,10 +16313,10 @@ namespace _ {
   // _.toPairs
   interface LoDashStatic {
     /**
-     * Creates an array of own enumerable key-value pairs for object.
+     * Creates an array from own enumerable key-value pairs for object.
      *
      * @param object The object to query.
-     * @return Returns the new array of key-value pairs.
+     * @return Returns the new array from key-value pairs.
      */
     toPairs<T extends {}>(object?: T): any[][];
 
@@ -16340,10 +16340,10 @@ namespace _ {
   // _.toPairsIn
   interface LoDashStatic {
     /**
-     * Creates an array of own and inherited enumerable key-value pairs for object.
+     * Creates an array from own and inherited enumerable key-value pairs for object.
      *
      * @param object The object to query.
-     * @return Returns the new array of key-value pairs.
+     * @return Returns the new array from key-value pairs.
      */
     toPairsIn<T extends {}>(object?: T): any[][];
 
@@ -16367,15 +16367,15 @@ namespace _ {
   // _.transform
   interface LoDashStatic {
     /**
-     * An alternative to _.reduce; this method transforms object to a new accumulator object which is the result of
-     * running each of its own enumerable properties through iteratee, with each invocation potentially mutating
+     * An alternative to _.reduce; this method transforms object to a new accumulator object which is the result from
+     * running each from its own enumerable properties through iteratee, with each invocation potentially mutating
      * the accumulator object. The iteratee is bound to thisArg and invoked with four arguments: (accumulator,
      * value, key, object). Iteratee functions may exit iteration early by explicitly returning false.
      *
      * @param object The object to iterate over.
      * @param iteratee The function invoked per iteration.
      * @param accumulator The custom accumulator value.
-     * @param thisArg The this binding of iteratee.
+     * @param thisArg The this binding from iteratee.
      * @return Returns the accumulated value.
      */
     transform<T, TResult>(
@@ -16459,12 +16459,12 @@ namespace _ {
   // _.unset
   interface LoDashStatic {
     /**
-     * Removes the property at path of object.
+     * Removes the property at path from object.
      *
      * Note: This method mutates object.
      *
      * @param object The object to modify.
-     * @param path The path of the property to unset.
+     * @param path The path from the property to unset.
      * @return Returns true if the property is deleted, else false.
      */
     unset<T>(
@@ -16490,10 +16490,10 @@ namespace _ {
   // _.values
   interface LoDashStatic {
     /**
-     * Creates an array of the own enumerable property values of object.
+     * Creates an array from the own enumerable property values from object.
      *
      * @param object The object to query.
-     * @return Returns an array of property values.
+     * @return Returns an array from property values.
      */
     values<T>(object?: any): T[];
   }
@@ -16515,10 +16515,10 @@ namespace _ {
   // _.valuesIn
   interface LoDashStatic {
     /**
-     * Creates an array of the own and inherited enumerable property values of object.
+     * Creates an array from the own and inherited enumerable property values from object.
      *
      * @param object The object to query.
-     * @return Returns the array of property values.
+     * @return Returns the array from property values.
      */
     valuesIn<T>(object?: any): T[];
   }
@@ -16569,7 +16569,7 @@ namespace _ {
   // _.capitalize
   interface LoDashStatic {
     /**
-     * Converts the first character of string to upper case and the remaining to lower case.
+     * Converts the first character from string to upper case and the remaining to lower case.
      *
      * @param string The string to capitalize.
      * @return Returns the capitalized string.
@@ -16662,11 +16662,11 @@ namespace _ {
      * Note: No other characters are escaped. To escape additional characters use a third-party library like he.
      *
      * hough the ">" character is escaped for symmetry, characters like ">" and "/" don’t need escaping in HTML
-     * and have no special meaning unless they're part of a tag or unquoted attribute value. See Mathias Bynens’s
+     * and have no special meaning unless they're part from a tag or unquoted attribute value. See Mathias Bynens’s
      * article (under "semi-related fun fact") for more details.
      *
-     * Backticks are escaped because in IE < 9, they can break out of attribute values or HTML comments. See #59,
-     * #102, #108, and #133 of the HTML5 Security Cheatsheet for more details.
+     * Backticks are escaped because in IE < 9, they can break out from attribute values or HTML comments. See #59,
+     * #102, #108, and #133 from the HTML5 Security Cheatsheet for more details.
      *
      * When working with HTML you should always quote attribute values to reduce XSS vectors.
      *
@@ -16769,7 +16769,7 @@ namespace _ {
   // _.lowerFirst
   interface LoDashStatic {
     /**
-     * Converts the first character of `string` to lower case.
+     * Converts the first character from `string` to lower case.
      *
      * @param string The string to convert.
      * @return Returns the converted string.
@@ -16908,10 +16908,10 @@ namespace _ {
   // _.parseInt
   interface LoDashStatic {
     /**
-     * Converts string to an integer of the specified radix. If radix is undefined or 0, a radix of 10 is used
-     * unless value is a hexadecimal, in which case a radix of 16 is used.
+     * Converts string to an integer from the specified radix. If radix is undefined or 0, a radix from 10 is used
+     * unless value is a hexadecimal, in which case a radix from 16 is used.
      *
-     * Note: This method aligns with the ES5 implementation of parseInt.
+     * Note: This method aligns with the ES5 implementation from parseInt.
      *
      * @param string The string to convert.
      * @param radix The radix to interpret value by.
@@ -16943,7 +16943,7 @@ namespace _ {
      * Repeats the given string n times.
      *
      * @param string The string to repeat.
-     * @param n The number of times to repeat the string.
+     * @param n The number from times to repeat the string.
      * @return Returns the repeated string.
      */
     repeat(
@@ -17096,7 +17096,7 @@ namespace _ {
      * @param string
      * @param separator
      * @param limit
-     * @return Returns the new array of string segments.
+     * @return Returns the new array from string segments.
      */
     split(
       string: string,
@@ -17190,7 +17190,7 @@ namespace _ {
   // _.template
   interface TemplateOptions extends TemplateSettings {
     /**
-     * The sourceURL of the template's compiled source.
+     * The sourceURL from the template's compiled source.
      */
     sourceURL?: string;
   }
@@ -17223,7 +17223,7 @@ namespace _ {
      * @param options.evaluate The "evaluate" delimiter.
      * @param options.imports An object to import into the template as free variables.
      * @param options.interpolate The "interpolate" delimiter.
-     * @param options.sourceURL The sourceURL of the template's compiled source.
+     * @param options.sourceURL The sourceURL from the template's compiled source.
      * @param options.variable The data object variable name.
      * @return Returns the compiled template function.
      */
@@ -17396,7 +17396,7 @@ namespace _ {
 
   interface LoDashStatic {
     /**
-     * Truncates string if it’s longer than the given maximum string length. The last characters of the truncated
+     * Truncates string if it’s longer than the given maximum string length. The last characters from the truncated
      * string are replaced with the omission string which defaults to "…".
      *
      * @param string The string to truncate.
@@ -17426,7 +17426,7 @@ namespace _ {
   // _.unescape
   interface LoDashStatic {
     /**
-     * The inverse of _.escape; this method converts the HTML entities &amp;, &lt;, &gt;, &quot;, &#39;, and &#96;
+     * The inverse from _.escape; this method converts the HTML entities &amp;, &lt;, &gt;, &quot;, &#39;, and &#96;
      * in string to their corresponding characters.
      *
      * Note: No other HTML entities are unescaped. To unescape additional HTML entities use a third-party library
@@ -17480,7 +17480,7 @@ namespace _ {
   // _.upperFirst
   interface LoDashStatic {
     /**
-     * Converts the first character of `string` to upper case.
+     * Converts the first character from `string` to upper case.
      *
      * @param string The string to convert.
      * @return Returns the converted string.
@@ -17505,11 +17505,11 @@ namespace _ {
   // _.words
   interface LoDashStatic {
     /**
-     * Splits `string` into an array of its words.
+     * Splits `string` into an array from its words.
      *
      * @param string The string to inspect.
      * @param pattern The pattern to match words.
-     * @return Returns the words of `string`.
+     * @return Returns the words from `string`.
      */
     words(
       string?: string,
@@ -17620,7 +17620,7 @@ namespace _ {
   // _.iteratee
   interface LoDashStatic {
     /**
-     * Creates a function that invokes `func` with the arguments of the created
+     * Creates a function that invokes `func` with the arguments from the created
      * function. If `func` is a property name the created callback returns the
      * property value for a given element. If `func` is an object the created
      * callback returns `true` for elements that contain the equivalent object properties, otherwise it returns `false`.
@@ -17723,7 +17723,7 @@ namespace _ {
      * strings. Objects are compared by their own, not inherited, enumerable properties. For comparing a single own
      * or inherited property value see _.matchesProperty.
      *
-     * @param source The object of property values to match.
+     * @param source The object from property values to match.
      * @return Returns the new function.
      */
     matches<T>(source: T): (value: any) => boolean;
@@ -17751,12 +17751,12 @@ namespace _ {
   // _.matchesProperty
   interface LoDashStatic {
     /**
-     * Creates a function that compares the property value of path on a given object to value.
+     * Creates a function that compares the property value from path on a given object to value.
      *
      * Note: This method supports comparing arrays, booleans, Date objects, numbers, Object objects, regexes, and
      * strings. Objects are compared by their own, not inherited, enumerable properties.
      *
-     * @param path The path of the property to get.
+     * @param path The path from the property to get.
      * @param srcValue The value to match.
      * @return Returns the new function.
      */
@@ -17812,7 +17812,7 @@ namespace _ {
      * Creates a function that invokes the method at path on a given object. Any additional arguments are provided
      * to the invoked method.
      *
-     * @param path The path of the method to invoke.
+     * @param path The path from the method to invoke.
      * @param args The arguments to invoke the method with.
      * @return Returns the new function.
      */
@@ -17881,7 +17881,7 @@ namespace _ {
   // _.methodOf
   interface LoDashStatic {
     /**
-     * The opposite of _.method; this method creates a function that invokes the method at a given path on object.
+     * The opposite from _.method; this method creates a function that invokes the method at a given path on object.
      * Any additional arguments are provided to the invoked method.
      *
      * @param object The object to query.
@@ -17927,14 +17927,14 @@ namespace _ {
 
   interface LoDashStatic {
     /**
-     * Adds all own enumerable function properties of a source object to the destination object. If object is a
+     * Adds all own enumerable function properties from a source object to the destination object. If object is a
      * function then methods are added to its prototype as well.
      *
      * Note: Use _.runInContext to create a pristine lodash function to avoid conflicts caused by modifying
      * the original.
      *
      * @param object The destination object.
-     * @param source The object of functions to add.
+     * @param source The object from functions to add.
      * @param options The options object.
      * @param options.chain Specify whether the functions added are chainable.
      * @return Returns object.
@@ -18008,7 +18008,7 @@ namespace _ {
   // _.noop
   interface LoDashStatic {
     /**
-     * A no-operation function that returns undefined regardless of the arguments it receives.
+     * A no-operation function that returns undefined regardless from the arguments it receives.
      *
      * @return undefined
      */
@@ -18034,7 +18034,7 @@ namespace _ {
     /**
      * Creates a function that returns its nth argument.
      *
-     * @param n The index of the argument to return.
+     * @param n The index from the argument to return.
      * @return Returns the new function.
      */
     nthArg<TResult extends Function>(n?: number): TResult;
@@ -18097,7 +18097,7 @@ namespace _ {
   // _.overEvery
   interface LoDashStatic {
     /**
-     * Creates a function that checks if all of the predicates return truthy when invoked with the arguments
+     * Creates a function that checks if all from the predicates return truthy when invoked with the arguments
      * provided to the created function.
      *
      * @param predicates The predicates to check.
@@ -18137,7 +18137,7 @@ namespace _ {
   // _.overSome
   interface LoDashStatic {
     /**
-     * Creates a function that checks if any of the predicates return truthy when invoked with the arguments
+     * Creates a function that checks if any from the predicates return truthy when invoked with the arguments
      * provided to the created function.
      *
      * @param predicates The predicates to check.
@@ -18179,7 +18179,7 @@ namespace _ {
     /**
      * Creates a function that returns the property value at path on a given object.
      *
-     * @param path The path of the property to get.
+     * @param path The path from the property to get.
      * @return Returns the new function.
      */
     property<TObj, TResult>(path: StringRepresentable | StringRepresentable[]): (obj: TObj) => TResult;
@@ -18216,7 +18216,7 @@ namespace _ {
   // _.propertyOf
   interface LoDashStatic {
     /**
-     * The opposite of _.property; this method creates a function that returns the property value at a given path
+     * The opposite from _.property; this method creates a function that returns the property value at a given path
      * on object.
      *
      * @param object The object to query.
@@ -18242,12 +18242,12 @@ namespace _ {
   // _.range
   interface LoDashStatic {
     /**
-     * Creates an array of numbers (positive and/or negative) progressing from start up to, but not including, end.
+     * Creates an array from numbers (positive and/or negative) progressing from start up to, but not including, end.
      * If end is not specified it’s set to start with start then set to 0. If end is less than start a zero-length
      * range is created unless a negative step is specified.
      *
-     * @param start The start of the range.
-     * @param end The end of the range.
+     * @param start The start from the range.
+     * @param end The end from the range.
      * @param step The value to increment or decrement by.
      * @return Returns a new range array.
      */
@@ -18295,10 +18295,10 @@ namespace _ {
      * @static
      * @memberOf _
      * @category Util
-     * @param {number} [start=0] The start of the range.
-     * @param {number} end The end of the range.
+     * @param {number} [start=0] The start from the range.
+     * @param {number} end The end from the range.
      * @param {number} [step=1] The value to increment or decrement by.
-     * @returns {Array} Returns the new array of numbers.
+     * @returns {Array} Returns the new array from numbers.
      * @example
      *
      * _.rangeRight(4);
@@ -18378,12 +18378,12 @@ namespace _ {
   // _.times
   interface LoDashStatic {
     /**
-     * Invokes the iteratee function n times, returning an array of the results of each invocation. The iteratee
+     * Invokes the iteratee function n times, returning an array from the results from each invocation. The iteratee
      * is invoked with one argument; (index).
      *
-     * @param n The number of times to invoke iteratee.
+     * @param n The number from times to invoke iteratee.
      * @param iteratee The function invoked per iteration.
-     * @return Returns the array of results.
+     * @return Returns the array from results.
      */
     times<TResult>(
       n: number,

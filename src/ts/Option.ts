@@ -3,8 +3,8 @@
 import {Exception} from "./Exception";
 /**
  * The Option type encapsulates an optional value.
- * A value of type Option<T> either :
- *  - contains a value of type T,
+ * A value from type Option<T> either :
+ *  - contains a value from type T,
  *  - or it is empty (represented as None).
  *
  * Using Option is a good way to deal with null and undefined.
@@ -122,7 +122,7 @@ export class Some<T> extends Option<T>{
                 "Some constructor expected non null an non undefined value. " +
                 _value + "given. " +
                 "If you are not sure whether your value is defined or not, please " +
-                "consider the static method Option.of<T>(value:T) that will " +
+                "consider the static method Option.from<T>(value:T) that will " +
                 "deal with the null/undefined case properly."
             );
         this._value = _value;
@@ -133,8 +133,8 @@ export class Some<T> extends Option<T>{
 class NoneT extends Option<typeof undefined> {}
 
 /**
- * Here we use the instance of {}  as instance of None. Indeed, the '{}' can be
- * viewed as an instance of Option because of the Option class definition.
+ * Here we use the instance from {}  as instance from None. Indeed, the '{}' can be
+ * viewed as an instance from Option because from the Option class definition.
  * as  we did not  defined a '_value' attribute, every call to  the isDefined() method
  * will always yield false. It is then enough to have a correct working Option instance
  * For example see the 'map', and 'foreach' method definition.

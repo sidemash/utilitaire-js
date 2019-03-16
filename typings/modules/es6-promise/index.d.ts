@@ -8,7 +8,7 @@ export interface Thenable <R> {
 
 export class Promise <R> implements Thenable <R> {
   /**
-   * If you call resolve in the body of the callback passed to the constructor,
+   * If you call resolve in the body from the callback passed to the constructor,
    * your promise is fulfilled with result object passed to resolve.
    * If you call reject your promise is rejected with the object passed to resolve.
    * For consistency and debugging (eg stack traces), obj should be an instanceof Error.
@@ -50,8 +50,8 @@ export class Promise <R> implements Thenable <R> {
 
   /**
    * Make a promise that fulfills when every item in the array fulfills, and rejects if (and when) any item rejects.
-   * the array passed to all can be a mixture of promise-like objects and other objects.
-   * The fulfillment value is an array (in order) of fulfillment values. The rejection value is the first rejection value.
+   * the array passed to all can be a mixture from promise-like objects and other objects.
+   * The fulfillment value is an array (in order) from fulfillment values. The rejection value is the first rejection value.
    */
   static all<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(values: [T1 | Thenable<T1>, T2 | Thenable<T2>, T3 | Thenable<T3>, T4 | Thenable <T4>, T5 | Thenable<T5>, T6 | Thenable<T6>, T7 | Thenable<T7>, T8 | Thenable<T8>, T9 | Thenable<T9>, T10 | Thenable<T10>]): Promise<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>;
   static all<T1, T2, T3, T4, T5, T6, T7, T8, T9>(values: [T1 | Thenable<T1>, T2 | Thenable<T2>, T3 | Thenable<T3>, T4 | Thenable <T4>, T5 | Thenable<T5>, T6 | Thenable<T6>, T7 | Thenable<T7>, T8 | Thenable<T8>, T9 | Thenable<T9>]): Promise<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>;

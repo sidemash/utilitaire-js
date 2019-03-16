@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Exception {
+export class Exception {
     constructor(message) {
         this.message = message;
     }
@@ -11,8 +9,7 @@ class Exception {
             return new GenericException({ cause: e });
     }
 }
-exports.Exception = Exception;
-class GenericException extends Exception {
+export class GenericException extends Exception {
     constructor(desc) {
         super(desc.message || "Generic Exception");
         this.desc = desc;
@@ -20,19 +17,16 @@ class GenericException extends Exception {
     }
     get cause() { return this.desc.cause; }
 }
-exports.GenericException = GenericException;
-class NoSuchElementException extends Exception {
+export class NoSuchElementException extends Exception {
     constructor(desc) {
         super(desc.message);
         this.desc = desc;
     }
     get message() { return this.desc.message; }
 }
-exports.NoSuchElementException = NoSuchElementException;
-class TimeOutException extends Exception {
+export class TimeOutException extends Exception {
     constructor(message) {
         super(message);
     }
 }
-exports.TimeOutException = TimeOutException;
 //# sourceMappingURL=Exception.js.map

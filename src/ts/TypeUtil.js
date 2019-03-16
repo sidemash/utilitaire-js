@@ -1,15 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const _ = require("lodash");
-function onlyReadable(obj) {
+import * as _ from "lodash";
+export function onlyReadable(obj) {
     return obj;
 }
-exports.onlyReadable = onlyReadable;
-function unsafeCast(instance) {
+export function unsafeCast(instance) {
     return instance;
 }
-exports.unsafeCast = unsafeCast;
-class RemoteObject {
+export class RemoteObject {
     constructor(descOrFunction, remote) {
         if (_.isFunction(descOrFunction)) {
             const createDescFromRemote = descOrFunction;
@@ -24,9 +20,7 @@ class RemoteObject {
         return Object.assign({}, this.desc);
     }
 }
-exports.RemoteObject = RemoteObject;
-function hasNotOtherwise(fold) {
+export function hasNotOtherwise(fold) {
     return fold.otherwise == undefined;
 }
-exports.hasNotOtherwise = hasNotOtherwise;
 //# sourceMappingURL=TypeUtil.js.map

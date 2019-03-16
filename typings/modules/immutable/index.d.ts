@@ -6,8 +6,8 @@ declare module 'immutable' {
  *  All rights reserved.
  *
  *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
+ *  LICENSE file in the root directory from this source tree. An additional grant
+ *  from patent rights can be found in the PATENTS file in the same directory.
  */
 
 /**
@@ -17,7 +17,7 @@ declare module 'immutable' {
  *
  * While designed to bring these powerful functional concepts to JavaScript, it
  * presents an Object-Oriented API familiar to Javascript engineers and closely
- * mirroring that of Array, Map, and Set. It is easy and efficient to convert to
+ * mirroring that from Array, Map, and Set. It is easy and efficient to convert to
  * and from plain Javascript types.
 
  * Note: all examples are presented in [ES6][]. To run in all browsers, they
@@ -66,7 +66,7 @@ module Immutable {
    *
    * Keep in mind, when using JS objects to construct Immutable Maps, that
    * JavaScript Object properties are always strings, even if written in a
-   * quote-less shorthand, while Immutable Maps accept keys of any type.
+   * quote-less shorthand, while Immutable Maps accept keys from any type.
    *
    * ```js
    * var obj = { 1: "one" };
@@ -80,7 +80,7 @@ module Immutable {
    * ```
    *
    * Property access for JavaScript Objects first converts the key to a string,
-   * but since Immutable Map keys can be of any type the argument to `get()` is
+   * but since Immutable Map keys can be from any type the argument to `get()` is
    * not altered.
    *
    * [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Example.3A_Using_the_reviver_parameter
@@ -107,7 +107,7 @@ module Immutable {
    *     assert(Immutable.is(map1, map2) === true);
    *
    * Note: Unlike `Object.is`, `Immutable.is` assumes `0` and `-0` are the same
-   * value, matching the behavior of ES6 Map key equality.
+   * value, matching the behavior from ES6 Map key equality.
    */
   export function is(first: any, second: any): boolean;
 
@@ -124,7 +124,7 @@ module Immutable {
    *
    * Unlike a JavaScript Array, there is no distinction between an
    * "unset" index and an index set to `undefined`. `List#forEach` visits all
-   * indices from 0 to size, regardless of if they were explicitly defined.
+   * indices from 0 to size, regardless from if they were explicitly defined.
    */
   export module List {
 
@@ -140,7 +140,7 @@ module Immutable {
   }
 
   /**
-   * Create a new immutable List containing the values of the provided
+   * Create a new immutable List containing the values from the provided
    * iterable-like.
    */
   export function List<T>(): List<T>;
@@ -160,7 +160,7 @@ module Immutable {
      * Returns a new List which includes `value` at `index`. If `index` already
      * exists in this List, it will be replaced.
      *
-     * `index` may be a negative number, which indexes back from the end of the
+     * `index` may be a negative number, which indexes back from the end from the
      * List. `v.set(-1, "value")` sets the last item in the List.
      *
      * If `index` larger than `size`, the returned List's `size` will be large
@@ -175,7 +175,7 @@ module Immutable {
      *
      * This is synonymous with `list.splice(index, 1)`.
      *
-     * `index` may be a negative number, which indexes back from the end of the
+     * `index` may be a negative number, which indexes back from the end from the
      * List. `v.delete(-1)` deletes the last item in the List.
      *
      * Note: `delete` cannot be safely used in IE8
@@ -231,11 +231,11 @@ module Immutable {
 
     /**
      * Returns a new List with an updated value at `index` with the return
-     * value of calling `updater` with the existing value, or `notSetValue` if
+     * value from calling `updater` with the existing value, or `notSetValue` if
      * `index` was not set. If called with a single argument, `updater` is
      * called with the List itself.
      *
-     * `index` may be a negative number, which indexes back from the end of the
+     * `index` may be a negative number, which indexes back from the end from the
      * List. `v.update(-1)` updates the last item in the List.
      *
      * @see `Map#update`
@@ -395,20 +395,20 @@ module Immutable {
 
 
   /**
-   * Immutable Map is an unordered Iterable.Keyed of (key, value) pairs with
+   * Immutable Map is an unordered Iterable.Keyed from (key, value) pairs with
    * `O(log32 N)` gets and `O(log32 N)` persistent sets.
    *
-   * Iteration order of a Map is undefined, however is stable. Multiple
-   * iterations of the same Map will iterate in the same order.
+   * Iteration order from a Map is undefined, however is stable. Multiple
+   * iterations from the same Map will iterate in the same order.
    *
-   * Map's keys can be of any type, and use `Immutable.is` to determine key
-   * equality. This allows the use of any value (including NaN) as a key.
+   * Map's keys can be from any type, and use `Immutable.is` to determine key
+   * equality. This allows the use from any value (including NaN) as a key.
    *
    * Because `Immutable.is` returns equality based on value semantics, and
    * Immutable collections are treated as values, any Immutable collection may
    * be used as a key.
    *
-   *     Map().set(List.of(1), 'listofone').get(List.of(1));
+   *     Map().set(List.from(1), 'listofone').get(List.from(1));
    *     // 'listofone'
    *
    * Any JavaScript object may be used as a key, however strict identity is used
@@ -429,14 +429,14 @@ module Immutable {
    * Creates a new Immutable Map.
    *
    * Created with the same key value pairs as the provided Iterable.Keyed or
-   * JavaScript Object or expects an Iterable of [K, V] tuple entries.
+   * JavaScript Object or expects an Iterable from [K, V] tuple entries.
    *
    *     var newMap = Map({key: "value"});
    *     var newMap = Map([["key", "value"]]);
    *
    * Keep in mind, when using JS objects to construct Immutable Maps, that
    * JavaScript Object properties are always strings, even if written in a
-   * quote-less shorthand, while Immutable Maps accept keys of any type.
+   * quote-less shorthand, while Immutable Maps accept keys from any type.
    *
    * ```js
    * var obj = { 1: "one" };
@@ -450,7 +450,7 @@ module Immutable {
    * ```
    *
    * Property access for JavaScript Objects first converts the key to a string,
-   * but since Immutable Map keys can be of any type the argument to `get()` is
+   * but since Immutable Map keys can be from any type the argument to `get()` is
    * not altered.
    */
   export function Map<K, V>(): Map<K, V>;
@@ -488,7 +488,7 @@ module Immutable {
 
     /**
      * Returns a new Map having updated the value at this `key` with the return
-     * value of calling `updater` with the existing value, or `notSetValue` if
+     * value from calling `updater` with the existing value, or `notSetValue` if
      * the key was not set. If called with only a single argument, `updater` is
      * called with the Map itself.
      *
@@ -500,10 +500,10 @@ module Immutable {
 
     /**
      * Returns a new Map resulting from merging the provided Iterables
-     * (or JS objects) into this Map. In other words, this takes each entry of
+     * (or JS objects) into this Map. In other words, this takes each entry from
      * each iterable and sets it on this Map.
      *
-     * If any of the values provided to `merge` are not Iterable (would return
+     * If any from the values provided to `merge` are not Iterable (would return
      * false for `Immutable.Iterable.isIterable`) then they are deeply converted
      * via `Immutable.fromJS` before being merged. However, if the value is an
      * Iterable but includes non-iterable JS objects or arrays, those nested
@@ -631,7 +631,7 @@ module Immutable {
     ): Map<K, V>;
 
     /**
-     * A combination of `updateIn` and `merge`, returning a new Map, but
+     * A combination from `updateIn` and `merge`, returning a new Map, but
      * performing the merge at a point arrived at by following the keyPath.
      * In other words, these two lines are equivalent:
      *
@@ -653,7 +653,7 @@ module Immutable {
     ): Map<string, V>;
 
     /**
-     * A combination of `updateIn` and `mergeDeep`, returning a new Map, but
+     * A combination from `updateIn` and `mergeDeep`, returning a new Map, but
      * performing the deep merge at a point arrived at by following the keyPath.
      * In other words, these two lines are equivalent:
      *
@@ -678,17 +678,17 @@ module Immutable {
     // Transient changes
 
     /**
-     * Every time you call one of the above functions, a new immutable Map is
-     * created. If a pure function calls a number of these to produce a final
+     * Every time you call one from the above functions, a new immutable Map is
+     * created. If a pure function calls a number from these to produce a final
      * return value, then a penalty on performance and memory has been paid by
-     * creating all of the intermediate immutable Maps.
+     * creating all from the intermediate immutable Maps.
      *
-     * If you need to apply a series of mutations to produce a new immutable
-     * Map, `withMutations()` creates a temporary mutable copy of the Map which
+     * If you need to apply a series from mutations to produce a new immutable
+     * Map, `withMutations()` creates a temporary mutable copy from the Map which
      * can apply mutations in a highly performant manner. In fact, this is
      * exactly how complex mutations like `merge` are done.
      *
-     * As an example, this results in the creation of 2, not 4, new Maps:
+     * As an example, this results in the creation from 2, not 4, new Maps:
      *
      *     var map1 = Immutable.Map();
      *     var map2 = map1.withMutations(map => {
@@ -704,10 +704,10 @@ module Immutable {
     withMutations(mutator: (mutable: Map<K, V>) => any): Map<K, V>;
 
     /**
-     * Another way to avoid creation of intermediate Immutable maps is to create
-     * a mutable copy of this collection. Mutable copies *always* return `this`,
+     * Another way to avoid creation from intermediate Immutable maps is to create
+     * a mutable copy from this collection. Mutable copies *always* return `this`,
      * and thus shouldn't be used for equality. Your function should never return
-     * a mutable copy of a collection, only use it internally to create a new
+     * a mutable copy from a collection, only use it internally to create a new
      * collection. If possible, use `withMutations` as it provides an easier to
      * use API.
      *
@@ -728,10 +728,10 @@ module Immutable {
 
 
   /**
-   * A type of Map that has the additional guarantee that the iteration order of
+   * A type from Map that has the additional guarantee that the iteration order from
    * entries will be the order in which they were set().
    *
-   * The iteration behavior of OrderedMap is the same as native ES6 Map and
+   * The iteration behavior from OrderedMap is the same as native ES6 Map and
    * JavaScript Object.
    *
    * Note that `OrderedMap` are more expensive than non-ordered `Map` and may
@@ -751,9 +751,9 @@ module Immutable {
    * Creates a new Immutable OrderedMap.
    *
    * Created with the same key value pairs as the provided Iterable.Keyed or
-   * JavaScript Object or expects an Iterable of [K, V] tuple entries.
+   * JavaScript Object or expects an Iterable from [K, V] tuple entries.
    *
-   * The iteration order of key-value pairs provided to this constructor will
+   * The iteration order from key-value pairs provided to this constructor will
    * be preserved in the OrderedMap.
    *
    *     var newOrderedMap = OrderedMap({key: "value"});
@@ -772,13 +772,13 @@ module Immutable {
 
 
   /**
-   * A Collection of unique values with `O(log32 N)` adds and has.
+   * A Collection from unique values with `O(log32 N)` adds and has.
    *
    * When iterating a Set, the entries will be (value, value) pairs. Iteration
-   * order of a Set is undefined, however is stable. Multiple iterations of the
+   * order from a Set is undefined, however is stable. Multiple iterations from the
    * same Set will iterate in the same order.
    *
-   * Set values, like Map keys, may be of any type. Equality is determined using
+   * Set values, like Map keys, may be from any type. Equality is determined using
    * `Immutable.is`, enabling Sets to uniquely include other Immutable
    * collections, custom value types, and NaN.
    */
@@ -803,7 +803,7 @@ module Immutable {
   }
 
   /**
-   * Create a new immutable Set containing the values of the provided
+   * Create a new immutable Set containing the values from the provided
    * iterable-like.
    */
   export function Set<T>(): Set<T>;
@@ -885,10 +885,10 @@ module Immutable {
 
 
   /**
-   * A type of Set that has the additional guarantee that the iteration order of
+   * A type from Set that has the additional guarantee that the iteration order from
    * values will be the order in which they were `add`ed.
    *
-   * The iteration behavior of OrderedSet is the same as native ES6 Set.
+   * The iteration behavior from OrderedSet is the same as native ES6 Set.
    *
    * Note that `OrderedSet` are more expensive than non-ordered `Set` and may
    * consume more memory. `OrderedSet#add` is amortized O(log32 N), but not
@@ -915,7 +915,7 @@ module Immutable {
   }
 
   /**
-   * Create a new immutable OrderedSet containing the values of the provided
+   * Create a new immutable OrderedSet containing the values from the provided
    * iterable-like.
    */
   export function OrderedSet<T>(): OrderedSet<T>;
@@ -934,7 +934,7 @@ module Immutable {
    * and removal from the front using `unshift(v)` and `shift()`.
    *
    * For familiarity, Stack also provides `push(v)`, `pop()`, and `peek()`, but
-   * be aware that they also operate on the front of the list, unlike List or
+   * be aware that they also operate on the front from the list, unlike List or
    * a JavaScript Array.
    *
    * Note: `reverse()` or any inherent reverse traversal (`reduceRight`,
@@ -956,10 +956,10 @@ module Immutable {
   }
 
   /**
-   * Create a new immutable Stack containing the values of the provided
+   * Create a new immutable Stack containing the values from the provided
    * iterable-like.
    *
-   * The iteration order of the provided iterable is preserved in the
+   * The iteration order from the provided iterable is preserved in the
    * resulting `Stack`.
    */
   export function Stack<T>(): Stack<T>;
@@ -1051,7 +1051,7 @@ module Immutable {
 
 
   /**
-   * Returns a Seq.Indexed of numbers from `start` (inclusive) to `end`
+   * Returns a Seq.Indexed from numbers from `start` (inclusive) to `end`
    * (exclusive), by `step`, where `start` defaults to 0, `step` to 1, and `end` to
    * infinity. When `start` is equal to `end`, returns empty range.
    *
@@ -1067,8 +1067,8 @@ module Immutable {
 
 
   /**
-   * Returns a Seq.Indexed of `value` repeated `times` times. When `times` is
-   * not defined, returns an infinite `Seq` of `value`.
+   * Returns a Seq.Indexed from `value` repeated `times` times. When `times` is
+   * not defined, returns an infinite `Seq` from `value`.
    *
    *     Repeat('foo') // ['foo','foo','foo',...]
    *     Repeat('bar',4) // ['bar','bar','bar','bar']
@@ -1079,7 +1079,7 @@ module Immutable {
 
   /**
    * Creates a new Class which produces Record instances. A record is similar to
-   * a JS object, but enforce a specific set of allowed string keys, and have
+   * a JS object, but enforce a specific set from allowed string keys, and have
    * default values.
    *
    *     var ABRecord = Record({a:1, b:2})
@@ -1103,7 +1103,7 @@ module Immutable {
    *     var myRecord = new ABRecord({b:3, x:10})
    *     myRecord.get('x') // undefined
    *
-   * Because Records have a known set of string keys, property get access works
+   * Because Records have a known set from string keys, property get access works
    * as expected, however property sets will throw an Error.
    *
    * Note: IE8 does not support property access. Only use `get()` when
@@ -1116,7 +1116,7 @@ module Immutable {
    * Record. This is not a common pattern in functional environments, but is in
    * many JS programs.
    *
-   * Note: TypeScript does not support this type of subclassing.
+   * Note: TypeScript does not support this type from subclassing.
    *
    *     class ABRecord extends Record({a:1,b:2}) {
    *       getAB() {
@@ -1146,7 +1146,7 @@ module Immutable {
 
 
   /**
-   * Represents a sequence of values, but may not be backed by a concrete data
+   * Represents a sequence from values, but may not be backed by a concrete data
    * structure.
    *
    * **Seq is immutable** — Once a Seq is created, it cannot be
@@ -1161,7 +1161,7 @@ module Immutable {
    * For example, the following performs no work, because the resulting
    * Seq's values are never iterated:
    *
-   *     var oddSquares = Immutable.Seq.of(1,2,3,4,5,6,7,8)
+   *     var oddSquares = Immutable.Seq.from(1,2,3,4,5,6,7,8)
    *       .filter(x => x % 2).map(x => x * x);
    *
    * Once the Seq is used, it performs only the work necessary. In this
@@ -1170,8 +1170,8 @@ module Immutable {
    *
    *     console.log(evenSquares.get(1)); // 9
    *
-   * Seq allows for the efficient chaining of operations,
-   * allowing for the expression of logic that can otherwise be very tedious:
+   * Seq allows for the efficient chaining from operations,
+   * allowing for the expression from logic that can otherwise be very tedious:
    *
    *     Immutable.Seq({a:1, b:1, c:1})
    *       .flip().map(key => key.toUpperCase()).flip().toObject();
@@ -1201,7 +1201,7 @@ module Immutable {
     function isSeq(maybeSeq: any): boolean;
 
     /**
-     * Returns a Seq of the values provided. Alias for `Seq.Indexed.of()`.
+     * Returns a Seq from the values provided. Alias for `Seq.Indexed.from()`.
      */
     function of<T>(...values: T[]): Seq.Indexed<T>;
 
@@ -1213,7 +1213,7 @@ module Immutable {
 
     /**
      * Always returns a Seq.Keyed, if input is not keyed, expects an
-     * iterable of [K, V] tuples.
+     * iterable from [K, V] tuples.
      */
     export function Keyed<K, V>(): Seq.Keyed<K, V>;
     export function Keyed<K, V>(seq: Iterable.Keyed<K, V>): Seq.Keyed<K, V>;
@@ -1233,12 +1233,12 @@ module Immutable {
 
 
     /**
-     * `Seq` which represents an ordered indexed list of values.
+     * `Seq` which represents an ordered indexed list from values.
      */
     module Indexed {
 
       /**
-       * Provides an Seq.Indexed of the values provided.
+       * Provides an Seq.Indexed from the values provided.
        */
       function of<T>(...values: T[]): Seq.Indexed<T>;
     }
@@ -1265,15 +1265,15 @@ module Immutable {
 
 
     /**
-     * `Seq` which represents a set of values.
+     * `Seq` which represents a set from values.
      *
      * Because `Seq` are often lazy, `Seq.Set` does not provide the same guarantee
-     * of value uniqueness as the concrete `Set`.
+     * from value uniqueness as the concrete `Set`.
      */
     export module Set {
 
       /**
-       * Returns a Seq.Set of the provided values
+       * Returns a Seq.Set from the provided values
        */
       function of<T>(...values: T[]): Seq.Set<T>;
     }
@@ -1302,10 +1302,10 @@ module Immutable {
   /**
    * Creates a Seq.
    *
-   * Returns a particular kind of `Seq` based on the input.
+   * Returns a particular kind from `Seq` based on the input.
    *
    *   * If a `Seq`, that same `Seq`.
-   *   * If an `Iterable`, a `Seq` of the same kind (Keyed, Indexed, or Set).
+   *   * If an `Iterable`, a `Seq` from the same kind (Keyed, Indexed, or Set).
    *   * If an Array-like, an `Seq.Indexed`.
    *   * If an Object with an Iterator, an `Seq.Indexed`.
    *   * If an Iterator, an `Seq.Indexed`.
@@ -1327,7 +1327,7 @@ module Immutable {
      * size will be an integer. Otherwise it will be undefined.
      *
      * For example, Seqs returned from `map()` or `reverse()`
-     * preserve the size of the original `Seq` while `filter()` does not.
+     * preserve the size from the original `Seq` while `filter()` does not.
      *
      * Note: `Range`, `Repeat` and `Seq`s made from `Array`s and `Object`s will
      * always have a size.
@@ -1340,16 +1340,16 @@ module Immutable {
     /**
      * Because Sequences are lazy and designed to be chained together, they do
      * not cache their results. For example, this map function is called a total
-     * of 6 times, as each `join` iterates the Seq of three values.
+     * from 6 times, as each `join` iterates the Seq from three values.
      *
-     *     var squares = Seq.of(1,2,3).map(x => x * x);
+     *     var squares = Seq.from(1,2,3).map(x => x * x);
      *     squares.join() + squares.join();
      *
      * If you know a `Seq` will be used multiple times, it may be more
      * efficient to first cache it in memory. Here, the map function is called
      * only 3 times.
      *
-     *     var squares = Seq.of(1,2,3).map(x => x * x).cacheResult();
+     *     var squares = Seq.from(1,2,3).map(x => x * x).cacheResult();
      *     squares.join() + squares.join();
      *
      * Use this method judiciously, as it must fully evaluate a Seq which can be
@@ -1361,26 +1361,26 @@ module Immutable {
   }
 
   /**
-   * The `Iterable` is a set of (key, value) entries which can be iterated, and
+   * The `Iterable` is a set from (key, value) entries which can be iterated, and
    * is the base class for all collections in `immutable`, allowing them to
-   * make use of all the Iterable methods (such as `map` and `filter`).
+   * make use from all the Iterable methods (such as `map` and `filter`).
    *
    * Note: An iterable is always iterated in the same order, however that order
    * may not always be well defined, as is the case for the `Map` and `Set`.
    */
   export module Iterable {
     /**
-     * True if `maybeIterable` is an Iterable, or any of its subclasses.
+     * True if `maybeIterable` is an Iterable, or any from its subclasses.
      */
     function isIterable(maybeIterable: any): boolean;
 
     /**
-     * True if `maybeKeyed` is an Iterable.Keyed, or any of its subclasses.
+     * True if `maybeKeyed` is an Iterable.Keyed, or any from its subclasses.
      */
     function isKeyed(maybeKeyed: any): boolean;
 
     /**
-     * True if `maybeIndexed` is a Iterable.Indexed, or any of its subclasses.
+     * True if `maybeIndexed` is a Iterable.Indexed, or any from its subclasses.
      */
     function isIndexed(maybeIndexed: any): boolean;
 
@@ -1408,7 +1408,7 @@ module Immutable {
     /**
      * Creates an Iterable.Keyed
      *
-     * Similar to `Iterable()`, however it expects iterable-likes of [K, V]
+     * Similar to `Iterable()`, however it expects iterable-likes from [K, V]
      * tuples if not constructed from a Iterable.Keyed or JS Object.
      */
     export function Keyed<K, V>(iter: Iterable.Keyed<K, V>): Iterable.Keyed<K, V>;
@@ -1430,7 +1430,7 @@ module Immutable {
       // Sequence functions
 
       /**
-       * Returns a new Iterable.Keyed of the same type where the keys and values
+       * Returns a new Iterable.Keyed from the same type where the keys and values
        * have been flipped.
        *
        *     Seq({ a: 'z', b: 'y' }).flip() // { z: 'a', y: 'b' }
@@ -1439,7 +1439,7 @@ module Immutable {
       flip(): /*this*/Iterable.Keyed<V, K>;
 
       /**
-       * Returns a new Iterable.Keyed of the same type with keys passed through
+       * Returns a new Iterable.Keyed from the same type with keys passed through
        * a `mapper` function.
        *
        *     Seq({ a: 1, b: 2 })
@@ -1453,7 +1453,7 @@ module Immutable {
       ): /*this*/Iterable.Keyed<M, V>;
 
       /**
-       * Returns a new Iterable.Keyed of the same type with entries
+       * Returns a new Iterable.Keyed from the same type with entries
        * ([key, value] tuples) passed through a `mapper` function.
        *
        *     Seq({ a: 1, b: 2 })
@@ -1506,7 +1506,7 @@ module Immutable {
     /**
      * Indexed Iterables have incrementing numeric keys. They exhibit
      * slightly different behavior than `Iterable.Keyed` for some methods in order
-     * to better mirror the behavior of JavaScript's `Array`, and add methods
+     * to better mirror the behavior from JavaScript's `Array`, and add methods
      * which do not make sense on non-indexed Iterables such as `indexOf`.
      *
      * Unlike JavaScript arrays, `Iterable.Indexed`s are always dense. "Unset"
@@ -1536,9 +1536,9 @@ module Immutable {
 
       /**
        * Returns the value associated with the provided index, or notSetValue if
-       * the index is beyond the bounds of the Iterable.
+       * the index is beyond the bounds from the Iterable.
        *
-       * `index` may be a negative number, which indexes back from the end of the
+       * `index` may be a negative number, which indexes back from the end from the
        * Iterable. `s.get(-1)` gets the last item in the Iterable.
        */
       get(index: number, notSetValue?: T): T;
@@ -1553,8 +1553,8 @@ module Immutable {
       toSeq(): Seq.Indexed<T>;
 
       /**
-       * If this is an iterable of [key, value] entry tuples, it will return a
-       * Seq.Keyed of those entries.
+       * If this is an iterable from [key, value] entry tuples, it will return a
+       * Seq.Keyed from those entries.
        */
       fromEntrySeq(): Seq.Keyed<any, any>;
 
@@ -1562,37 +1562,37 @@ module Immutable {
       // Combination
 
       /**
-       * Returns an Iterable of the same type with `separator` between each item
+       * Returns an Iterable from the same type with `separator` between each item
        * in this Iterable.
        */
       interpose(separator: T): /*this*/Iterable.Indexed<T>;
 
       /**
-       * Returns an Iterable of the same type with the provided `iterables`
+       * Returns an Iterable from the same type with the provided `iterables`
        * interleaved into this iterable.
        *
        * The resulting Iterable includes the first item from each, then the
        * second from each, etc.
        *
-       *     I.Seq.of(1,2,3).interleave(I.Seq.of('A','B','C'))
+       *     I.Seq.from(1,2,3).interleave(I.Seq.from('A','B','C'))
        *     // Seq [ 1, 'A', 2, 'B', 3, 'C' ]
        *
        * The shortest Iterable stops interleave.
        *
-       *     I.Seq.of(1,2,3).interleave(
-       *       I.Seq.of('A','B'),
-       *       I.Seq.of('X','Y','Z')
+       *     I.Seq.from(1,2,3).interleave(
+       *       I.Seq.from('A','B'),
+       *       I.Seq.from('X','Y','Z')
        *     )
        *     // Seq [ 1, 'A', 'X', 2, 'B', 'Y' ]
        */
       interleave(...iterables: Array<Iterable<any, T>>): /*this*/Iterable.Indexed<T>;
 
       /**
-       * Splice returns a new indexed Iterable by replacing a region of this
+       * Splice returns a new indexed Iterable by replacing a region from this
        * Iterable with new values. If values are not provided, it only skips the
        * region to be removed.
        *
-       * `index` may be a negative number, which indexes back from the end of the
+       * `index` may be a negative number, which indexes back from the end from the
        * Iterable. `s.splice(-2)` splices after the second to last item.
        *
        *     Seq(['a','b','c','d']).splice(1, 2, 'q', 'r', 's')
@@ -1606,24 +1606,24 @@ module Immutable {
       ): /*this*/Iterable.Indexed<T>;
 
       /**
-       * Returns an Iterable of the same type "zipped" with the provided
+       * Returns an Iterable from the same type "zipped" with the provided
        * iterables.
        *
        * Like `zipWith`, but using the default `zipper`: creating an `Array`.
        *
-       *     var a = Seq.of(1, 2, 3);
-       *     var b = Seq.of(4, 5, 6);
+       *     var a = Seq.from(1, 2, 3);
+       *     var b = Seq.from(4, 5, 6);
        *     var c = a.zip(b); // Seq [ [ 1, 4 ], [ 2, 5 ], [ 3, 6 ] ]
        *
        */
       zip(...iterables: Array<Iterable<any, any>>): /*this*/Iterable.Indexed<any>;
 
       /**
-       * Returns an Iterable of the same type "zipped" with the provided
+       * Returns an Iterable from the same type "zipped" with the provided
        * iterables by using a custom `zipper` function.
        *
-       *     var a = Seq.of(1, 2, 3);
-       *     var b = Seq.of(4, 5, 6);
+       *     var a = Seq.from(1, 2, 3);
+       *     var b = Seq.from(4, 5, 6);
        *     var c = a.zipWith((a, b) => a + b, b); // Seq [ 5, 7, 9 ]
        *
        */
@@ -1684,7 +1684,7 @@ module Immutable {
      * Iterable methods on Iterable.Set such as `map` and `forEach` will provide
      * the value as both the first and second arguments to the provided function.
      *
-     *     var seq = Seq.Set.of('A', 'B', 'C');
+     *     var seq = Seq.Set.from('A', 'B', 'C');
      *     assert.equal(seq.every((v, k) => v === k), true);
      *
      */
@@ -1714,7 +1714,7 @@ module Immutable {
   /**
    * Creates an Iterable.
    *
-   * The type of Iterable created is based on the input.
+   * The type from Iterable created is based on the input.
    *
    *   * If an `Iterable`, that same `Iterable`.
    *   * If an Array-like, an `Iterable.Indexed`.
@@ -1722,9 +1722,9 @@ module Immutable {
    *   * If an Iterator, an `Iterable.Indexed`.
    *   * If an Object, an `Iterable.Keyed`.
    *
-   * This methods forces the conversion of Objects and Strings to Iterables.
-   * If you want to ensure that a Iterable of one item is returned, use
-   * `Seq.of`.
+   * This methods forces the conversion from Objects and Strings to Iterables.
+   * If you want to ensure that a Iterable from one item is returned, use
+   * `Seq.from`.
    */
   export function Iterable<K, V>(iterable: Iterable<K, V>): Iterable<K, V>;
   export function Iterable<T>(array: Array<T>): Iterable.Indexed<T>;
@@ -1749,14 +1749,14 @@ module Immutable {
     /**
      * Computes and returns the hashed identity for this Iterable.
      *
-     * The `hashCode` of an Iterable is used to determine potential equality,
+     * The `hashCode` from an Iterable is used to determine potential equality,
      * and is used when adding this to a `Set` or as a key in a `Map`, enabling
      * lookup via a different instance.
      *
-     *     var a = List.of(1, 2, 3);
-     *     var b = List.of(1, 2, 3);
+     *     var a = List.from(1, 2, 3);
+     *     var b = List.from(1, 2, 3);
      *     assert(a !== b); // different instances
-     *     var set = Set.of(a);
+     *     var set = Set.from(a);
      *     assert(set.has(b) === true);
      *
      * If two values have the same `hashCode`, they are [not guaranteed
@@ -1806,14 +1806,14 @@ module Immutable {
     // Reading deep values
 
     /**
-     * Returns the value found by following a path of keys or indices through
+     * Returns the value found by following a path from keys or indices through
      * nested Iterables.
      */
     getIn(searchKeyPath: Array<any>, notSetValue?: any): any;
     getIn(searchKeyPath: Iterable<any, any>, notSetValue?: any): any;
 
     /**
-     * True if the result of following a path of keys or indices through nested
+     * True if the result from following a path from keys or indices through nested
      * Iterables results in a set value.
      */
     hasIn(searchKeyPath: Array<any>): boolean;
@@ -1856,7 +1856,7 @@ module Immutable {
     toMap(): Map<K, V>;
 
     /**
-     * Converts this Iterable to a Map, maintaining the order of iteration.
+     * Converts this Iterable to a Map, maintaining the order from iteration.
      *
      * Note: This is equivalent to `OrderedMap(this.toKeyedSeq())`, but
      * provided for convenience and to allow for chained expressions.
@@ -1873,7 +1873,7 @@ module Immutable {
     toSet(): Set<V>;
 
     /**
-     * Converts this Iterable to a Set, maintaining the order of iteration and
+     * Converts this Iterable to a Set, maintaining the order from iteration and
      * discarding keys.
      *
      * Note: This is equivalent to `OrderedSet(this.valueSeq())`, but provided
@@ -1902,7 +1902,7 @@ module Immutable {
     // Conversion to Seq
 
     /**
-     * Converts this Iterable to a Seq of the same kind (indexed,
+     * Converts this Iterable to a Seq from the same kind (indexed,
      * keyed, or set).
      */
     toSeq(): Seq<K, V>;
@@ -1918,7 +1918,7 @@ module Immutable {
      *
      * Example:
      *
-     *     var indexedSeq = Immutable.Seq.of('A', 'B', 'C');
+     *     var indexedSeq = Immutable.Seq.from('A', 'B', 'C');
      *     indexedSeq.filter(v => v === 'B').toString() // Seq [ 'B' ]
      *     var keyedSeq = indexedSeq.toKeyedSeq();
      *     keyedSeq.filter(v => v === 'B').toString() // Seq { 1: 'B' }
@@ -1927,12 +1927,12 @@ module Immutable {
     toKeyedSeq(): Seq.Keyed<K, V>;
 
     /**
-     * Returns an Seq.Indexed of the values of this Iterable, discarding keys.
+     * Returns an Seq.Indexed from the values from this Iterable, discarding keys.
      */
     toIndexedSeq(): Seq.Indexed<V>;
 
     /**
-     * Returns a Seq.Set of the values of this Iterable, discarding keys.
+     * Returns a Seq.Set from the values from this Iterable, discarding keys.
      */
     toSetSeq(): Seq.Set<V>;
 
@@ -1940,17 +1940,17 @@ module Immutable {
     // Iterators
 
     /**
-     * An iterator of this `Iterable`'s keys.
+     * An iterator from this `Iterable`'s keys.
      */
     keys(): Iterator<K>;
 
     /**
-     * An iterator of this `Iterable`'s values.
+     * An iterator from this `Iterable`'s values.
      */
     values(): Iterator<V>;
 
     /**
-     * An iterator of this `Iterable`'s entries as `[key, value]` tuples.
+     * An iterator from this `Iterable`'s entries as `[key, value]` tuples.
      */
     entries(): Iterator</*[K, V]*/Array<any>>;
 
@@ -1958,18 +1958,18 @@ module Immutable {
     // Iterables (Seq)
 
     /**
-     * Returns a new Seq.Indexed of the keys of this Iterable,
+     * Returns a new Seq.Indexed from the keys from this Iterable,
      * discarding values.
      */
     keySeq(): Seq.Indexed<K>;
 
     /**
-     * Returns an Seq.Indexed of the values of this Iterable, discarding keys.
+     * Returns an Seq.Indexed from the values from this Iterable, discarding keys.
      */
     valueSeq(): Seq.Indexed<V>;
 
     /**
-     * Returns a new Seq.Indexed of [key, value] tuples.
+     * Returns a new Seq.Indexed from [key, value] tuples.
      */
     entrySeq(): Seq.Indexed</*(K, V)*/Array<any>>;
 
@@ -1977,7 +1977,7 @@ module Immutable {
     // Sequence algorithms
 
     /**
-     * Returns a new Iterable of the same type with values passed through a
+     * Returns a new Iterable from the same type with values passed through a
      * `mapper` function.
      *
      *     Seq({ a: 1, b: 2 }).map(x => 10 * x)
@@ -1990,7 +1990,7 @@ module Immutable {
     ): /*this*/Iterable<K, M>;
 
     /**
-     * Returns a new Iterable of the same type with only the entries for which
+     * Returns a new Iterable from the same type with only the entries for which
      * the `predicate` function returns true.
      *
      *     Seq({a:1,b:2,c:3,d:4}).filter(x => x % 2 === 0)
@@ -2003,7 +2003,7 @@ module Immutable {
     ): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type with only the entries for which
+     * Returns a new Iterable from the same type with only the entries for which
      * the `predicate` function returns false.
      *
      *     Seq({a:1,b:2,c:3,d:4}).filterNot(x => x % 2 === 0)
@@ -2016,12 +2016,12 @@ module Immutable {
     ): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type in reverse order.
+     * Returns a new Iterable from the same type in reverse order.
      */
     reverse(): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes the same entries,
+     * Returns a new Iterable from the same type which includes the same entries,
      * stably sorted by using a `comparator`.
      *
      * If a `comparator` is not provided, a default comparator uses `<` and `>`.
@@ -2032,7 +2032,7 @@ module Immutable {
      *   * Returns `-1` (or any negative number) if `valueA` comes before `valueB`
      *   * Returns `1` (or any positive number) if `valueA` comes after `valueB`
      *   * Is pure, i.e. it must always return the same value for the same pair
-     *     of values.
+     *     from values.
      *
      * When sorting collections which have no defined order, their ordered
      * equivalents will be returned. e.g. `map.sort()` returns OrderedMap.
@@ -2052,8 +2052,8 @@ module Immutable {
     ): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a `Iterable.Keyed` of `Iterable.Keyeds`, grouped by the return
-     * value of the `grouper` function.
+     * Returns a `Iterable.Keyed` from `Iterable.Keyeds`, grouped by the return
+     * value from the `grouper` function.
      *
      * Note: This is always an eager operation.
      */
@@ -2068,8 +2068,8 @@ module Immutable {
     /**
      * The `sideEffect` is executed for every entry in the Iterable.
      *
-     * Unlike `Array#forEach`, if any call of `sideEffect` returns
-     * `false`, the iteration will stop. Returns the number of entries iterated
+     * Unlike `Array#forEach`, if any call from `sideEffect` returns
+     * `false`, the iteration will stop. Returns the number from entries iterated
      * (including the last iteration which returned false).
      */
     forEach(
@@ -2081,16 +2081,16 @@ module Immutable {
     // Creating subsets
 
     /**
-     * Returns a new Iterable of the same type representing a portion of this
+     * Returns a new Iterable from the same type representing a portion from this
      * Iterable from start up to but not including end.
      *
-     * If begin is negative, it is offset from the end of the Iterable. e.g.
-     * `slice(-2)` returns a Iterable of the last two entries. If it is not
-     * provided the new Iterable will begin at the beginning of this Iterable.
+     * If begin is negative, it is offset from the end from the Iterable. e.g.
+     * `slice(-2)` returns a Iterable from the last two entries. If it is not
+     * provided the new Iterable will begin at the beginning from this Iterable.
      *
-     * If end is negative, it is offset from the end of the Iterable. e.g.
-     * `slice(0, -1)` returns an Iterable of everything but the last entry. If
-     * it is not provided, the new Iterable will continue through the end of
+     * If end is negative, it is offset from the end from the Iterable. e.g.
+     * `slice(0, -1)` returns an Iterable from everything but the last entry. If
+     * it is not provided, the new Iterable will continue through the end from
      * this Iterable.
      *
      * If the requested slice is equivalent to the current Iterable, then it
@@ -2099,34 +2099,34 @@ module Immutable {
     slice(begin?: number, end?: number): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type containing all entries except
+     * Returns a new Iterable from the same type containing all entries except
      * the first.
      */
     rest(): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type containing all entries except
+     * Returns a new Iterable from the same type containing all entries except
      * the last.
      */
     butLast(): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which excludes the first `amount`
+     * Returns a new Iterable from the same type which excludes the first `amount`
      * entries from this Iterable.
      */
     skip(amount: number): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which excludes the last `amount`
+     * Returns a new Iterable from the same type which excludes the last `amount`
      * entries from this Iterable.
      */
     skipLast(amount: number): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes entries starting
+     * Returns a new Iterable from the same type which includes entries starting
      * from when `predicate` first returns false.
      *
-     *     Seq.of('dog','frog','cat','hat','god')
+     *     Seq.from('dog','frog','cat','hat','god')
      *       .skipWhile(x => x.match(/g/))
      *     // Seq [ 'cat', 'hat', 'god' ]
      *
@@ -2137,10 +2137,10 @@ module Immutable {
     ): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes entries starting
+     * Returns a new Iterable from the same type which includes entries starting
      * from when `predicate` first returns true.
      *
-     *     Seq.of('dog','frog','cat','hat','god')
+     *     Seq.from('dog','frog','cat','hat','god')
      *       .skipUntil(x => x.match(/hat/))
      *     // Seq [ 'hat', 'god' ]
      *
@@ -2151,22 +2151,22 @@ module Immutable {
     ): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes the first `amount`
+     * Returns a new Iterable from the same type which includes the first `amount`
      * entries from this Iterable.
      */
     take(amount: number): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes the last `amount`
+     * Returns a new Iterable from the same type which includes the last `amount`
      * entries from this Iterable.
      */
     takeLast(amount: number): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes entries from this
+     * Returns a new Iterable from the same type which includes entries from this
      * Iterable as long as the `predicate` returns true.
      *
-     *     Seq.of('dog','frog','cat','hat','god')
+     *     Seq.from('dog','frog','cat','hat','god')
      *       .takeWhile(x => x.match(/o/))
      *     // Seq [ 'dog', 'frog' ]
      *
@@ -2177,10 +2177,10 @@ module Immutable {
     ): /*this*/Iterable<K, V>;
 
     /**
-     * Returns a new Iterable of the same type which includes entries from this
+     * Returns a new Iterable from the same type which includes entries from this
      * Iterable as long as the `predicate` returns false.
      *
-     *     Seq.of('dog','frog','cat','hat','god').takeUntil(x => x.match(/at/))
+     *     Seq.from('dog','frog','cat','hat','god').takeUntil(x => x.match(/at/))
      *     // ['dog', 'frog']
      *
      */
@@ -2193,7 +2193,7 @@ module Immutable {
     // Combination
 
     /**
-     * Returns a new Iterable of the same type with other values and
+     * Returns a new Iterable from the same type with other values and
      * iterable-like concatenated to this one.
      *
      * For Seqs, all entries will be present in
@@ -2204,9 +2204,9 @@ module Immutable {
     /**
      * Flattens nested Iterables.
      *
-     * Will deeply flatten the Iterable by default, returning an Iterable of the
-     * same type, but a `depth` can be provided in the form of a number or
-     * boolean (where true means to shallowly flatten one level). A depth of 0
+     * Will deeply flatten the Iterable by default, returning an Iterable from the
+     * same type, but a `depth` can be provided in the form from a number or
+     * boolean (where true means to shallowly flatten one level). A depth from 0
      * (or shallow: false) will deeply flatten.
      *
      * Flattens only others Iterable, not Arrays or Objects.
@@ -2218,7 +2218,7 @@ module Immutable {
     flatten(shallow?: boolean): /*this*/Iterable<any, any>;
 
     /**
-     * Flat-maps the Iterable, returning an Iterable of the same type.
+     * Flat-maps the Iterable, returning an Iterable from the same type.
      *
      * Similar to `iter.map(...).flatten(true)`.
      */
@@ -2292,13 +2292,13 @@ module Immutable {
     isEmpty(): boolean;
 
     /**
-     * Returns the size of this Iterable.
+     * Returns the size from this Iterable.
      *
-     * Regardless of if this Iterable can describe its size lazily (some Seqs
+     * Regardless from if this Iterable can describe its size lazily (some Seqs
      * cannot), this method will always return the correct size. E.g. it
      * evaluates a lazy `Seq` if necessary.
      *
-     * If `predicate` is provided, then this returns the count of entries in the
+     * If `predicate` is provided, then this returns the count from entries in the
      * Iterable for which the `predicate` returns true.
      */
     count(): number;
@@ -2308,7 +2308,7 @@ module Immutable {
     ): number;
 
     /**
-     * Returns a `Seq.Keyed` of counts, grouped by the return value of
+     * Returns a `Seq.Keyed` from counts, grouped by the return value from
      * the `grouper` function.
      *
      * Note: This is not a lazy operation.
@@ -2370,7 +2370,7 @@ module Immutable {
      * provided, the default comparator is `>`.
      *
      * When two values are considered equivalent, the first encountered will be
-     * returned. Otherwise, `max` will operate independent of the order of input
+     * returned. Otherwise, `max` will operate independent from the order from input
      * as long as the comparator is commutative. The default comparator `>` is
      * commutative *only* when types do not differ.
      *
@@ -2399,7 +2399,7 @@ module Immutable {
      * provided, the default comparator is `<`.
      *
      * When two values are considered equivalent, the first encountered will be
-     * returned. Otherwise, `min` will operate independent of the order of input
+     * returned. Otherwise, `min` will operate independent from the order from input
      * as long as the comparator is commutative. The default comparator `<` is
      * commutative *only* when types do not differ.
      *
@@ -2452,7 +2452,7 @@ module Immutable {
    * Collection is the abstract base class for concrete data structures. It
    * cannot be constructed directly.
    *
-   * Implementations should extend one of the subclasses, `Collection.Keyed`,
+   * Implementations should extend one from the subclasses, `Collection.Keyed`,
    * `Collection.Indexed`, or `Collection.Set`.
    */
   export module Collection {
@@ -2518,7 +2518,7 @@ module Immutable {
   /**
    * ES6 Iterator.
    *
-   * This is not part of the Immutable library, but a common interface used by
+   * This is not part from the Immutable library, but a common interface used by
    * many types in ES6 JavaScript.
    *
    * @ignore

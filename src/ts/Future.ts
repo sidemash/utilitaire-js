@@ -93,12 +93,30 @@ export class Future<T> {
         );
     }
 
-    static lazy<T>(f: () => T) : LazyFuture<T> {
-        return Future.lazyWith(() => Future.of(f));
+    static lazyFrom<T>(f: () => T) : LazyFuture<T> {
+        return Future.lazyFromFuture(() => Future.from(f));
     }
 
-    static lazyWith<T>(f: () => Future<T>) : LazyFuture<T> {
+    static lazyFromFuture<T>(f: () => Future<T>) : LazyFuture<T> {
         return  new LazyFutureImpl(f);
+    }
+
+    static lazyFromPromise<T>(promise:Promise<T>) : LazyFuture<T> {
+        return  Future.lazyFromFuture(() => Future.fromPromise(promise));
+    }
+
+    static lazyFromPromiseFn<T>(fn: () => Promise<T>) : LazyFuture<T> {
+        return  Future.lazyFromFuture(() => Future.fromPromiseFn(fn));
+    }
+
+    static fromPromiseFn<T>(fn: () => Promise<T>) : Future<T> {
+        try {
+            const promise = fn();
+            return Future.fromPromise(promise);
+        }
+        catch (error) {
+            return Future.fromPromise<T>(Promise.reject(error));
+        }
     }
 
     static fromPromise<T>(promise: Promise<T>) : Future<T> {
@@ -107,7 +125,7 @@ export class Future<T> {
         return future.init(promiseOption);
     }
 
-    static startAfterWith<T>(timeout:number, fn : () => Future<T>) : Future<T> {
+    static startAfter<T>(timeout:number, fn : () => Future<T>) : Future<T> {
         const f : Future<Future<T>> = Future.fromPromise<Future<T>>(
             new Promise<Future<T>>((resolve, reject) => {
                 setTimeout(() => {
@@ -138,7 +156,7 @@ export class Future<T> {
         );
     }
 
-    static of<T>(fn: () => T, executeFnInNewThread:boolean = true) : Future<T> {
+    static from<T>(fn: () => T, executeFnInNewThread:boolean = true) : Future<T> {
         if(executeFnInNewThread){
             return Future.fromPromise<T>(
                 new Promise((resolve, reject) => {
@@ -161,7 +179,7 @@ export class Future<T> {
         }
     }
 
-    static ofWith<T>(fn: () => Future<T>, executeFnInNewThread:boolean = true) : Future<T> {
+    static fromFuture<T>(fn: () => Future<T>, executeFnInNewThread:boolean = true) : Future<T> {
         if(executeFnInNewThread){
             return Future.fromPromise<T>(
                 new Promise((resolve, reject) => {
@@ -228,7 +246,7 @@ export class Future<T> {
         else return null;
     }
 
-    toLazy() : LazyFuture<T> { return Future.lazyWith(() => this)}
+    toLazy() : LazyFuture<T> { return Future.lazyFromFuture(() => this)}
 
     exceptionOrNull() : Exception {
         if(this.isFailure()) return this._tryOption.value.exception();
@@ -251,7 +269,7 @@ export class Future<T> {
         }
         else if(this.isSuccess()){
             const executeFnInNewThread = false;
-            return Future.of(() => fn(this.valueOrNull()), executeFnInNewThread)
+            return Future.from(() => fn(this.valueOrNull()), executeFnInNewThread)
         }
         else return Future.fromPromise<U>(
                 new Promise((resolve, reject) => {
@@ -276,7 +294,7 @@ export class Future<T> {
                 setTimeout(() => {
                     try {
                         // After the duration , If this promise is completed, there is no need to execute
-                        // the orElse Part of the argument. We execute this if and only
+                        // the orElse Part from the argument. We execute this if and only
                         // if this future is pending.
                         if(this.isPending() || this.isNotYetStarted()){
                             const timeOutFuture =
@@ -384,20 +402,18 @@ export class Future<T> {
         }
     }
 
-    onSuccess(fn : (res:T) => void) : Future<T> {
+    onSuccess(fn : (res:T) => void) : void {
         if(this.isSuccess()) fn(this.valueOrNull());
         else {
             this.completeFunctionSubscribers.push({ ifSuccess : fn});
         }
-        return this;
     }
 
-    onFailure(fn : (exception:Exception) => void) : Future<T> {
+    onFailure(fn : (exception:Exception) => void) : void {
         if(this.isFailure()) fn(this.exceptionOrNull());
         else {
             this.completeFunctionSubscribers.push({ ifFailure : fn});
         }
-        return this;
     }
 
     /**
@@ -408,7 +424,7 @@ export class Future<T> {
      * @param fn : Function to be applied once the future will be completed or immediately if
      *          the future has already been complete at the call time.
      */
-    onComplete(fn : VoidFunction | { ifSuccess : (result:T) => void, ifFailure : (exception:Exception) => void }) : Future<T>  {
+    onComplete(fn : VoidFunction | { ifSuccess : (result:T) => void, ifFailure : (exception:Exception) => void }) : void {
         if(_.isFunction(fn)) {
             const fnAsFunction = fn as VoidFunction;
             if(this.isCompleted()) fnAsFunction();
@@ -424,7 +440,6 @@ export class Future<T> {
                 this.completeFunctionSubscribers.push(fnAsObject);
             }
         }
-        return this;
     }
 
     fold<U>(fold : { ifPending : () => U,  ifNotYetStarted : () => U, ifSuccess : (result:T) => U, ifFailure : (exception:Exception) => U} |
@@ -453,7 +468,7 @@ export class Future<T> {
         }
         else if(this.isFailure()){
             const executeFnInNewThread = false;
-            return Future.of(() => fn(this.exceptionOrNull()), executeFnInNewThread);
+            return Future.from(() => fn(this.exceptionOrNull()), executeFnInNewThread);
         }
         else return Future.fromPromise<T>(
                 new Promise((resolve, reject) => {
@@ -476,40 +491,40 @@ export class Future<T> {
         return this.flatMap(r => Future.executeAfter(duration, () => r))
     }
 
-    recoverWith(fn: (exception:Exception) => Future<T>) : Future<T> {
+    flatRecover(fn: (exception:Exception) => Future<T>) : Future<T> {
         if(this.isSuccess()){
             return this;
         }
         else if(this.isFailure()){
             const executeFnInNewThread = false;
-            return Future.ofWith(() => fn(this.exceptionOrNull()), executeFnInNewThread);
+            return Future.fromFuture(() => fn(this.exceptionOrNull()), executeFnInNewThread);
         }
         else return Future.fromPromise<T>(
-            new Promise<T>((resolve, reject) => {
-                this.onFailure(error => {
-                    try {
-                        fn(error).onComplete({
-                            ifFailure : error => reject(error),
-                            ifSuccess : value => resolve(value)
-                        });
-                    } catch (error){
-                        reject(error)
-                    }
-                });
+                new Promise<T>((resolve, reject) => {
+                    this.onFailure(error => {
+                        try {
+                            fn(error).onComplete({
+                                ifFailure : error => reject(error),
+                                ifSuccess : value => resolve(value)
+                            });
+                        } catch (error){
+                            reject(error)
+                        }
+                    });
 
-                this.onSuccess(value => {
-                    resolve(value as any); // TODO How to constraint U to be a super type of T to give a sens to this ?
+                    this.onSuccess(value => {
+                        resolve(value as any); // TODO How to constraint U to be a super type from T to give a sens to this ?
+                    })
                 })
-            })
-        )
+            )
     }
 
     transform<U>(transformer : { ifSuccess : (result:T) => U, ifFailure : (exception:Exception) => U }): Future<U>{
         return this.map(transformer.ifSuccess).recover(transformer.ifFailure);
     }
 
-    transformWith<U>(transformer : { ifSuccess : (result:T) => Future<U>, ifFailure : (exception:Exception) => Future<U> }): Future<U> {
-        return this.flatMap(transformer.ifSuccess).recoverWith(transformer.ifFailure);
+    flatTransform<U>(transformer : () => Future<U>): Future<U> {
+        return this.flatMap(transformer).flatRecover(transformer);
     }
 
     start() : Future<T> { return this; }
@@ -561,12 +576,12 @@ export abstract class LazyFuture<T> extends Future<T> {
 
     private evalFutureOption: Option<Future<T>>;
 
-    protected constructor(private readonly f : () => Future<T>){
+    protected constructor(protected readonly f : () => Future<T>){
         super(Option.empty<any>(), Option.empty<any>());
         this.evalFutureOption = Option.empty<Future<T>>();
     }
 
-    protected  evalF() : Future<T> {
+    protected evalF() : Future<T> {
         if(this.evalFutureOption.isDefined()) return this.evalFutureOption.value;
         else {
             const evalFuture = this.f().start();
@@ -590,8 +605,8 @@ export abstract class LazyFuture<T> extends Future<T> {
 
 
     /*
-    static of<T>(f : () => T) : LazyFuture<T> {
-        return LazyFuture.ofFuture(() => Future.of(f));
+    static from<T>(f : () => T) : LazyFuture<T> {
+        return LazyFuture.ofFuture(() => Future.from(f));
     }
 
     static ofFuture<T>(f : () => Future<T>) : LazyFuture<T> {
@@ -622,17 +637,17 @@ class LazyFutureImpl<T> extends LazyFuture<T> {
 
     map<U>(fn : (result:T) => U) : LazyFuture<U> {
         const f : () => Future<U> = () => this.evalF().map(fn);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
     filter(fn : (res:T) => boolean) : LazyFuture<T> {
         const f : () => Future<T> = () => this.evalF().filter(fn);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
     filterNot(fn : (res:T) => boolean) :LazyFuture<T> {
         const f : () => Future<T> = () => this.evalF().filterNot(fn);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
     select(fn : (res:T) => boolean) : LazyFuture<T> { return this.filter(fn); }
@@ -641,50 +656,47 @@ class LazyFutureImpl<T> extends LazyFuture<T> {
 
     flatMap<U>(fn : (result:T) => Future<U>) : LazyFuture<U> {
         const f : () => Future<U> = () => this.evalF().flatMap(fn);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
     toLazy() : LazyFuture<T> { return this; }
 
 
-    onSuccess(fn : (res:T) => void) : LazyFuture<T> {
-        const f : () => Future<T> = () => this.evalF().onSuccess(fn);
-        return Future.lazyWith(f)
+    onSuccess(fn : (res:T) => void) : void {
+        this.evalF().onSuccess(fn);
     }
 
-    onFailure(fn : (exception:Exception) => void) : LazyFuture<T>{
-        const f : () => Future<T> = () => this.evalF().onFailure(fn);
-        return Future.lazyWith(f)
+    onFailure(fn : (exception:Exception) => void) : void {
+        this.evalF().onFailure(fn);
     }
 
-    onComplete(fn : VoidFunction | { ifSuccess : (result:T) => void, ifFailure : (exception:Exception) => void }) : LazyFuture<T> {
-        const f : () => Future<T> = () => this.evalF().onComplete(fn);
-        return Future.lazyWith(f)
+    onComplete(fn : VoidFunction | { ifSuccess : (result:T) => void, ifFailure : (exception:Exception) => void }) : void {
+        this.evalF().onComplete(fn);
     }
 
     recover(fn: (exception:Exception) => T) : LazyFuture<T> {
         const f : () => Future<T> = () => this.evalF().recover(fn);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
-    recoverWith(fn: (exception:Exception) => Future<T>) : LazyFuture<T>{
-        const f : () => Future<T> = () => this.evalF().recoverWith(fn);
-        return Future.lazyWith(f)
+    flatRecover(fn: (exception:Exception) => Future<T>) : LazyFuture<T>{
+        const f : () => Future<T> = () => this.evalF().flatRecover(fn);
+        return Future.lazyFromFuture(f)
     }
 
     transform<U>(transformer : { ifSuccess : (result:T) => U, ifFailure : (exception:Exception) => U }): LazyFuture<U>{
         const f : () => Future<U> = () => this.evalF().transform(transformer);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
-    transformWith<U>(transformer : { ifSuccess : (result:T) => Future<U>, ifFailure : (exception:Exception) => Future<U> }): LazyFuture<U>{
-        const f : () => Future<U> = () => this.evalF().transformWith(transformer);
-        return Future.lazyWith(f)
+    flatTransform<U>(transformer : () => Future<U>): LazyFuture<U>{
+        const f : () => Future<U> = () => this.evalF().flatTransform(transformer);
+        return Future.lazyFromFuture(f)
     }
 
     completeBefore(obj : { timeOut : number, orElse ?: () => Future<T> }) : LazyFuture<T> {
         const f : () => Future<T> = () => this.evalF().completeBefore(obj);
-        return Future.lazyWith(f)
+        return Future.lazyFromFuture(f)
     }
 
     delay(duration:number) : LazyFuture<T> {
@@ -699,6 +711,8 @@ class LazyFutureImpl<T> extends LazyFuture<T> {
     toString():string { return super.toString(); }
 
     start() : Future<T> { return this.evalF(); }
+
+    reinitialize() : LazyFuture<T> { return Future.lazyFromFuture(this.f); }
 
     startAfter(duration:number) : Future<T> { return this.evalFafter(duration); }
 }

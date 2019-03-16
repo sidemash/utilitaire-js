@@ -119,7 +119,7 @@ export abstract class Try<T> {
         else if(this.isFailure()) return Try.of(() => fn(this._exception));
     }
 
-    recoverWith(fn: (exception:Exception) => Try<T>) : Try<T> {
+    flatRecover(fn: (exception:Exception) => Try<T>) : Try<T> {
         if(this.isSuccess()) return this;
         else if(this.isFailure()) return Try.safeApplyTry<T>(() => fn(this._exception));
     }
