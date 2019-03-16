@@ -47,30 +47,13 @@ There exists in Future class a method called fold that will "open and see in" th
     } 
 ```
 3 - Others methods available
-- Query State 
-		promise.isCompleted
-		promise.isNotYetStarted 
-		promise.isPending 
-		promise.isSuccess
-		promise.isFailure
-	- Get value out
-		promise.exceptionOrNull
-		promise.valueOrNull
-	- Transform
-		promise.fold 
-		promise.map 
-		promise.flatMap 
-		promise.recover
-		promise.recoverWith 
-		promise.transform
-		promise.transformWith  
-	- Timeout / Delay 
-		promise.completeBefore
-		promise.delay 
-	- CallBack 
-		promise.onComplete()
-		promise.onSuccess 
-		promise.onFailure
+|                      | Promise<T>                                                                                                                                                                                                                                                | Future<T>                                                                                                                                                                                                                                                 |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Query Internal State | None                                                                                                                                                                                                                                                      | future.isCompleted() 		 future.isNotYetStarted()  		 future.isPending()  		 future.isSuccess() 		 future.isFailure()                                                                                                                                              |
+| Pull the value out   | None                                                                                                                                                                                                                                                      | future.valueOrNull()  future.exceptionOrNull()                                                                                                                                                                                                            |
+| Transform            | then<U>(fn : T => U) : Promise<U>  then<U>(fn : T => Promise<U>) : Promise<U> 		 catch<U>(fn : any => U) : Promise<U>  catch<U>(fn : any => Promise<U>) : Promise<U> 		 finally<U>(fn : () => U) : Promise<U>  finally<U>(fn : () => Promise<U>) : Promise<U> | map<U>(fn : T => U) : Future<U>  flatMap<U>(fn : T => Future<U>): Future<U>  recover<U>(fn : T => U) : Future<U>  flatRecover<U>(fn : T => Future<U>) : Future<U>  transform<U>(fn: () => U): Future<U>  flatTransform<U>(fn: () => Future<U>): Future<U> |
+| Timeout / Delay      | None                                                                                                                                                                                                                                                      | delay(obj : { duration: number }): Future<T>;  completeBefore(obj: { timeOut: number,  orElse?: () => Future<T> }): Future<T>;                                                                                                                            |
+| Callback             | None (but can be simulated with then/catch/finally methods)                                                                                                                                                                                               | onComplete(fn : () => void): void  onComplete(fn : { ifSuccess: (result: T) => void,  ifFailure: (exception: Exception) => void}): void  onSuccess(fn : T => void) : void  onFailure(fn: Exception => void): void                                         |
 		
 ## Motivation  
 ## nomenclature  
