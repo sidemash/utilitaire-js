@@ -71,7 +71,7 @@ There exists in Future class a method called fold that will "open and see in" th
         ); 
     } 
 ```
-3 - Others methods available
+3 - Others methods availables
 
 |                      | ```Promise<T>```                                                                                                                                                                                                                                                | ```Future<T> ```                                                                                                                                                                                                                                                |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -80,10 +80,13 @@ There exists in Future class a method called fold that will "open and see in" th
 | Transform            | ```then<U>(fn : T => U) : Promise<U>```<br> ```then<U>(fn : T => Promise<U>):Promise<U>``` <br> 	```catch<U>(fn : any => U) : Promise<U>``` <br>  ```catch<U>(fn : any => Promise<U>):Promise<U>``` <br>  ```finally<U>(fn : () => U) : Promise<U>``` <br>  ```finally<U>(fn : () => Promise<U>):Promise<U>```  | ```map<U>(fn : T => U) : Future<U> ``` <br>  ```flatMap<U>(fn : T => Future<U>): Future<U>``` <br>  ```recover<U>(fn : T => U) : Future<U>``` <br>  ```flatRecover<U>(fn : T => Future<U>) : Future<U>``` <br>  ```transform<U>(fn: () => U): Future<U>``` <br>  ```flatTransform<U>(fn: () => Future<U>): Future<U>``` |
 | Timeout / Delay      | None                                                                                                                                                                                                                                                      | ```delay(obj : { duration: number }): Future<T>``` <br>  ```completeBefore(obj:{ timeOut: number }):Future<T>``` |
 | Callback             | None (but can be simulated with then/catch/finally <br> methods)                                                                                                                                                                                               | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
-	
+| Static Methods Creation | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any): Promise<T>``` | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
+| Static Method Helpers   | ```Promise.all<T>(promises:Array<Promise<T>>): Promise<Array<T>>```<br> ```Promise.race<T>(promises:Array<Promise<T>>): Promise<T>```  | ```Future.all<T>(futures: Array<Future<T>>): Future<Array<T>>```<br> ```Future.firstCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.lastCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.startAfter<T>(timeout:number, fn : () => Future<T>) : Future<T>```<br> ```Future.executeAfter<T>(timeout:number, fn : () => T) : Future<T>``` |
 		
 ## Motivation  
 ## nomenclature  
+### flatMap / flatRecover / flatTransform
+### map instead of then 
 ## expression oriented
 ## many methods  
 When you have a promise object, is it possible to know if it is completed ? 

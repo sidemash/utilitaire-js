@@ -49,7 +49,7 @@ export class Future<T> {
         return Future.foreverPending<T>();
     }
 
-    static sequence<T>(futures: Array<Future<T>>): Future<Array<T>>{
+    static all<T>(futures: Array<Future<T>>): Future<Array<T>>{
         return Future.fromPromise(Promise.all(futures.map(future => future.toPromise())))
     }
 
@@ -519,8 +519,8 @@ export class Future<T> {
             )
     }
 
-    transform<U>(transformer : { ifSuccess : (result:T) => U, ifFailure : (exception:Exception) => U }): Future<U>{
-        return this.map(transformer.ifSuccess).recover(transformer.ifFailure);
+    transform<U>(transformer : () => U): Future<U> {
+        return this.map(transformer).recover(transformer);
     }
 
     flatTransform<U>(transformer : () => Future<U>): Future<U> {
@@ -684,7 +684,7 @@ class LazyFutureImpl<T> extends LazyFuture<T> {
         return Future.lazyFromFuture(f)
     }
 
-    transform<U>(transformer : { ifSuccess : (result:T) => U, ifFailure : (exception:Exception) => U }): LazyFuture<U>{
+    transform<U>(transformer : () => U): LazyFuture<U>{
         const f : () => Future<U> = () => this.evalF().transform(transformer);
         return Future.lazyFromFuture(f)
     }

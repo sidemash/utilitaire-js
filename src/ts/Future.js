@@ -26,7 +26,7 @@ export class Future {
     static neverCompleted() {
         return Future.foreverPending();
     }
-    static sequence(futures) {
+    static all(futures) {
         return Future.fromPromise(Promise.all(futures.map(future => future.toPromise())));
     }
     static firstCompletedOf(futures) {
@@ -450,7 +450,7 @@ export class Future {
             }));
     }
     transform(transformer) {
-        return this.map(transformer.ifSuccess).recover(transformer.ifFailure);
+        return this.map(transformer).recover(transformer);
     }
     flatTransform(transformer) {
         return this.flatMap(transformer).flatRecover(transformer);

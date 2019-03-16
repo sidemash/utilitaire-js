@@ -45,7 +45,7 @@ declare module "utilitaire" {
         protected init(promiseOption: Option<Promise<T>>): Future<T>;
         static foreverPending<T>(): Future<T>;
         static neverCompleted<T>(): Future<T>;
-        static sequence<T>(futures: Array<Future<T>>): Future<Array<T>>;
+        static all<T>(futures: Array<Future<T>>): Future<Array<T>>;
         static firstCompletedOf<T>(futures: Array<Future<T>>): Future<T>;
         static lastCompletedOf<T>(futures: Array<Future<T>>): Future<T>;
         static lazyFrom<T>(f: () => T): LazyFuture<T>;
@@ -106,10 +106,7 @@ declare module "utilitaire" {
         recover(fn: (exception: Exception) => T): Future<T>;
         delay(duration: number): Future<T>;
         flatRecover(fn: (exception: Exception) => Future<T>): Future<T>;
-        transform<U>(transformer: {
-            ifSuccess: (result: T) => U;
-            ifFailure: (exception: Exception) => U;
-        }): Future<U>;
+        transform<U>(transformer: () => U): Future<U>;
         flatTransform<U>(transformer: () => Future<U>): Future<U>;
         start(): Future<T>;
         isLazy(): boolean;
