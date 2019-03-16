@@ -1,0 +1,19 @@
+{
+  "name": "utilitaire",
+  "authors": [
+    "Open Source <opensource@sidemash.com>"
+  ],
+  "description": "A common library for Javascript and Typescript projects",
+  "main": "index.js",
+  "license": "MIT",
+  "homepage": "http://www.sidemash.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

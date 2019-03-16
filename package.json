@@ -1,0 +1,30 @@
+{
+  "name": "utilitaire",
+  "version": "1.0.0",
+  "description": "Set of utils Tools for Typescript mainly to enhance Promise API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sidemash",
+    "utils",
+    "utilitaires",
+    "helpers"
+  ],
+  "author": "Open Source <opensource@sidemash.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "dts-bundle": "^0.5.0",
+    "typescript": "^1.8.2"
+  },
+  "typescript": {
+    "definition": "utilitaire.d.ts"
+  },
+  "types": "index.d.ts",
+  "dependencies": {
+    "es6-promise": "^4.0.5",
+    "immutable": "^3.8.1",
+    "lodash": "^4.17.4"
+  }
+}

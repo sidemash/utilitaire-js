@@ -1,0 +1,9 @@
+{
+  "name": "utilitaire",
+  "main": "src/U.d.ts",
+  "out" : "../index.d.ts",
+
+  "removeSource": true,
+
+  "outputAsModuleFolder" : true
+}

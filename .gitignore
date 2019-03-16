@@ -1,0 +1,10 @@
+bower_components
+.idea
+.idea_modules
+.history
+.DS_Store
+node_modules/*/node_modules
+node_modules
+src/*/**.js
+src/*/**.js.map
+.vscode
