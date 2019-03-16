@@ -85,8 +85,8 @@ There exists in Future class a method called fold that will "open and see in" th
 		
 ## Motivation  
 ## nomenclature  
-### flatMap / flatRecover / flatTransform
-### map instead of then 
+### Why naming flatMap / flatRecover / flatTransform ?
+### Why naming map instead of then ?
 ## expression oriented
 ## many methods  
 When you have a promise object, is it possible to know if it is completed ? 
