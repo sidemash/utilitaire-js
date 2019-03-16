@@ -83,12 +83,13 @@ There exists in Future class a method called fold that will "open and see in" th
 | Callback             | None (but can be simulated with then/catch/finally methods)                                                                                                                                                                                               | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
 | Static Methods Creation | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any): Promise<T>``` | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
 | Static Method Helpers   | ```Promise.all<T>(promises:Array<Promise<T>>): Promise<Array<T>>```<br> ```Promise.race<T>(promises:Array<Promise<T>>): Promise<T>```  | ```Future.all<T>(futures: Array<Future<T>>): Future<Array<T>>```<br> ```Future.firstCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.lastCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.startAfter<T>(timeout:number, fn : () => Future<T>) : Future<T>```<br> ```Future.executeAfter<T>(timeout:number, fn : () => T) : Future<T>``` |
-		
+
+// TODO 
 ## Motivation  
-## nomenclature  
+## Nomenclature  
 ### Why naming flatMap / flatRecover / flatTransform ?
 ### Why naming map instead of then ?
-## expression oriented
+## Expression oriented
 ## many methods  
 When you have a promise object, is it possible to know if it is completed ? 
 ```javascript
