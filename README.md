@@ -4,7 +4,7 @@ Set of utils Tools for Typescript mainly to enhance Promise API
 # Future 
 This type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
 
-## Usage Example 
+## Usages Examples 
 ### 1 - Defining Fallback
 ```typescript
 // Starting by importing Future 
@@ -27,6 +27,7 @@ Future.from(getUserFromServer1)            // Create a Future by Trying to get u
     })
 ```
 <br>
+
 ### 2 - Delaying execution and Retrying
 You will see why the Future can be in a NotYetStarted state.
 ```typescript
@@ -54,7 +55,9 @@ lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to
                                     // its initial State start it and Return Future<User>
 
 ``` 
+
 <br>
+
 ### 3 - Rendering Promise inside React component
 There exists in Future class a method called fold that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
 ```typescript jsx
@@ -74,7 +77,9 @@ render() {
     ); 
 } 
 ```
+
 <br>
+
 ### 4 - Others methods availables
 
 |                      | ```Promise<T>```                                                                                                                                                                                                                                                | ```Future<T> ```                                                                                                                                                                                                                                                |
