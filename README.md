@@ -5,7 +5,7 @@ Set of utils Tools for Typescript mainly to enhance Promise API
 This type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
 
 ## Usage Example 
-1 - Defining Fallback
+### 1 - Defining Fallback
 ```typescript
 // Starting by importing Future 
 import {Future} from "utilitaire";
@@ -16,18 +16,19 @@ const getUserFromServer1 : () => User = // Assume this is defined somehow long c
 const getUserFromServer2 : () => User = // Assume this is defined somehow long computation
 
 // So we can do the following : 
-Future.from(getUserFromServer1)   // Create a Future by Trying to get user from Server1. we have Future<User>
+Future.from(getUserFromServer1)            // Create a Future by Trying to get user from Server1. we have Future<User>
     .completeBefore({ timeOut : 3000 })    // This attempt should be completed before 3s get elapsed. we have Future<User>
     .recover(exception => {})              // If this attempt fails, we recover from failure ignoring the exception. now we have Future<void>
     .delay({ duration : 1000 })            // We will then wait 1s. We still have Future<void>
-    .map(ignored => getUserFromServer2())  // (map is almost like then)  And then we will try again to get user from Server1 again. Now we have Future<User>
+    .map(ignored => getUserFromServer2())  // (map is almost like then)  And we will try again to get user from Server2. Now we have Future<User>
     .onComplete({
         ifSuccess : user => console.log("Returned User From Server " + user.name), 
         ifFailure : exception  => console.log("An exception Occured " + exception.toString())
     })
 ```
 
-2 - Delaying execution and Retrying
+
+### 2 - Delaying execution and Retrying
 You will see why the Future can be in a NotYetStarted state.
 ```typescript
 import {LazyFuture} from "utilitaire";
@@ -50,27 +51,31 @@ lazyFuture.startAfter({ duration : 3000 }) // Return Future<User>
 
 // We can also retry all of previously defined computations
 lazyFuture.reinitialize(); // Return a new LazyFuture<User> Reset to its initial State
-lazyFuture.reinitialize().start() // Return a new LazyFuture<User> Reset to its initial State start it and Return Future<User>
+lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to 
+                                    // its initial State start it and Return Future<User>
 
 ``` 
-3 - Rendering Promise inside React component
+
+
+
+### 3 - Rendering Promise inside React component
 There exists in Future class a method called fold that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
 ```typescript jsx
 // Here is the render we can write with the fold method 
-    render() {
-        const getUserFromServerFuture : Future<User> = ... // Assume we have a future fetching the user from Server
-        return (
-            <div>
-                {
-                    getUserFromServerFuture.fold({ // fold method will "open and see in" the future
-                        ifSuccess : user => 	     <span>Hello {user.name}</span>,
-                        ifFailure : exception => <span>An Error Occured</span>,
-                        otherwise : () =>        <Loading />
-                    })
-                }
-            </div>
-        ); 
-    } 
+render() {
+    const getUserFromServerFuture : Future<User> = ... // Assume we have a future fetching the user from Server
+    return (
+        <div>
+            {
+                getUserFromServerFuture.fold({ // fold method will "open and see in" the future
+                    ifSuccess : user => 	     <span>Hello {user.name}</span>,
+                    ifFailure : exception => <span>An Error Occured</span>,
+                    otherwise : () =>        <Loading />
+                })
+            }
+        </div>
+    ); 
+} 
 ```
 3 - Others methods availables
 
