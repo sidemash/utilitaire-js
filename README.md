@@ -7,8 +7,8 @@ This type is meant to be used as Promises, so when you see Future<T>, think "Pro
 ## Usage Example 
 1 - Defining Fallback
 ```typescript
+// Starting by importing Future 
 import {Future} from "utilitaire";
-import {Promise} from "es6-promise"; 
 
 // Let the following type represent a User.
 type User = { name : string }
@@ -16,7 +16,7 @@ const getUserFromServer1 : () => User = // Assume this is defined somehow long c
 const getUserFromServer2 : () => User = // Assume this is defined somehow long computation
 
 // So we can do the following : 
-Future.from(getUserFromServer1())   // Create a Future by Trying to get user from Server1. we have Future<User>
+Future.from(getUserFromServer1)   // Create a Future by Trying to get user from Server1. we have Future<User>
     .completeBefore({ timeOut : 3000 })    // This attempt should be completed before 3s get elapsed. we have Future<User>
     .recover(exception => {})              // If this attempt fails, we recover from failure ignoring the exception. now we have Future<void>
     .delay({ duration : 1000 })            // We will then wait 1s. We still have Future<void>
@@ -26,6 +26,7 @@ Future.from(getUserFromServer1())   // Create a Future by Trying to get user fro
         ifFailure : exception  => console.log("An exception Occured " + exception.toString())
     })
 ```
+
 2 - Delaying execution and Retrying
 You will see why the Future can be in a NotYetStarted state.
 ```typescript
@@ -79,7 +80,7 @@ There exists in Future class a method called fold that will "open and see in" th
 | Pull the value out   | None                                                                                                                                                                                                                                                      | ```future.valueOrNull()``` <br>  ```future.exceptionOrNull()```|
 | Transform            | ```then<U>(fn : T => U) : Promise<U>```<br> ```then<U>(fn : T => Promise<U>):Promise<U>``` <br> 	```catch<U>(fn : any => U) : Promise<U>``` <br>  ```catch<U>(fn : any => Promise<U>):Promise<U>``` <br>  ```finally<U>(fn : () => U) : Promise<U>``` <br>  ```finally<U>(fn : () => Promise<U>):Promise<U>```  | ```map<U>(fn : T => U) : Future<U> ``` <br>  ```flatMap<U>(fn : T => Future<U>): Future<U>``` <br>  ```recover<U>(fn : T => U) : Future<U>``` <br>  ```flatRecover<U>(fn : T => Future<U>) : Future<U>``` <br>  ```transform<U>(fn: () => U): Future<U>``` <br>  ```flatTransform<U>(fn: () => Future<U>): Future<U>``` |
 | Timeout / Delay      | None                                                                                                                                                                                                                                                      | ```delay(obj : { duration: number }): Future<T>``` <br>  ```completeBefore(obj:{ timeOut: number }):Future<T>``` |
-| Callback             | None (but can be simulated with then/catch/finally <br> methods)                                                                                                                                                                                               | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
+| Callback             | None (but can be simulated with then/catch/finally methods)                                                                                                                                                                                               | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
 | Static Methods Creation | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any): Promise<T>``` | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
 | Static Method Helpers   | ```Promise.all<T>(promises:Array<Promise<T>>): Promise<Array<T>>```<br> ```Promise.race<T>(promises:Array<Promise<T>>): Promise<T>```  | ```Future.all<T>(futures: Array<Future<T>>): Future<Array<T>>```<br> ```Future.firstCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.lastCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.startAfter<T>(timeout:number, fn : () => Future<T>) : Future<T>```<br> ```Future.executeAfter<T>(timeout:number, fn : () => T) : Future<T>``` |
 		
