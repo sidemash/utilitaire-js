@@ -5,7 +5,7 @@ Set of utils Tools for Typescript mainly to enhance Promise API
 This type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
 
 ## Usage Example 
-1 - Defining Retry 
+1 - Defining Timeout and Retry once
 ```typescript
 import {Future} from "utilitaire";
 import {Promise} from "es6-promise"; 
@@ -26,9 +26,9 @@ Future.fromPromise(getUserFromServer1())    // Create a Future by Trying to get 
     })
 ```
 
-2 - Rendering Promise inside React component : the fold method
+2 - Rendering Promise inside React component
 There exists in Future class a method called fold that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
-```typescript
+```typescript jsx
 // Imagine we are in the render of a React.Component that display the fetching of a user from server 
 // Here is the render we can write with the fold method 
     render() {
