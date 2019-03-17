@@ -5,7 +5,7 @@ Set of utils Tools for Typescript mainly to enhance Promise API
 This type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
 
 ## Usages Examples 
-### 1 - Defining Fallback
+### Use Case 1 - Defining Fallback
 ```typescript
 // Starting by importing Future 
 import {Future} from "utilitaire";
@@ -28,7 +28,7 @@ Future.from(getUserFromServer1)            // Create a Future by Trying to get u
 ```
 <br>
 
-### 2 - Delaying execution and Retrying
+### Use Case 2 - Delaying execution and Retrying
 You will see why the Future can be in a NotYetStarted state.
 ```typescript
 import {LazyFuture} from "utilitaire";
@@ -58,7 +58,7 @@ lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to
 
 <br>
 
-### 3 - Rendering Promise inside React component
+### Use Case 3 - Rendering Promise inside React component
 There exists in Future class a method called fold that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
 ```typescript jsx
 // Here is the render we can write with the fold method 
@@ -120,7 +120,7 @@ Assume we have the `flatMap` method defined on `Array` by this behaviour :
 ```typescript 
 const array1 = Array(1, 2, 3).flatMap(i => Array(i, i))   // Return Array(1, 1, 2, 2, 3, 3)
 ```
-If we used the `map` function, we would have get the following result
+If we used the `map` function defined in Array, we would have get the following result
 ```typescript 
 const array2 = Array(1, 2, 3).map(i => Array(i, i))   // Return Array(Array(1, 1), Array(2, 2), Array(3, 3)) 
 ```
@@ -135,8 +135,8 @@ So to get what we get in array1, we have to "flatten" the array2
 // because array2 = Array(1, 2, 3).map(i => Array(i, i)) 
 // array1 == Array(1, 2, 3).map(i => Array(i, i)).flatten 
 ```
-We then have the nomenclature "FlatMap means map and then flatten"
-The same pattern goes for Set, List, and Future
+We then have the nomenclature **FlatMap means map and then flatten**
+The same pattern goes for Set, List, and Future and we could define `flatMap` such as 
 ```typescript 
 // Set(1).flatMap(i => Set(i + 1))          // Return Set(2)
 // List(1).flatMap(i => List(i + 1))        // Return List(2)
