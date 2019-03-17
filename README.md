@@ -95,6 +95,58 @@ render() {
 // TODO 
 ## Motivation  
 ## Nomenclature  
-### Why naming flatMap / flatRecover / flatTransform ?
+<br>
+
+### Why not using catch/then/finally ?
+Because `catch` is a reserved keyword, we choose NOT to try to force the definition of a method named `catch`. 
+Hence we did not choose `then` because we knew that `catch` won't be available. If a `then` method were defined, it would have been weird if
+the catch method were missing. The same goes for ``finally`` reserved keyword.
+
+<br>
+
 ### Why naming map instead of then ?
+What does the `map` allows you to do ? 
+Create a new data structure by opening you current data structure and apply a function on every items inside of it.
+```typescript 
+Array(1, 2, 3).map(i => i + 1) // Create a new Array starting from the current Array and applying a function to every elements inside of it 
+Future(1).map(i => i + 1)      // Create a new Future starting from the current Future and applying a function to every elements inside of it 
+```
+NB : See this link for some [theorical resources](https://en.wikipedia.org/wiki/Map_(higher-order_function)#Generalization)
+about the map function.
+<br>
+
+### Why naming flatMap / flatRecover / flatTransform ?
+Assume we have the `flatMap` method defined on `Array` by this behaviour : 
+```typescript 
+const array1 = Array(1, 2, 3).flatMap(i => Array(i, i))   // Return Array(1, 1, 2, 2, 3, 3)
+```
+If we used the `map` function, we would have get the following result
+```typescript 
+const array2 = Array(1, 2, 3).map(i => Array(i, i))   // Return Array(Array(1, 1), Array(2, 2), Array(3, 3)) 
+```
+Now assume we have the `flatten` method defined on `Array` by this behaviour : 
+```typescript 
+const array3 = Array(Array(1)).flatten             // Return Array(1)
+const array4 = Array(Array(1), Array(2)).flatten   // Return Array(1, 2)
+```
+So to get what we get in array1, we have to "flatten" the array2
+```typescript 
+// array1 == array2.flatten 
+// because array2 = Array(1, 2, 3).map(i => Array(i, i)) 
+// array1 == Array(1, 2, 3).map(i => Array(i, i)).flatten 
+```
+We then have the nomenclature "FlatMap means map and then flatten"
+The same pattern goes for Set, List, and Future
+```typescript 
+// Set(1).flatMap(i => Set(i + 1))          // Return Set(2)
+// List(1).flatMap(i => List(i + 1))        // Return List(2)
+// Future(1).flatMap(i => Future(i + 1))    // Return Future(2)
+// and so one....
+```
+<br> 
+
+NB : With this flatMap operations and others functions having dome properties, the Future Data structure is a [Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+
+<br>
+
 ## Expression oriented
