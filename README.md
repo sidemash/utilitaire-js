@@ -92,8 +92,7 @@ render() {
 | Static Method Creation | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any): Promise<T>``` | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
 | Static Method Helpers   | ```Promise.all<T>(promises:Array<Promise<T>>): Promise<Array<T>>```<br> ```Promise.race<T>(promises:Array<Promise<T>>): Promise<T>```  | ```Future.all<T>(futures: Array<Future<T>>): Future<Array<T>>```<br> ```Future.firstCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.lastCompletedOf<T>(futures: Array<Future<T>>): Future<T>```<br> ```Future.startAfter<T>(timeout:number, fn : () => Future<T>) : Future<T>```<br> ```Future.executeAfter<T>(timeout:number, fn : () => T) : Future<T>``` |
 
-// TODO 
-## Motivation  
+ 
 ## Nomenclature  
 <br>
 
@@ -148,5 +147,3 @@ The same pattern goes for Set, List, and Future and we could define `flatMap` su
 NB : With this flatMap operations and others functions having dome properties, the Future Data structure is a [Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))
 
 <br>
-
-## Expression oriented
