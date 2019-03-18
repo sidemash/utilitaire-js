@@ -12,7 +12,6 @@ export type OnComplete<T> = {
     whatEver  ?: () => void,
 };
 
-export const sum = (a:number, b:number) => a + b
 
 export class Future<T> {
 
