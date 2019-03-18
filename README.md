@@ -64,7 +64,7 @@ lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to
 <br>
 
 ### Use Case 3 - Rendering Promise inside React component
-There exists in `Future` class a method called `fold` that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
+There exists in `Future` class a method called `fold` that will "open and see in" the future and following the current state of the future, a computation will append with the value inside the future object if any 
 ```typescript jsx
 // Here is the render we can write with the fold method 
 render() {
@@ -99,7 +99,7 @@ render() {
 | Timeout / Delay                       ||
 | None  | ```delay(obj : { duration: number }): Future<T>``` <br>  ```completeBefore(obj:{ timeOut: number }):Future<T>``` |
 | Callback                              || 
-| None | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
+| None (but can be simulated with then/catch/finally) | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
 | Static Method Creation                ||
 | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any):Promise<T>``` <br><br><br>  | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
 | Static Method Helpers                 ||
@@ -130,31 +130,31 @@ about the map function.
 ### Why naming flatMap / flatRecover / flatTransform ?
 We all know the `map`function defined in array 
 ```typescript 
-const array2 = Array(1, 2, 3).map(i => i * 2)   // Return Array(2, 4, 6) 
+const array1 = Array(1, 2, 3).map(i => i * 2)   // Return Array(2, 4, 6) 
 const array2 = Array(1, 2, 3).map(i => { num : i })   // Return Array({num : 1}, {num : 2}, {num : 3}) 
 ```
 
 Now Assume we have the `flatMap` method defined on `Array` by this behaviour : 
 ```typescript 
-const array1 = Array(1, 2, 3).flatMap(i => Array(i, i))   // Return Array(1, 1, 2, 2, 3, 3)
+const array3 = Array(1, 2, 3).flatMap(i => Array(i, i))   // Return Array(1, 1, 2, 2, 3, 3)
 ```
 
-If We use the `map` function defined in Array, with the same argument `i => Array(i, i)`,  we will have the following result
+If We use the `map` function defined in Array, with the same argument as `flatMap` function previously defined , ie `i => Array(i, i)`,  we will have the following result
 ```typescript 
-const array2 = Array(1, 2, 3).map(i => Array(i, i))   // Return Array(Array(1, 1), Array(2, 2), Array(3, 3)) 
+const array4 = Array(1, 2, 3).map(i => Array(i, i))   // Return Array(Array(1, 1), Array(2, 2), Array(3, 3)) 
 ```
 
 Now assume we have the `flatten` method defined on `Array` by this behaviour : 
 ```typescript 
-const array3 = Array(Array(1)).flatten             // Return Array(1)
-const array4 = Array(Array(1), Array(2)).flatten   // Return Array(1, 2)
+const array5 = Array(Array(1)).flatten             // Return Array(1)
+const array6 = Array(Array(1), Array(2)).flatten   // Return Array(1, 2)
 ```
 
 So to get what we get in array1, we have to "flatten" the array2
 ```typescript 
-// array1 == array2.flatten 
-// because array2 = Array(1, 2, 3).map(i => Array(i, i)) 
-// array1 == Array(1, 2, 3).map(i => Array(i, i)).flatten 
+// array3 == array4.flatten 
+// because array4 = Array(1, 2, 3).map(i => Array(i, i)) 
+// array3F == Array(1, 2, 3).map(i => Array(i, i)).flatten 
 ```
 We then have the nomenclature **FlatMap**  means **map and then flatten**
 The same pattern goes for Set, List, and Future and we could define `flatMap` such as 
