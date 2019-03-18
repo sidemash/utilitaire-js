@@ -86,7 +86,7 @@ render() {
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Query Internal State | None                                                                                                                                                                                                                                                      | ```future.isCompleted()``` <br>  ```future.isNotYetStarted()``` <br>  ```future.isPending()``` <br>  ```future.isSuccess()``` <br>  ```future.isFailure()``` |
 | Pull the value out      | None                                                                                                                                                                                                                                                      | ```future.valueOrNull()``` <br>  ```future.exceptionOrNull()```|
-| Transform            | ```then<U>(fn : T => U) : Promise<U>```<br> ```then<U>(fn : T => Promise<U>):Promise<U>``` <br> 	```catch<U>(fn:any=>U):Promise<U>``` <br>  ```catch<U>(fn:any=>Promise<U>):Promise<U>``` <br>  ```finally<U>(fn:()=>U):Promise<U>``` <br>  ```finally<U>(fn:()=>Promise<U>):Promise<U>```  | ```map<U>(fn : T => U) : Future<U> ``` <br>  ```flatMap<U>(fn : T => Future<U>): Future<U>``` <br>  ```recover<U>(fn : T => U) : Future<U>``` <br>  ```flatRecover<U>(fn : T => Future<U>) : Future<U>``` <br>  ```transform<U>(fn: () => U): Future<U>``` <br>  ```flatTransform<U>(fn: () => Future<U>): Future<U>``` |
+| Transform            | ```then<U>(fn : T => U) : Promise<U>```<br> ```then<U>(fn : T => Promise<U>):Promise<U>``` <br> <br> 	```catch<U>(fn:any=>U):Promise<U>``` <br>  ```catch<U>(fn:any=>Promise<U>):Promise<U>``` <br><br> ```finally<U>(fn:()=>U):Promise<U>``` <br>  ```finally<U>(fn:()=>Promise<U>):Promise<U>```  | ```map<U>(fn : T => U) : Future<U> ``` <br>  ```flatMap<U>(fn : T => Future<U>): Future<U>``` <br><br>   ```recover<U>(fn : T => U) : Future<U>``` <br>  ```flatRecover<U>(fn : T => Future<U>) : Future<U>``` <br><br>   ```transform<U>(fn: () => U): Future<U>``` <br>  ```flatTransform<U>(fn: () => Future<U>): Future<U>``` |
 | Timeout / Delay      | None  | ```delay(obj : { duration: number }): Future<T>``` <br>  ```completeBefore(obj:{ timeOut: number }):Future<T>``` |
 | Callback             | None | ```onComplete(fn : () => void): void ``` <br> ```onSuccess(fn : T => void) : void``` <br>  ```onFailure(fn: Exception => void): void```|
 | Static Method Creation | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any): Promise<T>``` | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
@@ -110,7 +110,7 @@ Create a new data structure by opening you current data structure and apply a fu
 Array(1, 2, 3).map(i => i + 1) // Create a new Array starting from the current Array and applying a function to every elements inside of it 
 Future(1).map(i => i + 1)      // Create a new Future starting from the current Future and applying a function to every elements inside of it 
 ```
-NB : See this link for some [theorical resources](https://en.wikipedia.org/wiki/Map_(higher-order_function)#Generalization)
+NB : See this link for some [theorical resource](https://en.wikipedia.org/wiki/Map_(higher-order_function))
 about the map function.
 <br>
 
@@ -134,7 +134,7 @@ So to get what we get in array1, we have to "flatten" the array2
 // because array2 = Array(1, 2, 3).map(i => Array(i, i)) 
 // array1 == Array(1, 2, 3).map(i => Array(i, i)).flatten 
 ```
-We then have the nomenclature **FlatMap means map and then flatten**
+We then have the nomenclature **FlatMap**  means **map and then flatten**
 The same pattern goes for Set, List, and Future and we could define `flatMap` such as 
 ```typescript 
 // Set(1).flatMap(i => Set(i + 1))          // Return Set(2)
@@ -144,6 +144,6 @@ The same pattern goes for Set, List, and Future and we could define `flatMap` su
 ```
 <br> 
 
-NB : With this flatMap operations and others functions having dome properties, the Future Data structure is a [Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+NB : With this flatMap operations and others functions having some other properties, the `Future` Data structure is a [Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))
 
 <br>
