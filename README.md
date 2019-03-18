@@ -7,7 +7,7 @@ Set of utils Tools for Typescript mainly to enhance Promise API
 - es6-promise
 
 # Future 
-This `Future` type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
+This `Future` type is meant to be used as `Promise`, so when you see `Future<T>`, think "`Promise<T>` with additionals behaviors having 4 states : `NotYetStarted`, `Pending`, `Successful`, `Failed`"
 
 ## Usages Examples 
 ### Use Case 1 - Defining Fallback
@@ -25,7 +25,7 @@ Future.from(getUserFromServer1)            // -> Return Future<User> : Create a 
     .completeBefore({ timeOut : 3000 })    // -> Return Future<User> : This attempt should be completed before 3s get elapsed
     .recover(exception => {})              // -> Return Future<void> : If this attempt fails, we recover from failure ignoring the exception.
     .delay({ duration : 1000 })            // -> Return Future<void> : We will then wait 1s. We still have Future<void>
-    .map(ignored => getUserFromServer2())  // -> Return Future<User> : (map is almost like then) And we will try again to get user from Server2.
+    .map(ignored => getUserFromServer2())  // -> Return Future<User> : (`map` is almost like `then`) And we will try again to get user from Server2.
     .onComplete({
         ifSuccess : user => console.log("Returned User From Server " + user.name), 
         ifFailure : exception  => console.log("An exception Occured " + exception.toString())
@@ -64,7 +64,7 @@ lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to
 <br>
 
 ### Use Case 3 - Rendering Promise inside React component
-There exists in Future class a method called `fold` that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
+There exists in `Future` class a method called `fold` that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
 ```typescript jsx
 // Here is the render we can write with the fold method 
 render() {
