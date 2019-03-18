@@ -3,7 +3,7 @@
     "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
-    "target" : "es6",
+    "target" : "es5",
     "sourceMap" : true,
     "jsx" : "react",
     "allowSyntheticDefaultImports": true

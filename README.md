@@ -1,8 +1,13 @@
 # utilitaire-js
 Set of utils Tools for Typescript mainly to enhance Promise API
 
+# Dependencies
+- lodash 
+- immutable 
+- es6-promise
+
 # Future 
-This type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
+This `Future` type is meant to be used as Promises, so when you see Future<T>, think "Promise<T> with additionals behaviors having 4 states : NotYetStarted, Pending, Successful, Failed"
 
 ## Usages Examples 
 ### Use Case 1 - Defining Fallback
@@ -16,11 +21,11 @@ const getUserFromServer1 : () => User = // Assume this is defined somehow long c
 const getUserFromServer2 : () => User = // Assume this is defined somehow long computation
 
 // So we can do the following : 
-Future.from(getUserFromServer1)            // Create a Future by Trying to get user from Server1. we have Future<User>
-    .completeBefore({ timeOut : 3000 })    // This attempt should be completed before 3s get elapsed. we have Future<User>
-    .recover(exception => {})              // If this attempt fails, we recover from failure ignoring the exception. now we have Future<void>
-    .delay({ duration : 1000 })            // We will then wait 1s. We still have Future<void>
-    .map(ignored => getUserFromServer2())  // (map is almost like then)  And we will try again to get user from Server2. Now we have Future<User>
+Future.from(getUserFromServer1)            // -> Return Future<User> : Create a Future by Trying to get user from Server1.
+    .completeBefore({ timeOut : 3000 })    // -> Return Future<User> : This attempt should be completed before 3s get elapsed
+    .recover(exception => {})              // -> Return Future<void> : If this attempt fails, we recover from failure ignoring the exception.
+    .delay({ duration : 1000 })            // -> Return Future<void> : We will then wait 1s. We still have Future<void>
+    .map(ignored => getUserFromServer2())  // -> Return Future<User> : (map is almost like then) And we will try again to get user from Server2.
     .onComplete({
         ifSuccess : user => console.log("Returned User From Server " + user.name), 
         ifFailure : exception  => console.log("An exception Occured " + exception.toString())
@@ -29,7 +34,7 @@ Future.from(getUserFromServer1)            // Create a Future by Trying to get u
 <br>
 
 ### Use Case 2 - Delaying execution and Retrying
-You will see why the Future can be in a NotYetStarted state.
+You will see why the Future can be in a `NotYetStarted` state: In fact it is its initial state.
 ```typescript
 import {LazyFuture} from "utilitaire";
 
@@ -59,7 +64,7 @@ lazyFuture.reinitialize().start()   // Return a new LazyFuture<User> Reset to
 <br>
 
 ### Use Case 3 - Rendering Promise inside React component
-There exists in Future class a method called fold that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
+There exists in Future class a method called `fold` that will "open and see in" the future and following the state, a computation will append with the value inside the future object if any 
 ```typescript jsx
 // Here is the render we can write with the fold method 
 render() {
@@ -68,9 +73,9 @@ render() {
         <div>
             {
                 getUserFromServerFuture.fold({ // fold method will "open and see in" the future
-                    ifSuccess : user => 	     <span>Hello {user.name}</span>,
+                    ifSuccess : user => <span>Hello {user.name}</span>,
                     ifFailure : exception => <span>An Error Occured</span>,
-                    otherwise : () =>        <Loading />
+                    otherwise : () => <Loading />
                 })
             }
         </div>
@@ -80,7 +85,7 @@ render() {
 
 <br>
 
-### 4 - Others methods availables
+### 4 - Comparison with Promise API
 
 |                       ```Promise<T>```                                                                                                                                                                                                                                                | ```Future<T> ```                                                                                                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -98,7 +103,7 @@ render() {
 | Static Method Creation                ||
 | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(exception:any):Promise<T>``` <br><br><br>  | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
 | Static Method Helpers                 ||
-|  ```Promise.all<T>(promises:[Promise<T>]):Promise<[T]>```<br> ```Promise.race<T>(promises:[Promise<T>]): Promise<T>``` <br><br> <br> <br>  <br> <br>  | ```Future.all<T>(futures: [Future<T>]): Future<[T]>```<br> ```Future.firstCompletedOf<T>(futures: [Future<T>]): Future<T>```<br> ```Future.lastCompletedOf<T>(futures:[Future<T>]):Future<T>```<br> ```Future.startAfter<T>(timeout:number,``` <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ```fn:()=>Future<T>):Future<T>```<br> ```Future.executeAfter<T>(timeout:number,```  <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ```fn:()=>T):Future<T>``` |
+|  ```Promise.all<T>(promises:[Promise<T>]):Promise<[T]>```<br> ```Promise.race<T>(promises:[Promise<T>]): Promise<T>``` <br><br> <br> <br>  <br> <br>  | ```Future.all<T>(futures: [Future<T>]): Future<[T]>```<br> ```Future.firstCompletedOf<T>(futures: [Future<T>]): Future<T>```<br> ```Future.lastCompletedOf<T>(futures:[Future<T>]):Future<T>```<br> ```Future.startAfter<T>(timeout:number,``` <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ```fn: () => Future<T>):Future<T>```<br> ```Future.executeAfter<T>(timeout:number,```  <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;```fn: () => T):Future<T>``` |
 
  
 ## Nomenclature  
@@ -123,19 +128,28 @@ about the map function.
 <br>
 
 ### Why naming flatMap / flatRecover / flatTransform ?
-Assume we have the `flatMap` method defined on `Array` by this behaviour : 
+We all know the `map`function defined in array 
+```typescript 
+const array2 = Array(1, 2, 3).map(i => i * 2)   // Return Array(2, 4, 6) 
+const array2 = Array(1, 2, 3).map(i => { num : i })   // Return Array({num : 1}, {num : 2}, {num : 3}) 
+```
+
+Now Assume we have the `flatMap` method defined on `Array` by this behaviour : 
 ```typescript 
 const array1 = Array(1, 2, 3).flatMap(i => Array(i, i))   // Return Array(1, 1, 2, 2, 3, 3)
 ```
-If we used the `map` function defined in Array, we would have get the following result
+
+If We use the `map` function defined in Array, with the same argument `i => Array(i, i)`,  we will have the following result
 ```typescript 
 const array2 = Array(1, 2, 3).map(i => Array(i, i))   // Return Array(Array(1, 1), Array(2, 2), Array(3, 3)) 
 ```
+
 Now assume we have the `flatten` method defined on `Array` by this behaviour : 
 ```typescript 
 const array3 = Array(Array(1)).flatten             // Return Array(1)
 const array4 = Array(Array(1), Array(2)).flatten   // Return Array(1, 2)
 ```
+
 So to get what we get in array1, we have to "flatten" the array2
 ```typescript 
 // array1 == array2.flatten 
@@ -152,6 +166,6 @@ The same pattern goes for Set, List, and Future and we could define `flatMap` su
 ```
 <br> 
 
-NB : With this flatMap operations and others functions having some other properties, the `Future` Data structure is a [Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+NB : With this `flatMap` operations and others functions having some other properties, the `Future` Data structure is a [Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))
 
 <br>

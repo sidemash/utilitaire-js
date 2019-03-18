@@ -1,26 +1,33 @@
-import * as _ from "lodash";
-export function onlyReadable(obj) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var _ = require("lodash");
+function onlyReadable(obj) {
     return obj;
 }
-export function unsafeCast(instance) {
+exports.onlyReadable = onlyReadable;
+function unsafeCast(instance) {
     return instance;
 }
-export class RemoteObject {
-    constructor(descOrFunction, remote) {
+exports.unsafeCast = unsafeCast;
+var RemoteObject = (function () {
+    function RemoteObject(descOrFunction, remote) {
         if (_.isFunction(descOrFunction)) {
-            const createDescFromRemote = descOrFunction;
+            var createDescFromRemote = descOrFunction;
             this.desc = Object.assign({}, remote, createDescFromRemote(remote));
         }
         else {
-            const desc = descOrFunction;
+            var desc = descOrFunction;
             this.desc = desc;
         }
     }
-    cloneDesc() {
+    RemoteObject.prototype.cloneDesc = function () {
         return Object.assign({}, this.desc);
-    }
-}
-export function hasNotOtherwise(fold) {
+    };
+    return RemoteObject;
+}());
+exports.RemoteObject = RemoteObject;
+function hasNotOtherwise(fold) {
     return fold.otherwise == undefined;
 }
+exports.hasNotOtherwise = hasNotOtherwise;
 //# sourceMappingURL=TypeUtil.js.map

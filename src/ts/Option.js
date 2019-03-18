@@ -1,110 +1,139 @@
-import { Exception } from "./Exception";
-export class Option {
-    get value() { return this._value; }
-    valueOrElse(value) {
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var Exception_1 = require("./Exception");
+var Option = (function () {
+    function Option() {
+    }
+    Object.defineProperty(Option.prototype, "value", {
+        get: function () { return this._value; },
+        enumerable: true,
+        configurable: true
+    });
+    Option.prototype.valueOrElse = function (value) {
         if (this.isDefined())
             return this.value;
         else
             return value;
-    }
-    valueOrNull() {
+    };
+    Option.prototype.valueOrNull = function () {
         if (this.isDefined())
             return this.value;
         else
             return null;
-    }
-    isDefined() {
+    };
+    Option.prototype.isDefined = function () {
         return this.value != undefined;
-    }
-    isEmpty() {
+    };
+    Option.prototype.isEmpty = function () {
         return !this.isDefined();
-    }
-    flatMap(fn) {
+    };
+    Option.prototype.flatMap = function (fn) {
         if (this.isEmpty())
-            return None;
+            return exports.None;
         else {
-            const resultOption = fn(this.value);
+            var resultOption = fn(this.value);
             if (Option.isDefinedValue(resultOption))
                 return resultOption;
             else
-                return None;
+                return exports.None;
         }
-    }
-    map(fn) {
+    };
+    Option.prototype.map = function (fn) {
         if (this.isDefined())
             return Option.of(fn(this.value));
         else
-            return None;
-    }
-    filter(fn) {
+            return exports.None;
+    };
+    Option.prototype.filter = function (fn) {
         if (this.isEmpty())
-            return None;
+            return exports.None;
         else if (!fn(this.value))
-            return None;
+            return exports.None;
         else
             return this;
-    }
-    filterNot(fn) {
-        const notFn = (el) => !fn(el);
+    };
+    Option.prototype.filterNot = function (fn) {
+        var notFn = function (el) { return !fn(el); };
         return this.filter(notFn);
-    }
-    select(fn) {
+    };
+    Option.prototype.select = function (fn) {
         return this.filter(fn);
-    }
-    reject(fn) {
+    };
+    Option.prototype.reject = function (fn) {
         return this.filterNot(fn);
-    }
-    exists(fn) {
+    };
+    Option.prototype.exists = function (fn) {
         return this.filter(fn).isDefined();
-    }
-    forEach(fn) {
+    };
+    Option.prototype.forEach = function (fn) {
         if (this.isDefined())
             fn(this.value);
-    }
-    static isDefinedValue(value) {
+    };
+    Option.isDefinedValue = function (value) {
         return (value != null && value != undefined);
-    }
-    static of(value) {
+    };
+    Option.of = function (value) {
         if (Option.isDefinedValue(value))
             return new Some(value);
         else
-            return None;
-    }
-    orElseFilter(value, fn) {
+            return exports.None;
+    };
+    Option.prototype.orElseFilter = function (value, fn) {
         if (this.isEmpty() && Option.isDefinedValue(value) && fn(value))
             return Option.of(value);
         else
             return this;
-    }
-    orElse(value) {
+    };
+    Option.prototype.orElse = function (value) {
         if (this.isEmpty())
             return Option.of(value);
         else
             return this;
-    }
-    static filter(value, fn) {
+    };
+    Option.filter = function (value, fn) {
         if (Option.isDefinedValue(value) && fn(value))
             return new Some(value);
         else
-            return None;
-    }
-    static empty() {
-        return None;
-    }
-}
-export class Some extends Option {
-    constructor(_value) {
-        super();
+            return exports.None;
+    };
+    Option.empty = function () {
+        return exports.None;
+    };
+    return Option;
+}());
+exports.Option = Option;
+var Some = (function (_super) {
+    __extends(Some, _super);
+    function Some(_value) {
+        var _this = _super.call(this) || this;
         if (_value == null || _value == undefined)
-            throw new Exception("Some constructor expected non null an non undefined value. " +
+            throw new Exception_1.Exception("Some constructor expected non null an non undefined value. " +
                 _value + "given. " +
                 "If you are not sure whether your value is defined or not, please " +
                 "consider the static method Option.from<T>(value:T) that will " +
                 "deal with the null/undefined case properly.");
-        this._value = _value;
+        _this._value = _value;
+        return _this;
     }
-}
-class NoneT extends Option {
-}
-export const None = new NoneT();
+    return Some;
+}(Option));
+exports.Some = Some;
+var NoneT = (function (_super) {
+    __extends(NoneT, _super);
+    function NoneT() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return NoneT;
+}(Option));
+exports.None = new NoneT();
 //# sourceMappingURL=Option.js.map
