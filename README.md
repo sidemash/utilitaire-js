@@ -97,7 +97,7 @@ render() {
 | Static Method Creation                ||
 | ```Promise.resolve<T>(value:T) : Promise<T>```<br> ```Promise.reject<T>(execp:any):Promise<T>``` <br><br><br>  | ```Future.successful<T>(value:T): Future<T>```<br> ```Future.failed<T>(exception:Exception): Future<T>```<br> ```Future.foreverPending<T>() : Future<T>```<br> ```Future.notYetStarted<T>(): Future<T>```                                                                                                                                                                  |
 | Static Method Helpers                 ||
-|  ```Promise.all<T>(p:[Promise<T>]):Promise<[T]>```<br> ```Promise.race<T>(promises:[Promise<T>]): Promise<T>``` <br> <br> <br>  | ```Future.all<T>(futures: [Future<T>]): Future<[T]>```<br> ```Future.firstCompletedOf<T>(futures: [Future<T>]): Future<T>```<br> ```Future.lastCompletedOf<T>(futures:[Future<T>]):Future<T>```<br> ```Future.startAfter<T>(timeout:number,fn:()=>Future<T>):Future<T>```<br> ```Future.executeAfter<T>(timeout:number, <br > fn:()=>T):Future<T>``` |
+|  ```Promise.all<T>(p:[Promise<T>]):Promise<[T]>```<br> ```Promise.race<T>(promises:[Promise<T>]): Promise<T>``` <br> <br> <br>  | ```Future.all<T>(futures: [Future<T>]): Future<[T]>```<br> ```Future.firstCompletedOf<T>(futures: [Future<T>]): Future<T>```<br> ```Future.lastCompletedOf<T>(futures:[Future<T>]):Future<T>```<br> ```Future.startAfter<T>(timeout:number,fn:()=>Future<T>):Future<T>```<br> ```Future.executeAfter<T>(timeout:number,  <br> fn:()=>T):Future<T>``` |
 
  
 ## Nomenclature  
