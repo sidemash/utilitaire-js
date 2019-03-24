@@ -1,10 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var _this = this;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("lodash");
 var es6_promise_1 = require("es6-promise");
 var Try_1 = require("./Try");
@@ -481,19 +486,19 @@ var Future = (function () {
     Future.prototype.toString = function () {
         return (this.fold({
             ifPending: function () { return "Future(Pending)"; },
-            ifSuccess: function (value) { return ("Future(Success(" + value + "))"); },
-            ifFailure: function (exception) { return ("Future(Failure(" + exception + "))"); },
+            ifSuccess: function (value) { return "Future(Success(" + value + "))"; },
+            ifFailure: function (exception) { return "Future(Failure(" + exception + "))"; },
             ifNotYetStarted: function () { return "Future(NotYetStarted)"; },
         }));
     };
-    Future._foreverPending = Future.fromPromise(new es6_promise_1.Promise(function (resolve, reject) { }));
     return Future;
 }());
+Future._foreverPending = Future.fromPromise(new es6_promise_1.Promise(function (resolve, reject) { }));
 exports.Future = Future;
 var FutureCompletedWithValue = (function (_super) {
     __extends(FutureCompletedWithValue, _super);
     function FutureCompletedWithValue(value) {
-        _super.call(this, Option_1.Option.of(es6_promise_1.Promise.resolve(value)), Option_1.Option.of(Try_1.Try.successful(value)));
+        return _super.call(this, Option_1.Option.of(es6_promise_1.Promise.resolve(value)), Option_1.Option.of(Try_1.Try.successful(value))) || this;
     }
     FutureCompletedWithValue.prototype.toString = function () { return _super.prototype.toString.call(this); };
     return FutureCompletedWithValue;
@@ -501,7 +506,7 @@ var FutureCompletedWithValue = (function (_super) {
 var FutureCompletedWithException = (function (_super) {
     __extends(FutureCompletedWithException, _super);
     function FutureCompletedWithException(exception) {
-        _super.call(this, Option_1.Option.of(es6_promise_1.Promise.reject(exception)), Option_1.Option.of(Try_1.Try.failed(exception)));
+        return _super.call(this, Option_1.Option.of(es6_promise_1.Promise.reject(exception)), Option_1.Option.of(Try_1.Try.failed(exception))) || this;
     }
     FutureCompletedWithException.prototype.toString = function () { return _super.prototype.toString.call(this); };
     return FutureCompletedWithException;
@@ -509,65 +514,57 @@ var FutureCompletedWithException = (function (_super) {
 var FutureNotYetStarted = (function (_super) {
     __extends(FutureNotYetStarted, _super);
     function FutureNotYetStarted() {
-        _super.call(this, Option_1.Option.empty(), Option_1.Option.empty());
+        return _super.call(this, Option_1.Option.empty(), Option_1.Option.empty()) || this;
     }
     FutureNotYetStarted.prototype.toString = function () { return _super.prototype.toString.call(this); };
     return FutureNotYetStarted;
 }(Future));
 var LazyFuture = (function (_super) {
     __extends(LazyFuture, _super);
-    function LazyFuture() {
-        _super.apply(this, arguments);
+    function LazyFuture(f) {
+        var _this = _super.call(this, Option_1.Option.empty(), Option_1.Option.empty()) || this;
+        _this.f = f;
+        _this.evalFutureOption = Option_1.Option.empty();
+        return _this;
     }
+    LazyFuture.prototype.evalF = function () {
+        if (this.evalFutureOption.isDefined())
+            return this.evalFutureOption.value;
+        else {
+            var evalFuture = this.f().start();
+            this.evalFutureOption = Option_1.Option.of(evalFuture);
+            return this.init(Option_1.Option.of(evalFuture.toPromise()));
+        }
+    };
+    LazyFuture.prototype.evalFafter = function (duration) {
+        var _this = this;
+        var future = Future.executeAfter(duration, function () {
+            if (_this.evalFutureOption.isDefined())
+                return _this.evalFutureOption.value;
+            else {
+                var evalFuture = _this.f().start();
+                _this.evalFutureOption = Option_1.Option.of(evalFuture);
+                return _this.init(Option_1.Option.of(evalFuture.toPromise()));
+            }
+        });
+        return future.flatMap(function (f) { return f; });
+    };
+    LazyFuture.prototype.isLazy = function () { return true; };
+    LazyFuture.prototype.toString = function () {
+        return (this.fold({
+            ifPending: function () { return "LazyFuture(Pending)"; },
+            ifSuccess: function (value) { return "LazyFuture(Success(" + value + "))"; },
+            ifFailure: function (exception) { return "LazyFuture(Failure(" + exception + "))"; },
+            ifNotYetStarted: function () { return "LazyFuture(NotYetStarted)"; },
+        }));
+    };
     return LazyFuture;
 }(Future));
 exports.LazyFuture = LazyFuture;
-(function () { return Future(); });
-{
-    _super.call(this, Option_1.Option.empty(), Option_1.Option.empty());
-    this.evalFutureOption = Option_1.Option.empty();
-}
-evalF();
-Future < T > {
-    if: function () { }, this: .evalFutureOption.isDefined(), return: this.evalFutureOption.value,
-    else: {
-        const: evalFuture = this.f().start(),
-        this: .evalFutureOption = Option_1.Option.of(evalFuture),
-        return: this.init(Option_1.Option.of(evalFuture.toPromise()))
-    }
-};
-evalFafter(duration, number);
-Future < T > {
-    const: future, Future: function () { } } < T >> ;
-Future.executeAfter(duration, function () {
-    if (_this.evalFutureOption.isDefined())
-        return _this.evalFutureOption.value;
-    else {
-        var evalFuture = _this.f().start();
-        _this.evalFutureOption = Option_1.Option.of(evalFuture);
-        return _this.init(Option_1.Option.of(evalFuture.toPromise()));
-    }
-});
-return future.flatMap(function (f) { return f; });
-isLazy();
-boolean;
-{
-    return true;
-}
-toString();
-string;
-{
-    return (this.fold({
-        ifPending: function () { return "LazyFuture(Pending)"; },
-        ifSuccess: function (value) { return ("LazyFuture(Success(" + value + "))"); },
-        ifFailure: function (exception) { return ("LazyFuture(Failure(" + exception + "))"); },
-        ifNotYetStarted: function () { return "LazyFuture(NotYetStarted)"; },
-    }));
-}
 var LazyFutureImpl = (function (_super) {
     __extends(LazyFutureImpl, _super);
     function LazyFutureImpl(f) {
-        _super.call(this, f);
+        return _super.call(this, f) || this;
     }
     LazyFutureImpl.prototype.map = function (fn) {
         var _this = this;

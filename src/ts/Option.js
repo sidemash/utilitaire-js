@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Exception_1 = require("./Exception");
 var Option = (function () {
     function Option() {
@@ -109,14 +115,15 @@ exports.Option = Option;
 var Some = (function (_super) {
     __extends(Some, _super);
     function Some(_value) {
-        _super.call(this);
+        var _this = _super.call(this) || this;
         if (_value == null || _value == undefined)
             throw new Exception_1.Exception("Some constructor expected non null an non undefined value. " +
                 _value + "given. " +
                 "If you are not sure whether your value is defined or not, please " +
                 "consider the static method Option.from<T>(value:T) that will " +
                 "deal with the null/undefined case properly.");
-        this._value = _value;
+        _this._value = _value;
+        return _this;
     }
     return Some;
 }(Option));
@@ -124,7 +131,7 @@ exports.Some = Some;
 var NoneT = (function (_super) {
     __extends(NoneT, _super);
     function NoneT() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return NoneT;
 }(Option));

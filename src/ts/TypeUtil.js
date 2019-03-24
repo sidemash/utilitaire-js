@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("lodash");
 function onlyReadable(obj) {
     return obj;
@@ -8,15 +9,8 @@ function unsafeCast(instance) {
     return instance;
 }
 exports.unsafeCast = unsafeCast;
-readonly[P in keyof];
-T;
-T[P];
-;
-readonly;
-desc: JsObject;
 var RemoteObject = (function () {
     function RemoteObject(descOrFunction, remote) {
-        this.readonly = desc;
         if (_.isFunction(descOrFunction)) {
             var createDescFromRemote = descOrFunction;
             this.desc = Object.assign({}, remote, createDescFromRemote(remote));
