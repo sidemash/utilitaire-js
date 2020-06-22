@@ -3,17 +3,10 @@
     "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
-    "target" : "es5",
+    "target" : "es6",
     "sourceMap" : true,
-    "jsx" : "react",
     "allowSyntheticDefaultImports": true
   },
-  "exclude" : [
-    "node_modules",
-    "bower_components",
-    "build",
-    "typings/browser",
-    "typings/browser.d.ts"
-  ],
+  "include": ["src"],
   "compileOnSave" : false
 }

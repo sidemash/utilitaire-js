@@ -44,9 +44,9 @@ export abstract class Try<T> {
         return !this.isSuccess();
     }
 
-    valueOrElse(other: T): T {
+    valueOrElse(fn: () => T): T {
         if (this.isSuccess()) return this._value;
-        else return other;
+        else return fn();
     }
 
     valueOrNull(): T {

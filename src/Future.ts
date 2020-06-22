@@ -1,5 +1,4 @@
-import * as _ from "lodash";
-import {Promise} from "es6-promise";
+import {isFunction} from "lodash";
 import {Try} from "./Try";
 import {Option} from "./Option";
 import {Exception, NoSuchElementException, TimeOutException} from "./Exception";
@@ -223,18 +222,27 @@ export class Future<T> {
 
     private _onSuccess(value:T){
         this._tryOption = Option.of(Try.successful<T>(value));
-        this.completeFunctionSubscribers.forEach(o => {
-            if(o.ifSuccess != undefined) o.ifSuccess(value);
-            else if(o.whatEver != undefined) o.whatEver();
-        });
+        setTimeout(() => {
+            this.completeFunctionSubscribers.forEach(o => {
+                try {
+                    if (o.ifSuccess != undefined) o.ifSuccess(value);
+                    else if (o.whatEver != undefined) o.whatEver();
+                } catch(e){ console.log("UN CATCHED Execption when executing success callback on future", e)}
+            });
+        }, 100);
     }
 
     private _onFailure(exception:Exception){
         this._tryOption = Option.of(Try.failed<T>(exception));
-        this.completeFunctionSubscribers.forEach(o => {
-            if(o.ifFailure != undefined)o.ifFailure(exception);
-            else if(o.whatEver != undefined) o.whatEver();
-        });
+        console.log("on failure ", exception);
+        setTimeout(() => {
+            this.completeFunctionSubscribers.forEach(o => {
+                try {
+                    if(o.ifFailure != undefined)o.ifFailure(exception);
+                    else if(o.whatEver != undefined) o.whatEver();
+                } catch(e){ console.log("UN CATCHED Execption when executing failure callback on future.", e)}
+            });
+        }, 100);
     }
 
     private _setPromiseOption(promiseOption: Option<Promise<T>>) : Future<T> {
@@ -245,6 +253,10 @@ export class Future<T> {
     valueOrNull() : T {
         if(this.isSuccess()) return this._tryOption.value.value();
         else return null;
+    }
+
+    valueOption() : Option<T> {
+        return Option.of(this.valueOrNull());
     }
 
     toLazy() : LazyFuture<T> { return Future.lazyFromFuture(() => this)}
@@ -426,7 +438,7 @@ export class Future<T> {
      *          the future has already been complete at the call time.
      */
     onComplete(fn : VoidFunction | { ifSuccess : (result:T) => void, ifFailure : (exception:Exception) => void }) : void {
-        if(_.isFunction(fn)) {
+        if(isFunction(fn)) {
             const fnAsFunction = fn as VoidFunction;
             if(this.isCompleted()) fnAsFunction();
             else {

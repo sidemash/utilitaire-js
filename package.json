@@ -1,33 +1,35 @@
 {
   "name": "utilitaire",
   "version": "1.0.0",
-  "description": "Set of utils Tools for Typescript mainly to enhance Promise API",
+  "description": "Set of utils tools for Typescript / Javascript.",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
+  "types": "@types/index.d.ts",
   "keywords": [
     "sidemash",
     "utils",
-    "utilitaires",
+    "tools",
+    "utilitaire",
+    "option",
+    "future",
+    "try",
     "helpers"
   ],
-  "author": "Open Source <opensource@sidemash.com>",
+  "author": "Sidemash Cloud <opensource@sidemash.com> (https://www.sidemash.com)",
   "license": "MIT",
-  "devDependencies": {
-    "dts-bundle": "^0.5.0",
-    "jest": "^24.5.0",
-    "ts-jest": "^24.0.0",
-    "typescript": "^1.8.10"
-  },
-  "typescript": {
-    "definition": "utilitaire.d.ts"
-  },
-  "types": "index.d.ts",
   "dependencies": {
-    "@types/jest": "^24.0.11",
-    "es6-promise": "^4.0.5",
-    "immutable": "^3.8.1",
-    "lodash": "^4.17.4"
+    "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidemash/utilitaire-js.git"
+  },
+  "devDependencies": {
+    "@types/immutable": "^3.8.7",
+    "@types/lodash": "^4.14.123",
+    "typescript": "^3.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

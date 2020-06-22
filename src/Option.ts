@@ -19,14 +19,19 @@ export abstract class Option<T> {
      */
     get value () : T { return this._value; }
 
-    valueOrElse(value:T): T {
+    valueOrElse(fn:() => T): T {
         if(this.isDefined()) return this.value;
-        else return value;
+        else return fn();
     }
 
     valueOrNull(): T {
         if(this.isDefined()) return this.value;
         else return null;
+    }
+
+    valueOrUndefined(): T {
+        if(this.isDefined()) return this.value;
+        else return undefined;
     }
 
     isDefined(): boolean {
@@ -95,8 +100,8 @@ export abstract class Option<T> {
         else return this;
     }
 
-    orElse(value:T): Option<T> {
-        if(this.isEmpty()) return Option.of(value);
+    orElse(fn:() => T): Option<T> {
+        if(this.isEmpty()) return Option.of(fn());
         else return this;
     }
 
@@ -127,10 +132,14 @@ export class Some<T> extends Option<T>{
             );
         this._value = _value;
     }
+
+    toString() : string { return `Some(${this._value})` }
 }
 
 
-class NoneT extends Option<typeof undefined> {}
+class NoneT extends Option<typeof undefined> {
+    toString() : string { return "None" }
+}
 
 /**
  * Here we use the instance from {}  as instance from None. Indeed, the '{}' can be
