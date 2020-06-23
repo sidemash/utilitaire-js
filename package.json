@@ -1,6 +1,6 @@
 {
   "name": "utilidade",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Set of utils tools for Typescript / Javascript.",
   "main": "index.js",
   "types": "index.d.ts",
