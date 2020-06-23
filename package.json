@@ -1,14 +1,14 @@
 {
-  "name": "utilitaire",
-  "version": "2.0.0",
+  "name": "utilidade",
+  "version": "2.0.2",
   "description": "Set of utils tools for Typescript / Javascript.",
   "main": "index.js",
-  "types": "@types/index.d.ts",
+  "types": "index.d.ts",
   "keywords": [
     "sidemash",
     "utils",
     "tools",
-    "utilitaire",
+    "utilidade",
     "option",
     "future",
     "try",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sidemash/utilitaire-js.git"
+    "url": "git+https://github.com/sidemash/utilidade-js.git"
   },
   "devDependencies": {
     "@types/immutable": "^3.8.7",

@@ -1,8 +1,10 @@
-import { isFunction } from "lodash";
-import { Try } from "./Try";
-import { Option } from "./Option";
-import { Exception, NoSuchElementException, TimeOutException } from "./Exception";
-export class Future {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const lodash_1 = require("lodash");
+const Try_1 = require("./Try");
+const Option_1 = require("./Option");
+const Exception_1 = require("./Exception");
+class Future {
     constructor(_promiseOption, _tryOption) {
         this._promiseOption = _promiseOption;
         this._tryOption = _tryOption;
@@ -15,7 +17,7 @@ export class Future {
             return value;
         })
             .catch(error => {
-            this._onFailure(Exception.createFrom(error));
+            this._onFailure(Exception_1.Exception.createFrom(error));
             return error;
         }))));
     }
@@ -77,8 +79,8 @@ export class Future {
         }
     }
     static fromPromise(promise) {
-        const promiseOption = Option.of(promise);
-        const future = new Future(promiseOption, Option.empty());
+        const promiseOption = Option_1.Option.of(promise);
+        const future = new Future(promiseOption, Option_1.Option.empty());
         return future.init(promiseOption);
     }
     static startAfter(timeout, fn) {
@@ -166,7 +168,7 @@ export class Future {
     static failed(exception) { return new FutureCompletedWithException(exception); }
     static notYetStarted() { return new FutureNotYetStarted(); }
     _onSuccess(value) {
-        this._tryOption = Option.of(Try.successful(value));
+        this._tryOption = Option_1.Option.of(Try_1.Try.successful(value));
         setTimeout(() => {
             this.completeFunctionSubscribers.forEach(o => {
                 try {
@@ -182,7 +184,7 @@ export class Future {
         }, 100);
     }
     _onFailure(exception) {
-        this._tryOption = Option.of(Try.failed(exception));
+        this._tryOption = Option_1.Option.of(Try_1.Try.failed(exception));
         console.log("on failure ", exception);
         setTimeout(() => {
             this.completeFunctionSubscribers.forEach(o => {
@@ -209,7 +211,7 @@ export class Future {
             return null;
     }
     valueOption() {
-        return Option.of(this.valueOrNull());
+        return Option_1.Option.of(this.valueOrNull());
     }
     toLazy() { return Future.lazyFromFuture(() => this); }
     exceptionOrNull() {
@@ -254,7 +256,7 @@ export class Future {
                     if (this.isPending() || this.isNotYetStarted()) {
                         const timeOutFuture = () => {
                             if (obj.orElse === undefined || obj.orElse == null) {
-                                return Future.failed(new TimeOutException(`This future took long to be executed, the duration should not have exceeded ${obj.timeOut}ms`));
+                                return Future.failed(new Exception_1.TimeOutException(`This future took long to be executed, the duration should not have exceeded ${obj.timeOut}ms`));
                             }
                             else {
                                 try {
@@ -286,7 +288,7 @@ export class Future {
             if (fn(value))
                 return value;
             else
-                throw new NoSuchElementException({
+                throw new Exception_1.NoSuchElementException({
                     message: "No such element error: the future was completed with exception '" + this._tryOption.value.exception +
                         "' Hence it did not match the predicate in the filter method you have previously called."
                 });
@@ -335,7 +337,7 @@ export class Future {
     toTryOption() { return this._tryOption; }
     toPromise() {
         if (this.isNotYetStarted())
-            throw new Exception("Can not transform this Future into a function because this future has not yet started.");
+            throw new Exception_1.Exception("Can not transform this Future into a function because this future has not yet started.");
         return this._promiseOption.value;
     }
     toPromiseOption() {
@@ -369,7 +371,7 @@ export class Future {
         }
     }
     onComplete(fn) {
-        if (isFunction(fn)) {
+        if (lodash_1.isFunction(fn)) {
             const fnAsFunction = fn;
             if (this.isCompleted())
                 fnAsFunction();
@@ -483,38 +485,39 @@ export class Future {
         }));
     }
 }
+exports.Future = Future;
 Future._foreverPending = Future.fromPromise(new Promise((resolve, reject) => { }));
 class FutureCompletedWithValue extends Future {
     constructor(value) {
-        super(Option.of(Promise.resolve(value)), Option.of(Try.successful(value)));
+        super(Option_1.Option.of(Promise.resolve(value)), Option_1.Option.of(Try_1.Try.successful(value)));
     }
     toString() { return super.toString(); }
 }
 class FutureCompletedWithException extends Future {
     constructor(exception) {
-        super(Option.of(Promise.reject(exception)), Option.of(Try.failed(exception)));
+        super(Option_1.Option.of(Promise.reject(exception)), Option_1.Option.of(Try_1.Try.failed(exception)));
     }
     toString() { return super.toString(); }
 }
 class FutureNotYetStarted extends Future {
     constructor() {
-        super(Option.empty(), Option.empty());
+        super(Option_1.Option.empty(), Option_1.Option.empty());
     }
     toString() { return super.toString(); }
 }
-export class LazyFuture extends Future {
+class LazyFuture extends Future {
     constructor(f) {
-        super(Option.empty(), Option.empty());
+        super(Option_1.Option.empty(), Option_1.Option.empty());
         this.f = f;
-        this.evalFutureOption = Option.empty();
+        this.evalFutureOption = Option_1.Option.empty();
     }
     evalF() {
         if (this.evalFutureOption.isDefined())
             return this.evalFutureOption.value;
         else {
             const evalFuture = this.f().start();
-            this.evalFutureOption = Option.of(evalFuture);
-            return this.init(Option.of(evalFuture.toPromise()));
+            this.evalFutureOption = Option_1.Option.of(evalFuture);
+            return this.init(Option_1.Option.of(evalFuture.toPromise()));
         }
     }
     evalFafter(duration) {
@@ -523,8 +526,8 @@ export class LazyFuture extends Future {
                 return this.evalFutureOption.value;
             else {
                 const evalFuture = this.f().start();
-                this.evalFutureOption = Option.of(evalFuture);
-                return this.init(Option.of(evalFuture.toPromise()));
+                this.evalFutureOption = Option_1.Option.of(evalFuture);
+                return this.init(Option_1.Option.of(evalFuture.toPromise()));
             }
         });
         return future.flatMap(f => f);
@@ -539,6 +542,7 @@ export class LazyFuture extends Future {
         }));
     }
 }
+exports.LazyFuture = LazyFuture;
 class LazyFutureImpl extends LazyFuture {
     constructor(f) {
         super(f);

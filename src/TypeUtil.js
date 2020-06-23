@@ -1,10 +1,15 @@
-export function onlyReadable(obj) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function onlyReadable(obj) {
     return obj;
 }
-export function unsafeCast(instance) {
+exports.onlyReadable = onlyReadable;
+function unsafeCast(instance) {
     return instance;
 }
-export function hasNotOtherwise(fold) {
+exports.unsafeCast = unsafeCast;
+function hasNotOtherwise(fold) {
     return fold.otherwise == undefined;
 }
+exports.hasNotOtherwise = hasNotOtherwise;
 //# sourceMappingURL=TypeUtil.js.map

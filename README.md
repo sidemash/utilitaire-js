@@ -1,4 +1,4 @@
-# utilitaire-js
+# utilidade-js
 Set of utils Tools for Typescript mainly to enhance Promise API
 
 # Dependencies
@@ -13,7 +13,7 @@ This `Future` type is meant to be used as `Promise`, so when you see `Future<T>`
 ### Use Case 1 - Defining Fallback
 ```typescript
 // Starting by importing Future 
-import {Future} from "utilitaire";
+import {Future} from "utilidade";
 
 // Let the following type represent a User.
 type User = { name : string }
@@ -36,7 +36,7 @@ Future.from(getUserFromServer1)            // -> Return Future<User> : Create a 
 ### Use Case 2 - Delaying execution and Retrying
 You will see why the Future can be in a `NotYetStarted` state: In fact it is its initial state.
 ```typescript
-import {LazyFuture} from "utilitaire";
+import {LazyFuture} from "utilidade";
 
 const lazyFuture : LazyFuture<User> = 
                 Future.lazyFrom(() => getUserFromServer1())

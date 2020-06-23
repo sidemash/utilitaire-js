@@ -1,5 +1,5 @@
 
-declare module "utilitaire" {
+declare module "utilidade" {
 
 
     export abstract class Option<T> {

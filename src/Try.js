@@ -1,15 +1,17 @@
-import { Option } from "./Option";
-import { Future } from "./Future";
-import { unsafeCast } from "./TypeUtil";
-import { Exception, NoSuchElementException } from "./Exception";
-export class Try {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Option_1 = require("./Option");
+const Future_1 = require("./Future");
+const TypeUtil_1 = require("./TypeUtil");
+const Exception_1 = require("./Exception");
+class Try {
     static safeApply(fn) {
         try {
             const value = fn();
             return Try.successful(value);
         }
         catch (error) {
-            return Try.failed(Exception.createFrom(error));
+            return Try.failed(Exception_1.Exception.createFrom(error));
         }
     }
     static safeApplyTry(fn) {
@@ -17,7 +19,7 @@ export class Try {
             return fn();
         }
         catch (error) {
-            return Try.failed(Exception.createFrom(error));
+            return Try.failed(Exception_1.Exception.createFrom(error));
         }
     }
     static of(fn) {
@@ -57,7 +59,7 @@ export class Try {
         if (this.isFailure())
             return this._exception;
         else
-            throw new Exception("Attempting to get an exception for a successful Try");
+            throw new Exception_1.Exception("Attempting to get an exception for a successful Try");
     }
     exceptionOrElse(other) {
         if (this.isFailure())
@@ -73,12 +75,12 @@ export class Try {
     }
     toOption() {
         if (this.isSuccess())
-            return Option.of(this._value);
+            return Option_1.Option.of(this._value);
         else
-            return Option.empty();
+            return Option_1.Option.empty();
     }
     toFuture() {
-        return Future.fromTry(this);
+        return Future_1.Future.fromTry(this);
     }
     forEach(fn) {
         if (this.isSuccess())
@@ -100,7 +102,7 @@ export class Try {
                 if (fn(this._value))
                     return this;
                 else {
-                    return Try.failed(new NoSuchElementException({
+                    return Try.failed(new Exception_1.NoSuchElementException({
                         message: "No such element exception: the value '" + this._value +
                             "' did not match the predicate in on the filter method you have previously called"
                     }));
@@ -124,7 +126,7 @@ export class Try {
         if (this.isSuccess())
             return Try.safeApplyTry(() => fn(this._value));
         else if (this.isFailure())
-            return unsafeCast(this);
+            return TypeUtil_1.unsafeCast(this);
     }
     transform(trans) {
         if (this.isSuccess())
@@ -139,6 +141,7 @@ export class Try {
             return fold.ifFailure(this._exception);
     }
 }
+exports.Try = Try;
 class Success extends Try {
     constructor(value) {
         super();

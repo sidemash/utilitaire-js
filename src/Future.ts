@@ -234,7 +234,6 @@ export class Future<T> {
 
     private _onFailure(exception:Exception){
         this._tryOption = Option.of(Try.failed<T>(exception));
-        console.log("on failure ", exception);
         setTimeout(() => {
             this.completeFunctionSubscribers.forEach(o => {
                 try {

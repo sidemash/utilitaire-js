@@ -3,7 +3,5 @@ bower_components
 /*.iml
 /.idea_modules
 node_modules
-src/**.js
-src/**.js.map
 package-lock.json
 yarn.lock
